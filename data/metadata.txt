@@ -1,0 +1,13 @@
+donor	plate	sample	Index	collected 	Robot_run	Library_prep_day	RNA_conc_after_IVT	RNA_Qubit	Barcode_Qubit
+D32	P_1578	1578	Index_37	Collect_83	R_2	Day 1	33.0	0.597	1.56
+D32	P_1579	1579	Index_38	Collect_88	R_3	Day 2	33.74	1.56	0.395
+D33	P_1580	1580	Index_39	Collect_88	R_2	Day 1	120.1	1.33	0.834
+D33	P_1581	1581	Index_40	Collect_76	R_2	Day 1	49.5	0.419	0.453
+D40	P_1582	1582	Index_41	Collect_80	R_3	Day 2	57.05	1.36	0.275
+D40	P_1583	1583	Index_42	Collect_84	R_3	Day 2	43.76	0.791	0.075
+D33	P_1584	1584	Index_43	Collect_72	R_2	Day 1	47.5	0.947	0.824
+D40	P_1585	1585	Index_44	Collect_78	R_3	Day 2	46.66	2.46	1.78
+D33	P_1586	1586	Index_45	Collect_85	R_1	Day 1	41.66	0.547	0.671
+D33	P_1587	1587	Index_46	Collect_85	R_1	Day 1	51.75	0.948	0.872
+D40	P_1588	1588	Index_47	Collect_80	R_1	Day 1	50.75	1.66	0.225
+D40	P_1589	1589	Index_48	Collect_78	R_1	Day 1	30.8	0.835	1.47
