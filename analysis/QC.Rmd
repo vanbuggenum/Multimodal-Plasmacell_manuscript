@@ -1,0 +1,456 @@
+---
+title: "QC and filtering"
+author: "vanBuggenum"
+output:
+  workflowr::wflow_html:
+    toc: TRUE
+    code_folding: hide
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = F, warning = F, echo = T, eval = T
+)
+```
+
+```{r libraries, include=FALSE}
+source("code/load_packages.R")
+source("code/plot_QC_function.R") #change settings in script to get different layout per subpanel for this figure
+dir.create("output/paper_figures") # location where paper figures are stored
+
+panellabels <- c('a', 'b', 'c','d' , 'e', 'f', 'g', 'h', 'i', 'j', 'k')
+
+add.textsize <- theme(axis.text.x = element_text(colour = 'black', size = 7),
+          axis.text.y = element_text(colour = 'black',size=7),
+          text = element_text(size=7),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=6)
+          )
+
+colors.donors <- c("#999999", "#E69F00", "#56B4E9")
+colors.clusters <-  c("#009E73", "#D55E00","#F0E442","grey")
+
+```
+
+## Introduction
+
+The single-cell multi-omics data contains single-cell transcriptomic and proteomic and phospho-proteomic data of in-vitro generated plasmacells. The code below shows Quality control plots, QC-filtering, normalization and scaling of the dataset.
+
+## Convert matrix to Seurat objects
+
+Import all count matrixes (from data/raw folder), combine plates and create unfiltered Seurat objects. 
+
+```{r convert_matrix_to_seurat}
+source("code/Import_and_create_seuratObj.R")
+```
+
+
+```{r}
+seu_RNA <- readRDS("output/seu.RNA.rds")
+seu.PROT_live <- readRDS("output/seu.PROT_live.rds")
+seu.PROT_fix <- readRDS("output/seu.PROT_fix.rds")
+```
+
+## QC plots
+
+```{r QC-filters}
+plot_RNA_nCount <- plot_QC_paper(seu_object = seu_RNA, 
+                                 feature = "nCount_RNA", 
+                                 ytext = "Total UMI counts per cell",
+                                 xtext = "Plate number",
+                                 paneltitle = "Fixed cells (1586 to 1589) show lower counts",
+                                 colorviolin = "dodgerblue2" ) + 
+                        geom_vline(xintercept =6.5, size = 0.3, color = "red") +
+  annotate(geom = "text", x = 6.6, y=20000, label = "Fixed cells", hjust = 0, size = 2.5) +
+                        theme(axis.title.x = element_blank()) 
+
+plot_RNA_ngenes <- plot_QC_paper(seu_object = seu_RNA, 
+                                 feature = "nFeature_RNA", 
+                                 ytext = "Total genes per cell",
+                                 xtext = "Plate number",
+                                 paneltitle = "Keep cells >300 genes",
+                                 colorviolin = "dodgerblue2" ) + 
+                        geom_hline(yintercept = 300, size = 0.3, color = "red") +
+                        theme(axis.title.x = element_blank())
+  
+plot_percent.mt <- plot_QC_paper(seu_object = seu_RNA, 
+                                 feature = "percent.mt", 
+                                 ytext = "% Mitochondrial counts",
+                                 xtext = "Plate number",
+                                 paneltitle = "Keep cells < 5 % mitochondrial genecounts",
+                                 colorviolin = "dodgerblue2" ) +
+                        geom_hline(yintercept = 5, color = "red", size = 0.3) +
+                        theme(axis.title.x = element_blank())
+
+plot_percent.rb <- plot_QC_paper(seu_object = seu_RNA, 
+                                 feature = "percent.rb", 
+                                 ytext = "% Ribosomal counts",
+                                 xtext = "Plate number",
+                                 paneltitle = "comparable % ribosomal counts in all plates",
+                                 colorviolin = "dodgerblue2" ) +
+                        theme(axis.title.x = element_blank())
+  
+  
+plot_PROT_nCount.live <- plot_QC_paper(seu_object = seu.PROT_live, 
+                                 feature = "nCount_PROT", 
+                                 ytext =  "Total UMI counts per cell",
+                                 xtext = "Plate number",
+                                 paneltitle = "Keep cells > 1500 & < 9000 PROT counts",
+                                 colorviolin = "deeppink3" ) +
+                        geom_hline(yintercept = 1500, size = 0.3) +
+                        geom_hline(yintercept = 9000, size = 0.3) +
+                        theme(axis.title.x = element_blank())
+
+plot_PROT_nCount.fix <- plot_QC_paper(seu_object = seu.PROT_fix, 
+                                 feature = "nCount_PROT", 
+                                 ytext =  "Total UMI counts per cell",
+                                 xtext = "Plate number",
+                                 paneltitle = "Keep cells > 2500 & < 20000 PROT counts",
+                                 colorviolin = "deeppink3" ) +
+                        geom_hline(yintercept = 2500, size = 0.3) +
+                        geom_hline(yintercept = 20000, size = 0.3) +
+                        theme(axis.title.x = element_blank())
+
+plot_PROT_nproteins.live <- plot_QC_paper(seu_object = seu.PROT_live, 
+                                 feature = "nFeature_PROT", 
+                                 ytext =  "Total proteins per cell",
+                                 xtext = "Plate number",
+                                 paneltitle = "Keep cells >40 proteins",
+                                 colorviolin = "deeppink3" ) +
+                        geom_hline(yintercept = 40, size = 0.3, color = "red")+
+                        theme(axis.title.x = element_blank())
+
+plot_PROT_nproteins.fix <- plot_QC_paper(seu_object = seu.PROT_fix, 
+                                 feature = "nFeature_PROT", 
+                                 ytext =  "Total proteins per cell",
+                                 xtext = "Plate number",
+                                 paneltitle = "Keep cells >65 proteins",
+                                 colorviolin = "deeppink3" ) +
+                        geom_hline(yintercept = 65, size = 0.3, color = "red")+
+                        theme(axis.title.x = element_blank())
+
+
+
+plot.QC <- plot_grid(plot_RNA_nCount, 
+                     plot_RNA_ngenes,  
+                     plot_percent.mt, 
+                     plot_percent.rb,
+                     plot_PROT_nCount.live,
+                     plot_PROT_nCount.fix,
+                     plot_PROT_nproteins.live,
+                     plot_PROT_nproteins.fix,  
+                     labels = c('a', 'b', 'c','d' , 'e', 'f', 'g', 'h'), label_size = 10, ncol = 2)
+
+ggsave(plot.QC, filename = "output/paper_figures/Suppl_QC_filters.pdf", width = 183, height = 200, units = "mm",  dpi = 300, useDingbats = FALSE)
+ggsave(plot.QC, filename = "output/paper_figures/Suppl_QC_filters.png", width = 183, height = 200, units = "mm",  dpi = 300)
+
+```
+
+
+```{r Suppl_QC_filters, fig.width=7.20472, fig.height=7.87402}
+plot.QC
+```
+*Supplementary Figure* Thresholds for selection of high-quality samples and cells from the QuRIE-seq datasets.
+
+
+1. Based on the indicated cut-offs, high-quality cells are filtered for further analysis:  
+
+```{r filter cells and samples, class.source = 'fold-show'}
+## Filter fixed protein dataset
+seu.PROT.fix.subset <- subset(seu.PROT_fix, subset = nCount_PROT >= 2500 & nCount_PROT < 20000)
+
+## Filter live-cell protein dataset
+seu.PROT.live.subset <- subset(seu.PROT_live, subset = nCount_PROT >= 1500 & nCount_PROT <= 9000)
+
+
+## RNA quality of fixed dataset is too low (very low gene numbers and counts). Therefore continue only with live-cell dataset.
+seu.RNA_live <- subset(seu_RNA, idents = c(1586:1589), invert = TRUE)
+seu.RNA_fix <- subset(seu_RNA, idents = c(1586:1589))
+
+## Filter RNA live dataset
+seu.RNA_live.subset <- subset(seu.RNA_live, subset = percent.mt <=5 & nFeature_RNA >= 300)
+seu.RNA_fix.subset <- subset(seu.RNA_fix) #, subset = percent.mt <= 5 & nFeature_RNA >= 300 # Nofilter because RNA not taken along.
+```
+
+2. Filter low-detected genes
+
+Keep genes that are >1% cells detected.
+
+```{r filter non-detected genes, class.source = 'fold-show'}
+## Additional filter features (genes) detected in 1% of cells
+seu.RNA_live.subset <- CreateSeuratObject(seu.RNA_live.subset[["RNA"]]@counts, min.cells = round(ncol(seu.RNA_live.subset)/100)) ## keep features detected in 1% of cells
+seu.RNA_fix.subset <- CreateSeuratObject(seu.RNA_fix.subset[["RNA"]]@counts, min.cells = round(ncol(seu.RNA_fix.subset)/100)) ## keep features detected in min 1% cells
+```
+
+3. Merge Seurat objects from Protein & RNA modalities
+
+```{r merge.protRNA.data, class.source = 'fold-show'}
+## Merge Seurat objects live dataset
+intersect <- colnames(seu.RNA_live.subset)[colnames(seu.RNA_live.subset) %in% colnames(seu.PROT.live.subset)]
+intersect <- colnames(seu.PROT.live.subset)[colnames(seu.PROT.live.subset) %in% intersect]
+
+seu.RNA_combined.live <- subset(seu.RNA_live.subset, cells = intersect )
+Prot.live.intersect <- seu.PROT.live.subset@assays$PROT@counts[,colnames(seu.PROT.live.subset) %in% intersect]
+
+seu.RNA_combined.live[["PROT"]] <- CreateAssayObject(counts = Prot.live.intersect)
+seu.RNA_combined.live
+
+## fix dataset
+intersect <- colnames(seu.RNA_fix.subset)[colnames(seu.RNA_fix.subset) %in% colnames(seu.PROT.fix.subset)]
+intersect <- colnames(seu.PROT.fix.subset)[colnames(seu.PROT.fix.subset) %in% intersect]
+
+seu.RNA_combined.fix <- subset(seu.RNA_fix.subset, cells = intersect )
+Prot.fix.intersect <- seu.PROT.fix.subset@assays$PROT@counts[,colnames(seu.PROT.fix.subset) %in% intersect]
+
+seu.RNA_combined.fix[["PROT"]] <- CreateAssayObject(counts = Prot.fix.intersect)
+seu.RNA_combined.fix
+
+```
+
+
+4. Antibody quality (Non-detected proteins) filter 
+
+```{r Functions_protein_plot}
+scale_x_reordered <- function(..., sep = "___") {
+  reg <- paste0(sep, ".+$")
+  ggplot2::scale_x_discrete(labels = function(x) gsub(reg, "", x), ...)
+}
+
+reorder_within <- function(x, by, within, fun = mean, sep = "___", ...) {
+  new_x <- paste(x, within, sep = sep)
+  stats::reorder(new_x, by, FUN = fun)
+}
+```
+
+```{r}
+PROT_tbl_subset.fix <- as.data.frame(seu.PROT.fix.subset@assays$PROT@counts) %>%
+  mutate(protein = rownames(seu.PROT.fix.subset)) %>%
+  dplyr::select(protein, everything()) %>%
+  gather("cell", "count", 2:c(ncol(seu.PROT.fix.subset)+1)) %>%
+  mutate(sample = gsub('.{5}$', '', cell) )
+```
+
+```{r p.suppl_Ab-QC_fix, fig.width=7.2, fig.height=7.2}
+ggplot(PROT_tbl_subset.fix, aes(reorder_within(protein, count, sample), count)) +
+     geom_boxplot(outlier.colour="black", outlier.shape=16,
+             outlier.size=0.5, notch=FALSE)  +
+     scale_x_reordered() +
+     facet_wrap(.~ sample, ncol=4,scales = "free_y") + 
+  theme_few()+
+    theme(axis.text.x=element_text(angle=90,hjust=1,vjust=.5,colour='gray50')) +
+  scale_y_log10() +
+  add.textsize +
+  coord_flip() +
+  labs(y="count (log10)", x = "Antibody (ordered per plate)")
+```
+*Supplementary Figure* Fixed dataset antibody counts per plate (ordered from high to low per plate (1586-1589))
+
+
+```{r filter_prot_fix}
+prot.median.fix <- aggregate(PROT_tbl_subset.fix[, 3], list(protein =PROT_tbl_subset.fix$protein), mean)
+
+prot.fix.toremove <- prot.median.fix$protein[prot.median.fix$x <=0.2]
+
+filtered.prot.counts <- seu.PROT.fix.subset[["PROT"]]@counts[!c(rownames(seu.PROT.fix.subset[["PROT"]]@counts) %chin% prot.fix.toremove),]
+
+seu.PROT.fix.subset <- CreateSeuratObject(filtered.prot.counts, assay = "PROT")
+
+```
+
+
+```{r}
+PROT_tbl_subset.live <- as.data.frame(seu.RNA_combined.live@assays$PROT@counts) %>%
+  mutate(protein = rownames(seu.RNA_combined.live[["PROT"]])) %>%
+  dplyr::select(protein, everything()) %>%
+  gather("cell", "count", 2:c(ncol(seu.RNA_combined.live[["PROT"]])+1)) %>%
+  mutate(sample = gsub('.{5}$', '', cell) )
+```
+
+```{r p.suppl_Ab-QC_live, fig.width=7.2, fig.height=8.5}
+ggplot(PROT_tbl_subset.live, aes(reorder_within(protein, count, sample), count)) +
+     geom_boxplot(outlier.colour="black", outlier.shape=16,
+             outlier.size=0.5, notch=FALSE)  +
+     scale_x_reordered() +
+     facet_wrap(.~ sample, ncol=4,scales = "free_y") + 
+  theme_few()+
+    theme(axis.text.x=element_text(angle=90,hjust=1,vjust=.5,colour='gray50')) +
+  scale_y_log10() +
+  add.textsize +
+  coord_flip() +
+  labs(y="count (log10)", x = "Antibody (ordered per plate)")
+```
+*Supplementary Figure* Live dataset antibody counts per plate (ordered from high to low per plate (1586-1589))
+
+
+```{r}
+prot.median.live <- aggregate(PROT_tbl_subset.live[, 3], list(protein =PROT_tbl_subset.live$protein), mean)
+
+prot.live.toremove <- prot.median.live$protein[prot.median.live$x <1]
+
+filtered.prot.counts.live <- seu.RNA_combined.live[["PROT"]]@counts[!c(rownames(seu.RNA_combined.live[["PROT"]]@counts) %chin% prot.live.toremove),]
+
+seu.RNA_combined.live[["PROT"]] <- CreateAssayObject(counts = filtered.prot.counts.live)
+
+```
+
+
+5. Add metadata to object:
+
+```{r add.metadata, class.source = 'fold-show'}
+## metadata import
+metadata <- read_delim("data/metadata.txt", "\t", escape_double = FALSE, trim_ws = TRUE)
+metadata$sample <- as.factor(metadata$sample)
+
+## add metadata to fix dataset
+meta.fix <- data.frame(seu.RNA_combined.fix@meta.data)  %>%
+  mutate(sample = orig.ident ) %>%
+  left_join(metadata) %>%
+  mutate(group = sample) 
+meta.fix<-as.data.frame(meta.fix)
+rownames(meta.fix) <- rownames(data.frame(seu.RNA_combined.fix@meta.data) )
+seu.RNA_combined.fix <- AddMetaData(object = seu.RNA_combined.fix, metadata = meta.fix)
+
+#meta.fix <- data.frame(seu.RNA_combined.fix@meta.data) %>%
+#  mutate(sample = rownames(seu.RNA_combined.fix@meta.data))
+
+
+## add metadata to live dataset
+meta.live <- data.frame(seu.RNA_combined.live@meta.data)  %>%
+  mutate(sample = orig.ident ) %>%
+  left_join(metadata) %>%
+  mutate(group = sample) 
+meta.live<-as.data.frame(meta.live)
+rownames(meta.live) <- rownames(data.frame(seu.RNA_combined.live@meta.data) )
+seu.RNA_combined.live <- AddMetaData(object = seu.RNA_combined.live, metadata = meta.live)
+
+#meta.live <- data.frame(seu.RNA_combined.live@meta.data) %>%
+#  mutate(sample = rownames(seu.RNA_combined.live@meta.data)) 
+
+seu.RNA_combined.live[["percent.mt"]] <- PercentageFeatureSet(seu.RNA_combined.live, pattern = "^MT")
+
+seu.RNA_combined.fix[["percent.mt"]] <- PercentageFeatureSet(seu.RNA_combined.fix, pattern = "^MT")
+```
+
+## Normalize and Scale
+
+```{r Normalize_and_scale, class.source = 'fold-show'}
+
+## fix data normalize RNA
+DefaultAssay(seu.RNA_combined.fix) <- 'RNA'
+seu.RNA_combined.fix <- SCTransform(seu.RNA_combined.fix, assay = "RNA", new.assay.name = "SCT", vars.to.regress = c("nCount_RNA", "percent.mt", "plate"), return.only.var.genes = FALSE, verbose = FALSE)
+
+# Add some metadata to normalized data (ncounts & percent mt)
+seu.RNA_combined.fix <- AddMetaData(seu.RNA_combined.fix, as.data.frame(seu.RNA_combined.fix@assays$SCT@counts) %>% summarise_all(funs(sum)) %>% unlist(), col.name = "nCount_RNA_SCT")
+
+seu.RNA_combined.fix <- PercentageFeatureSet(seu.RNA_combined.fix, pattern = "^MT\\.|^MTRN", col.name = "percent.mt.aftersct", assay = "SCT")
+
+## Fixed dataset normalize protein
+DefaultAssay(seu.RNA_combined.fix) <- 'PROT'
+VariableFeatures(seu.RNA_combined.fix) <- rownames(seu.RNA_combined.fix[["PROT"]])
+seu.RNA_combined.fix <- NormalizeData(seu.RNA_combined.fix, normalization.method = 'CLR', margin = 2, assay = "PROT") %>% 
+  ScaleData(vars.to.regress = c("nCount_PROT", "plate"))
+
+## live data normalize RNA
+DefaultAssay(seu.RNA_combined.live) <- 'RNA'
+seu.RNA_combined.live <- SCTransform(seu.RNA_combined.live, assay = "RNA", new.assay.name = "SCT", vars.to.regress = c("nCount_RNA", "percent.mt", "plate"), return.only.var.genes = FALSE, verbose = FALSE)
+
+# Add some metadata to normalized data (ncounts & percent mt)
+seu.RNA_combined.live <- AddMetaData(seu.RNA_combined.live, as.data.frame(seu.RNA_combined.live@assays$SCT@counts) %>% summarise_all(funs(sum)) %>% unlist(), col.name = "nCount_RNA_SCT")
+
+seu.RNA_combined.live <- PercentageFeatureSet(seu.RNA_combined.live, pattern = "^MT\\.|^MTRN", col.name = "percent.mt.aftersct", assay = "SCT")
+
+## live normalize & scale protein data 
+DefaultAssay(seu.RNA_combined.live) <- 'PROT'
+VariableFeatures(seu.RNA_combined.live) <- rownames(seu.RNA_combined.live[["PROT"]])
+seu.RNA_combined.live <- NormalizeData(seu.RNA_combined.live, normalization.method = 'CLR', margin = 2, assay = "PROT") %>% 
+  ScaleData(vars.to.regress = c("nCount_PROT", "plate")) 
+
+
+```
+
+## Filtered dataset properties 
+
+Overview of the number of cells and data properties of all plates.
+
+#### Live-cells RNA & surface protein dataset
+
+```{r}
+seu.RNA_combined.live
+```
+
+**Table** Overview of per plate properties after filtering.
+```{r}
+kable(seu.RNA_combined.live@meta.data %>% 
+        group_by(donor,plate) %>% 
+        summarise(`Number of cells` = round(n(),0),
+                  `Median counts RNA` = round(median(nCount_RNA),0),
+                  `Median Number genes` = round(median(nFeature_RNA),0),
+                  `Median Mitochondrial counts (Median %)` = round(median(percent.mt),2), 
+                  `Median counts PROT` = round(median(nCount_PROT),0),
+                  `Number proteins` = round(median(nFeature_PROT),0)
+                  )) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+**Table** Overview of per donor properties after filtering.
+```{r}
+kable(seu.RNA_combined.live@meta.data %>% 
+        group_by(donor) %>% 
+        summarise(`Number of cells` = round(n(),0),
+                  `Median counts RNA` = round(median(nCount_RNA),0),
+                  `Median Number genes` = round(median(nFeature_RNA),0),
+                  `Median Mitochondrial counts (Median %)` = round(median(percent.mt),2), 
+                  `Median counts PROT` = round(median(nCount_PROT),0),
+                  `Number proteins` = round(median(nFeature_PROT),0)
+                  )) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+#### Fixed cells intracellular proteins dataset
+
+```{r}
+seu.RNA_combined.fix
+```
+
+**Table** Overview of per plate properties after filtering.
+```{r}
+kable(seu.RNA_combined.fix@meta.data %>% 
+        group_by(donor,plate) %>% 
+        summarise(`Number of cells` = round(n(),0),
+                  `Median counts RNA` = round(median(nCount_RNA),0),
+                  `Median Number genes` = round(median(nFeature_RNA),0),
+                  `Median Mitochondrial counts (Median %)` = round(median(percent.mt),2), 
+                  `Median counts PROT` = round(median(nCount_PROT),0),
+                  `Number proteins` = round(median(nFeature_PROT),0)
+                  )) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+**Table** Overview of per donor properties after filtering.
+```{r}
+kable(seu.RNA_combined.fix@meta.data %>% 
+        group_by(donor) %>% 
+        summarise(`Number of cells` = round(n(),0),
+                  `Median counts RNA` = round(median(nCount_RNA),0),
+                  `Median Number genes` = round(median(nFeature_RNA),0),
+                  `Median Mitochondrial counts (Median %)` = round(median(percent.mt),2), 
+                  `Median counts PROT` = round(median(nCount_PROT),0),
+                  `Number proteins` = round(median(nFeature_PROT),0)
+                  )) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+
+## Save dataset
+
+Seurat object with filtered cells and normalized counts is stored in “output/seu.fix_norm.rds” (intracellular protein modality) and “output/seu.live_norm.rds”(RNA and surface protein modalities).
+
+```{r save.seurat, class.source = 'fold-show'}
+## Save Seurat objects
+saveRDS(seu.RNA_combined.fix, file = "output/seu.fix_norm.rds")
+saveRDS(seu.RNA_combined.live, file = "output/seu.live_norm.rds")
+
+```
+

@@ -1,7 +1,7 @@
 name: Multimodal-Plasmacell_manuscript
 output_dir: ../docs
 navbar:
-  title: Manuscript docs. Multi-modal single-cell analysis of human plasma-cells
+  title:
   left:
   - text: Home
     href: index.html
