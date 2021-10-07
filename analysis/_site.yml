@@ -1,17 +1,29 @@
-name: "Multimodal-Plasmacell_manuscript"
+name: Multimodal-Plasmacell_manuscript
 output_dir: ../docs
 navbar:
-  title: "Multimodal-Plasmacell_manuscript"
+  title: Manuscript documentation
   left:
   - text: Home
     href: index.html
-  - text: About
-    href: about.html
-  - text: License
+  - text: FASTQ to Seurat
+    href: FASTQtoSeurat.html
+  - text: QC
+    href: QC.html
+  - text: Plasmacell characterization
+    href: cellstate.html
+  - text: Hallmarks Ig-classes
+    href: hallmarks.html
+  - text: Signalling Ig-classes
+    href: Signalling.html
+  - text: License and citation
     href: license.html
+  right:
+  - icon: fa-github
+    text: Source code
+    href: https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript
 output:
   workflowr::wflow_html:
     toc: yes
     toc_float: yes
-    theme: cosmo
+    theme: flatly
     highlight: textmate

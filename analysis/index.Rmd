@@ -1,11 +1,27 @@
 ---
-title: "Home"
+title: "Documentation of analysis and figures"
+subtitle: "Multi-modal single-cell analysis of human plasma-cells"
 site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
     toc: false
+    code_folding: hide
 editor_options:
   chunk_output_type: console
 ---
 
-Welcome to my research website.
+## Project summary
+
+## In this repository
+
+## Attribution
+
+----
+
+Licence
+
+Cite
+
+----
+
+
