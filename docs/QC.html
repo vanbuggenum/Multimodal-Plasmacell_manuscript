@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="vanBuggenum" />
+
+
+<title>QC and filtering</title>
+
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="QC.html">QC</a>
+</li>
+<li>
+  <a href="cellstate.html">Plasmacell characterization</a>
+</li>
+<li>
+  <a href="hallmarks.html">Hallmarks Ig-classes</a>
+</li>
+<li>
+  <a href="Signalling.html">Signalling Ig-classes</a>
+</li>
+<li>
+  <a href="license.html">License and citation</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript">
+    <span class="fas fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">QC and filtering</h1>
+<h4 class="author">vanBuggenum</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2021-10-07
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Multimodal-Plasmacell_manuscript/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20211005code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20211005)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20211005code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20211005)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomvanbuggenumMultimodalPlasmacellmanuscripttree8d9f7085e23e84c57365d49b26e692875d5ff984targetblank8d9f708a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/tree/8d9f7085e23e84c57365d49b26e692875d5ff984" target="_blank">8d9f708</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomvanbuggenumMultimodalPlasmacellmanuscripttree8d9f7085e23e84c57365d49b26e692875d5ff984targetblank8d9f708a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/tree/8d9f7085e23e84c57365d49b26e692875d5ff984" target="_blank">8d9f708</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+
+Untracked files:
+    Untracked:  code/Import_and_create_seuratObj.R
+    Untracked:  code/load_packages.R
+    Untracked:  code/plot_QC_function.R
+    Untracked:  data/genelist.plots.diffmarkers.txt
+    Untracked:  data/metadata.txt
+    Untracked:  data/raw/
+    Untracked:  output/paper_figures/
+    Untracked:  output/seu.PROT_fix.rds
+    Untracked:  output/seu.PROT_live.rds
+    Untracked:  output/seu.RNA.rds
+    Untracked:  output/seu.fix_norm.rds
+    Untracked:  output/seu.live_norm.rds
+
+Unstaged changes:
+    Deleted:    analysis/about.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/QC.Rmd</code>) and HTML (<code>docs/QC.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/blob/8d9f7085e23e84c57365d49b26e692875d5ff984/analysis/QC.Rmd" target="_blank">8d9f708</a>
+</td>
+<td>
+jessievb
+</td>
+<td>
+2021-10-07
+</td>
+<td>
+quality check page and remove header title
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>The single-cell multi-omics data contains single-cell transcriptomic and proteomic and phospho-proteomic data of in-vitro generated plasmacells. The code below shows Quality control plots, QC-filtering, normalization and scaling of the dataset.</p>
+</div>
+<div id="convert-matrix-to-seurat-objects" class="section level2">
+<h2>Convert matrix to Seurat objects</h2>
+<p>Import all count matrixes (from data/raw folder), combine plates and create unfiltered Seurat objects.</p>
+<pre class="r"><code>source(&quot;code/Import_and_create_seuratObj.R&quot;)</code></pre>
+<pre class="r"><code>seu_RNA &lt;- readRDS(&quot;output/seu.RNA.rds&quot;)
+seu.PROT_live &lt;- readRDS(&quot;output/seu.PROT_live.rds&quot;)
+seu.PROT_fix &lt;- readRDS(&quot;output/seu.PROT_fix.rds&quot;)</code></pre>
+</div>
+<div id="qc-plots" class="section level2">
+<h2>QC plots</h2>
+<pre class="r"><code>plot_RNA_nCount &lt;- plot_QC_paper(seu_object = seu_RNA, 
+                                 feature = &quot;nCount_RNA&quot;, 
+                                 ytext = &quot;Total UMI counts per cell&quot;,
+                                 xtext = &quot;Plate number&quot;,
+                                 paneltitle = &quot;Fixed cells (1586 to 1589) show lower counts&quot;,
+                                 colorviolin = &quot;dodgerblue2&quot; ) + 
+                        geom_vline(xintercept =6.5, size = 0.3, color = &quot;red&quot;) +
+  annotate(geom = &quot;text&quot;, x = 6.6, y=20000, label = &quot;Fixed cells&quot;, hjust = 0, size = 2.5) +
+                        theme(axis.title.x = element_blank()) 
+
+plot_RNA_ngenes &lt;- plot_QC_paper(seu_object = seu_RNA, 
+                                 feature = &quot;nFeature_RNA&quot;, 
+                                 ytext = &quot;Total genes per cell&quot;,
+                                 xtext = &quot;Plate number&quot;,
+                                 paneltitle = &quot;Keep cells &gt;300 genes&quot;,
+                                 colorviolin = &quot;dodgerblue2&quot; ) + 
+                        geom_hline(yintercept = 300, size = 0.3, color = &quot;red&quot;) +
+                        theme(axis.title.x = element_blank())
+  
+plot_percent.mt &lt;- plot_QC_paper(seu_object = seu_RNA, 
+                                 feature = &quot;percent.mt&quot;, 
+                                 ytext = &quot;% Mitochondrial counts&quot;,
+                                 xtext = &quot;Plate number&quot;,
+                                 paneltitle = &quot;Keep cells &lt; 5 % mitochondrial genecounts&quot;,
+                                 colorviolin = &quot;dodgerblue2&quot; ) +
+                        geom_hline(yintercept = 5, color = &quot;red&quot;, size = 0.3) +
+                        theme(axis.title.x = element_blank())
+
+plot_percent.rb &lt;- plot_QC_paper(seu_object = seu_RNA, 
+                                 feature = &quot;percent.rb&quot;, 
+                                 ytext = &quot;% Ribosomal counts&quot;,
+                                 xtext = &quot;Plate number&quot;,
+                                 paneltitle = &quot;comparable % ribosomal counts in all plates&quot;,
+                                 colorviolin = &quot;dodgerblue2&quot; ) +
+                        theme(axis.title.x = element_blank())
+  
+  
+plot_PROT_nCount.live &lt;- plot_QC_paper(seu_object = seu.PROT_live, 
+                                 feature = &quot;nCount_PROT&quot;, 
+                                 ytext =  &quot;Total UMI counts per cell&quot;,
+                                 xtext = &quot;Plate number&quot;,
+                                 paneltitle = &quot;Keep cells &gt; 1500 &amp; &lt; 9000 PROT counts&quot;,
+                                 colorviolin = &quot;deeppink3&quot; ) +
+                        geom_hline(yintercept = 1500, size = 0.3) +
+                        geom_hline(yintercept = 9000, size = 0.3) +
+                        theme(axis.title.x = element_blank())
+
+plot_PROT_nCount.fix &lt;- plot_QC_paper(seu_object = seu.PROT_fix, 
+                                 feature = &quot;nCount_PROT&quot;, 
+                                 ytext =  &quot;Total UMI counts per cell&quot;,
+                                 xtext = &quot;Plate number&quot;,
+                                 paneltitle = &quot;Keep cells &gt; 2500 &amp; &lt; 20000 PROT counts&quot;,
+                                 colorviolin = &quot;deeppink3&quot; ) +
+                        geom_hline(yintercept = 2500, size = 0.3) +
+                        geom_hline(yintercept = 20000, size = 0.3) +
+                        theme(axis.title.x = element_blank())
+
+plot_PROT_nproteins.live &lt;- plot_QC_paper(seu_object = seu.PROT_live, 
+                                 feature = &quot;nFeature_PROT&quot;, 
+                                 ytext =  &quot;Total proteins per cell&quot;,
+                                 xtext = &quot;Plate number&quot;,
+                                 paneltitle = &quot;Keep cells &gt;40 proteins&quot;,
+                                 colorviolin = &quot;deeppink3&quot; ) +
+                        geom_hline(yintercept = 40, size = 0.3, color = &quot;red&quot;)+
+                        theme(axis.title.x = element_blank())
+
+plot_PROT_nproteins.fix &lt;- plot_QC_paper(seu_object = seu.PROT_fix, 
+                                 feature = &quot;nFeature_PROT&quot;, 
+                                 ytext =  &quot;Total proteins per cell&quot;,
+                                 xtext = &quot;Plate number&quot;,
+                                 paneltitle = &quot;Keep cells &gt;65 proteins&quot;,
+                                 colorviolin = &quot;deeppink3&quot; ) +
+                        geom_hline(yintercept = 65, size = 0.3, color = &quot;red&quot;)+
+                        theme(axis.title.x = element_blank())
+
+
+
+plot.QC &lt;- plot_grid(plot_RNA_nCount, 
+                     plot_RNA_ngenes,  
+                     plot_percent.mt, 
+                     plot_percent.rb,
+                     plot_PROT_nCount.live,
+                     plot_PROT_nCount.fix,
+                     plot_PROT_nproteins.live,
+                     plot_PROT_nproteins.fix,  
+                     labels = c(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;,&#39;d&#39; , &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;h&#39;), label_size = 10, ncol = 2)
+
+ggsave(plot.QC, filename = &quot;output/paper_figures/Suppl_QC_filters.pdf&quot;, width = 183, height = 200, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
+ggsave(plot.QC, filename = &quot;output/paper_figures/Suppl_QC_filters.png&quot;, width = 183, height = 200, units = &quot;mm&quot;,  dpi = 300)</code></pre>
+<pre class="r"><code>plot.QC</code></pre>
+<p><img src="figure/QC.Rmd/Suppl_QC_filters-1.png" width="691.65312" style="display: block; margin: auto;" /> <em>Supplementary Figure</em> Thresholds for selection of high-quality samples and cells from the QuRIE-seq datasets.</p>
+<ol style="list-style-type: decimal">
+<li>Based on the indicated cut-offs, high-quality cells are filtered for further analysis:</li>
+</ol>
+<pre class="r fold-show"><code>## Filter fixed protein dataset
+seu.PROT.fix.subset &lt;- subset(seu.PROT_fix, subset = nCount_PROT &gt;= 2500 &amp; nCount_PROT &lt; 20000)
+
+## Filter live-cell protein dataset
+seu.PROT.live.subset &lt;- subset(seu.PROT_live, subset = nCount_PROT &gt;= 1500 &amp; nCount_PROT &lt;= 9000)
+
+
+## RNA quality of fixed dataset is too low (very low gene numbers and counts). Therefore continue only with live-cell dataset.
+seu.RNA_live &lt;- subset(seu_RNA, idents = c(1586:1589), invert = TRUE)
+seu.RNA_fix &lt;- subset(seu_RNA, idents = c(1586:1589))
+
+## Filter RNA live dataset
+seu.RNA_live.subset &lt;- subset(seu.RNA_live, subset = percent.mt &lt;=5 &amp; nFeature_RNA &gt;= 300)
+seu.RNA_fix.subset &lt;- subset(seu.RNA_fix) #, subset = percent.mt &lt;= 5 &amp; nFeature_RNA &gt;= 300 # Nofilter because RNA not taken along.</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Filter low-detected genes</li>
+</ol>
+<p>Keep genes that are &gt;1% cells detected.</p>
+<pre class="r fold-show"><code>## Additional filter features (genes) detected in 1% of cells
+seu.RNA_live.subset &lt;- CreateSeuratObject(seu.RNA_live.subset[[&quot;RNA&quot;]]@counts, min.cells = round(ncol(seu.RNA_live.subset)/100)) ## keep features detected in 1% of cells
+seu.RNA_fix.subset &lt;- CreateSeuratObject(seu.RNA_fix.subset[[&quot;RNA&quot;]]@counts, min.cells = round(ncol(seu.RNA_fix.subset)/100)) ## keep features detected in min 1% cells</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Merge Seurat objects from Protein &amp; RNA modalities</li>
+</ol>
+<pre class="r fold-show"><code>## Merge Seurat objects live dataset
+intersect &lt;- colnames(seu.RNA_live.subset)[colnames(seu.RNA_live.subset) %in% colnames(seu.PROT.live.subset)]
+intersect &lt;- colnames(seu.PROT.live.subset)[colnames(seu.PROT.live.subset) %in% intersect]
+
+seu.RNA_combined.live &lt;- subset(seu.RNA_live.subset, cells = intersect )
+Prot.live.intersect &lt;- seu.PROT.live.subset@assays$PROT@counts[,colnames(seu.PROT.live.subset) %in% intersect]
+
+seu.RNA_combined.live[[&quot;PROT&quot;]] &lt;- CreateAssayObject(counts = Prot.live.intersect)
+seu.RNA_combined.live</code></pre>
+<pre><code>An object of class Seurat 
+10211 features across 1433 samples within 2 assays 
+Active assay: RNA (10158 features, 0 variable features)
+ 1 other assay present: PROT</code></pre>
+<pre class="r fold-show"><code>## fix dataset
+intersect &lt;- colnames(seu.RNA_fix.subset)[colnames(seu.RNA_fix.subset) %in% colnames(seu.PROT.fix.subset)]
+intersect &lt;- colnames(seu.PROT.fix.subset)[colnames(seu.PROT.fix.subset) %in% intersect]
+
+seu.RNA_combined.fix &lt;- subset(seu.RNA_fix.subset, cells = intersect )
+Prot.fix.intersect &lt;- seu.PROT.fix.subset@assays$PROT@counts[,colnames(seu.PROT.fix.subset) %in% intersect]
+
+seu.RNA_combined.fix[[&quot;PROT&quot;]] &lt;- CreateAssayObject(counts = Prot.fix.intersect)
+seu.RNA_combined.fix</code></pre>
+<pre><code>An object of class Seurat 
+5095 features across 1038 samples within 2 assays 
+Active assay: RNA (5019 features, 0 variable features)
+ 1 other assay present: PROT</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Antibody quality (Non-detected proteins) filter</li>
+</ol>
+<pre class="r"><code>scale_x_reordered &lt;- function(..., sep = &quot;___&quot;) {
+  reg &lt;- paste0(sep, &quot;.+$&quot;)
+  ggplot2::scale_x_discrete(labels = function(x) gsub(reg, &quot;&quot;, x), ...)
+}
+
+reorder_within &lt;- function(x, by, within, fun = mean, sep = &quot;___&quot;, ...) {
+  new_x &lt;- paste(x, within, sep = sep)
+  stats::reorder(new_x, by, FUN = fun)
+}</code></pre>
+<pre class="r"><code>PROT_tbl_subset.fix &lt;- as.data.frame(seu.PROT.fix.subset@assays$PROT@counts) %&gt;%
+  mutate(protein = rownames(seu.PROT.fix.subset)) %&gt;%
+  dplyr::select(protein, everything()) %&gt;%
+  gather(&quot;cell&quot;, &quot;count&quot;, 2:c(ncol(seu.PROT.fix.subset)+1)) %&gt;%
+  mutate(sample = gsub(&#39;.{5}$&#39;, &#39;&#39;, cell) )</code></pre>
+<pre class="r"><code>ggplot(PROT_tbl_subset.fix, aes(reorder_within(protein, count, sample), count)) +
+     geom_boxplot(outlier.colour=&quot;black&quot;, outlier.shape=16,
+             outlier.size=0.5, notch=FALSE)  +
+     scale_x_reordered() +
+     facet_wrap(.~ sample, ncol=4,scales = &quot;free_y&quot;) + 
+  theme_few()+
+    theme(axis.text.x=element_text(angle=90,hjust=1,vjust=.5,colour=&#39;gray50&#39;)) +
+  scale_y_log10() +
+  add.textsize +
+  coord_flip() +
+  labs(y=&quot;count (log10)&quot;, x = &quot;Antibody (ordered per plate)&quot;)</code></pre>
+<p><img src="figure/QC.Rmd/p.suppl_Ab-QC_fix-1.png" width="691.2" style="display: block; margin: auto;" /> <em>Supplementary Figure</em> Fixed dataset antibody counts per plate (ordered from high to low per plate (1586-1589))</p>
+<pre class="r"><code>prot.median.fix &lt;- aggregate(PROT_tbl_subset.fix[, 3], list(protein =PROT_tbl_subset.fix$protein), mean)
+
+prot.fix.toremove &lt;- prot.median.fix$protein[prot.median.fix$x &lt;=0.2]
+
+filtered.prot.counts &lt;- seu.PROT.fix.subset[[&quot;PROT&quot;]]@counts[!c(rownames(seu.PROT.fix.subset[[&quot;PROT&quot;]]@counts) %chin% prot.fix.toremove),]
+
+seu.PROT.fix.subset &lt;- CreateSeuratObject(filtered.prot.counts, assay = &quot;PROT&quot;)</code></pre>
+<pre class="r"><code>PROT_tbl_subset.live &lt;- as.data.frame(seu.RNA_combined.live@assays$PROT@counts) %&gt;%
+  mutate(protein = rownames(seu.RNA_combined.live[[&quot;PROT&quot;]])) %&gt;%
+  dplyr::select(protein, everything()) %&gt;%
+  gather(&quot;cell&quot;, &quot;count&quot;, 2:c(ncol(seu.RNA_combined.live[[&quot;PROT&quot;]])+1)) %&gt;%
+  mutate(sample = gsub(&#39;.{5}$&#39;, &#39;&#39;, cell) )</code></pre>
+<pre class="r"><code>ggplot(PROT_tbl_subset.live, aes(reorder_within(protein, count, sample), count)) +
+     geom_boxplot(outlier.colour=&quot;black&quot;, outlier.shape=16,
+             outlier.size=0.5, notch=FALSE)  +
+     scale_x_reordered() +
+     facet_wrap(.~ sample, ncol=4,scales = &quot;free_y&quot;) + 
+  theme_few()+
+    theme(axis.text.x=element_text(angle=90,hjust=1,vjust=.5,colour=&#39;gray50&#39;)) +
+  scale_y_log10() +
+  add.textsize +
+  coord_flip() +
+  labs(y=&quot;count (log10)&quot;, x = &quot;Antibody (ordered per plate)&quot;)</code></pre>
+<p><img src="figure/QC.Rmd/p.suppl_Ab-QC_live-1.png" width="691.2" style="display: block; margin: auto;" /> <em>Supplementary Figure</em> Live dataset antibody counts per plate (ordered from high to low per plate (1586-1589))</p>
+<pre class="r"><code>prot.median.live &lt;- aggregate(PROT_tbl_subset.live[, 3], list(protein =PROT_tbl_subset.live$protein), mean)
+
+prot.live.toremove &lt;- prot.median.live$protein[prot.median.live$x &lt;1]
+
+filtered.prot.counts.live &lt;- seu.RNA_combined.live[[&quot;PROT&quot;]]@counts[!c(rownames(seu.RNA_combined.live[[&quot;PROT&quot;]]@counts) %chin% prot.live.toremove),]
+
+seu.RNA_combined.live[[&quot;PROT&quot;]] &lt;- CreateAssayObject(counts = filtered.prot.counts.live)</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Add metadata to object:</li>
+</ol>
+<pre class="r fold-show"><code>## metadata import
+metadata &lt;- read_delim(&quot;data/metadata.txt&quot;, &quot;\t&quot;, escape_double = FALSE, trim_ws = TRUE)
+metadata$sample &lt;- as.factor(metadata$sample)
+
+## add metadata to fix dataset
+meta.fix &lt;- data.frame(seu.RNA_combined.fix@meta.data)  %&gt;%
+  mutate(sample = orig.ident ) %&gt;%
+  left_join(metadata) %&gt;%
+  mutate(group = sample) 
+meta.fix&lt;-as.data.frame(meta.fix)
+rownames(meta.fix) &lt;- rownames(data.frame(seu.RNA_combined.fix@meta.data) )
+seu.RNA_combined.fix &lt;- AddMetaData(object = seu.RNA_combined.fix, metadata = meta.fix)
+
+#meta.fix &lt;- data.frame(seu.RNA_combined.fix@meta.data) %&gt;%
+#  mutate(sample = rownames(seu.RNA_combined.fix@meta.data))
+
+
+## add metadata to live dataset
+meta.live &lt;- data.frame(seu.RNA_combined.live@meta.data)  %&gt;%
+  mutate(sample = orig.ident ) %&gt;%
+  left_join(metadata) %&gt;%
+  mutate(group = sample) 
+meta.live&lt;-as.data.frame(meta.live)
+rownames(meta.live) &lt;- rownames(data.frame(seu.RNA_combined.live@meta.data) )
+seu.RNA_combined.live &lt;- AddMetaData(object = seu.RNA_combined.live, metadata = meta.live)
+
+#meta.live &lt;- data.frame(seu.RNA_combined.live@meta.data) %&gt;%
+#  mutate(sample = rownames(seu.RNA_combined.live@meta.data)) 
+
+seu.RNA_combined.live[[&quot;percent.mt&quot;]] &lt;- PercentageFeatureSet(seu.RNA_combined.live, pattern = &quot;^MT&quot;)
+
+seu.RNA_combined.fix[[&quot;percent.mt&quot;]] &lt;- PercentageFeatureSet(seu.RNA_combined.fix, pattern = &quot;^MT&quot;)</code></pre>
+</div>
+<div id="normalize-and-scale" class="section level2">
+<h2>Normalize and Scale</h2>
+<pre class="r fold-show"><code>## fix data normalize RNA
+DefaultAssay(seu.RNA_combined.fix) &lt;- &#39;RNA&#39;
+seu.RNA_combined.fix &lt;- SCTransform(seu.RNA_combined.fix, assay = &quot;RNA&quot;, new.assay.name = &quot;SCT&quot;, vars.to.regress = c(&quot;nCount_RNA&quot;, &quot;percent.mt&quot;, &quot;plate&quot;), return.only.var.genes = FALSE, verbose = FALSE)
+
+# Add some metadata to normalized data (ncounts &amp; percent mt)
+seu.RNA_combined.fix &lt;- AddMetaData(seu.RNA_combined.fix, as.data.frame(seu.RNA_combined.fix@assays$SCT@counts) %&gt;% summarise_all(funs(sum)) %&gt;% unlist(), col.name = &quot;nCount_RNA_SCT&quot;)
+
+seu.RNA_combined.fix &lt;- PercentageFeatureSet(seu.RNA_combined.fix, pattern = &quot;^MT\\.|^MTRN&quot;, col.name = &quot;percent.mt.aftersct&quot;, assay = &quot;SCT&quot;)
+
+## Fixed dataset normalize protein
+DefaultAssay(seu.RNA_combined.fix) &lt;- &#39;PROT&#39;
+VariableFeatures(seu.RNA_combined.fix) &lt;- rownames(seu.RNA_combined.fix[[&quot;PROT&quot;]])
+seu.RNA_combined.fix &lt;- NormalizeData(seu.RNA_combined.fix, normalization.method = &#39;CLR&#39;, margin = 2, assay = &quot;PROT&quot;) %&gt;% 
+  ScaleData(vars.to.regress = c(&quot;nCount_PROT&quot;, &quot;plate&quot;))
+
+## live data normalize RNA
+DefaultAssay(seu.RNA_combined.live) &lt;- &#39;RNA&#39;
+seu.RNA_combined.live &lt;- SCTransform(seu.RNA_combined.live, assay = &quot;RNA&quot;, new.assay.name = &quot;SCT&quot;, vars.to.regress = c(&quot;nCount_RNA&quot;, &quot;percent.mt&quot;, &quot;plate&quot;), return.only.var.genes = FALSE, verbose = FALSE)
+
+# Add some metadata to normalized data (ncounts &amp; percent mt)
+seu.RNA_combined.live &lt;- AddMetaData(seu.RNA_combined.live, as.data.frame(seu.RNA_combined.live@assays$SCT@counts) %&gt;% summarise_all(funs(sum)) %&gt;% unlist(), col.name = &quot;nCount_RNA_SCT&quot;)
+
+seu.RNA_combined.live &lt;- PercentageFeatureSet(seu.RNA_combined.live, pattern = &quot;^MT\\.|^MTRN&quot;, col.name = &quot;percent.mt.aftersct&quot;, assay = &quot;SCT&quot;)
+
+## live normalize &amp; scale protein data 
+DefaultAssay(seu.RNA_combined.live) &lt;- &#39;PROT&#39;
+VariableFeatures(seu.RNA_combined.live) &lt;- rownames(seu.RNA_combined.live[[&quot;PROT&quot;]])
+seu.RNA_combined.live &lt;- NormalizeData(seu.RNA_combined.live, normalization.method = &#39;CLR&#39;, margin = 2, assay = &quot;PROT&quot;) %&gt;% 
+  ScaleData(vars.to.regress = c(&quot;nCount_PROT&quot;, &quot;plate&quot;)) </code></pre>
+</div>
+<div id="filtered-dataset-properties" class="section level2">
+<h2>Filtered dataset properties</h2>
+<p>Overview of the number of cells and data properties of all plates.</p>
+<div id="live-cells-rna-surface-protein-dataset" class="section level4">
+<h4>Live-cells RNA &amp; surface protein dataset</h4>
+<pre class="r"><code>seu.RNA_combined.live</code></pre>
+<pre><code>An object of class Seurat 
+20366 features across 1433 samples within 3 assays 
+Active assay: PROT (50 features, 50 variable features)
+ 2 other assays present: RNA, SCT</code></pre>
+<p><strong>Table</strong> Overview of per plate properties after filtering.</p>
+<pre class="r"><code>kable(seu.RNA_combined.live@meta.data %&gt;% 
+        group_by(donor,plate) %&gt;% 
+        summarise(`Number of cells` = round(n(),0),
+                  `Median counts RNA` = round(median(nCount_RNA),0),
+                  `Median Number genes` = round(median(nFeature_RNA),0),
+                  `Median Mitochondrial counts (Median %)` = round(median(percent.mt),2), 
+                  `Median counts PROT` = round(median(nCount_PROT),0),
+                  `Number proteins` = round(median(nFeature_PROT),0)
+                  )) %&gt;%
+  kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+donor
+</th>
+<th style="text-align:left;">
+plate
+</th>
+<th style="text-align:right;">
+Number of cells
+</th>
+<th style="text-align:right;">
+Median counts RNA
+</th>
+<th style="text-align:right;">
+Median Number genes
+</th>
+<th style="text-align:right;">
+Median Mitochondrial counts (Median %)
+</th>
+<th style="text-align:right;">
+Median counts PROT
+</th>
+<th style="text-align:right;">
+Number proteins
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+D32
+</td>
+<td style="text-align:left;">
+P_1578
+</td>
+<td style="text-align:right;">
+216
+</td>
+<td style="text-align:right;">
+1624
+</td>
+<td style="text-align:right;">
+556
+</td>
+<td style="text-align:right;">
+1.14
+</td>
+<td style="text-align:right;">
+3842
+</td>
+<td style="text-align:right;">
+46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D32
+</td>
+<td style="text-align:left;">
+P_1579
+</td>
+<td style="text-align:right;">
+293
+</td>
+<td style="text-align:right;">
+2333
+</td>
+<td style="text-align:right;">
+861
+</td>
+<td style="text-align:right;">
+1.21
+</td>
+<td style="text-align:right;">
+3601
+</td>
+<td style="text-align:right;">
+45
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D33
+</td>
+<td style="text-align:left;">
+P_1580
+</td>
+<td style="text-align:right;">
+274
+</td>
+<td style="text-align:right;">
+2888
+</td>
+<td style="text-align:right;">
+1040
+</td>
+<td style="text-align:right;">
+1.18
+</td>
+<td style="text-align:right;">
+3908
+</td>
+<td style="text-align:right;">
+47
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D33
+</td>
+<td style="text-align:left;">
+P_1584
+</td>
+<td style="text-align:right;">
+184
+</td>
+<td style="text-align:right;">
+3688
+</td>
+<td style="text-align:right;">
+1220
+</td>
+<td style="text-align:right;">
+1.21
+</td>
+<td style="text-align:right;">
+4383
+</td>
+<td style="text-align:right;">
+48
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D40
+</td>
+<td style="text-align:left;">
+P_1582
+</td>
+<td style="text-align:right;">
+231
+</td>
+<td style="text-align:right;">
+1150
+</td>
+<td style="text-align:right;">
+524
+</td>
+<td style="text-align:right;">
+1.11
+</td>
+<td style="text-align:right;">
+3575
+</td>
+<td style="text-align:right;">
+47
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D40
+</td>
+<td style="text-align:left;">
+P_1585
+</td>
+<td style="text-align:right;">
+235
+</td>
+<td style="text-align:right;">
+3706
+</td>
+<td style="text-align:right;">
+1133
+</td>
+<td style="text-align:right;">
+1.24
+</td>
+<td style="text-align:right;">
+3831
+</td>
+<td style="text-align:right;">
+47
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Table</strong> Overview of per donor properties after filtering.</p>
+<pre class="r"><code>kable(seu.RNA_combined.live@meta.data %&gt;% 
+        group_by(donor) %&gt;% 
+        summarise(`Number of cells` = round(n(),0),
+                  `Median counts RNA` = round(median(nCount_RNA),0),
+                  `Median Number genes` = round(median(nFeature_RNA),0),
+                  `Median Mitochondrial counts (Median %)` = round(median(percent.mt),2), 
+                  `Median counts PROT` = round(median(nCount_PROT),0),
+                  `Number proteins` = round(median(nFeature_PROT),0)
+                  )) %&gt;%
+  kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+donor
+</th>
+<th style="text-align:right;">
+Number of cells
+</th>
+<th style="text-align:right;">
+Median counts RNA
+</th>
+<th style="text-align:right;">
+Median Number genes
+</th>
+<th style="text-align:right;">
+Median Mitochondrial counts (Median %)
+</th>
+<th style="text-align:right;">
+Median counts PROT
+</th>
+<th style="text-align:right;">
+Number proteins
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+D32
+</td>
+<td style="text-align:right;">
+509
+</td>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:right;">
+732
+</td>
+<td style="text-align:right;">
+1.18
+</td>
+<td style="text-align:right;">
+3693
+</td>
+<td style="text-align:right;">
+46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D33
+</td>
+<td style="text-align:right;">
+458
+</td>
+<td style="text-align:right;">
+3168
+</td>
+<td style="text-align:right;">
+1122
+</td>
+<td style="text-align:right;">
+1.18
+</td>
+<td style="text-align:right;">
+4098
+</td>
+<td style="text-align:right;">
+47
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D40
+</td>
+<td style="text-align:right;">
+466
+</td>
+<td style="text-align:right;">
+1817
+</td>
+<td style="text-align:right;">
+731
+</td>
+<td style="text-align:right;">
+1.17
+</td>
+<td style="text-align:right;">
+3694
+</td>
+<td style="text-align:right;">
+47
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="fixed-cells-intracellular-proteins-dataset" class="section level4">
+<h4>Fixed cells intracellular proteins dataset</h4>
+<pre class="r"><code>seu.RNA_combined.fix</code></pre>
+<pre><code>An object of class Seurat 
+10114 features across 1038 samples within 3 assays 
+Active assay: PROT (76 features, 76 variable features)
+ 2 other assays present: RNA, SCT</code></pre>
+<p><strong>Table</strong> Overview of per plate properties after filtering.</p>
+<pre class="r"><code>kable(seu.RNA_combined.fix@meta.data %&gt;% 
+        group_by(donor,plate) %&gt;% 
+        summarise(`Number of cells` = round(n(),0),
+                  `Median counts RNA` = round(median(nCount_RNA),0),
+                  `Median Number genes` = round(median(nFeature_RNA),0),
+                  `Median Mitochondrial counts (Median %)` = round(median(percent.mt),2), 
+                  `Median counts PROT` = round(median(nCount_PROT),0),
+                  `Number proteins` = round(median(nFeature_PROT),0)
+                  )) %&gt;%
+  kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+donor
+</th>
+<th style="text-align:left;">
+plate
+</th>
+<th style="text-align:right;">
+Number of cells
+</th>
+<th style="text-align:right;">
+Median counts RNA
+</th>
+<th style="text-align:right;">
+Median Number genes
+</th>
+<th style="text-align:right;">
+Median Mitochondrial counts (Median %)
+</th>
+<th style="text-align:right;">
+Median counts PROT
+</th>
+<th style="text-align:right;">
+Number proteins
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+D33
+</td>
+<td style="text-align:left;">
+P_1586
+</td>
+<td style="text-align:right;">
+290
+</td>
+<td style="text-align:right;">
+280
+</td>
+<td style="text-align:right;">
+106
+</td>
+<td style="text-align:right;">
+0.52
+</td>
+<td style="text-align:right;">
+7664
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D33
+</td>
+<td style="text-align:left;">
+P_1587
+</td>
+<td style="text-align:right;">
+232
+</td>
+<td style="text-align:right;">
+266
+</td>
+<td style="text-align:right;">
+120
+</td>
+<td style="text-align:right;">
+0.99
+</td>
+<td style="text-align:right;">
+8492
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D40
+</td>
+<td style="text-align:left;">
+P_1588
+</td>
+<td style="text-align:right;">
+254
+</td>
+<td style="text-align:right;">
+322
+</td>
+<td style="text-align:right;">
+140
+</td>
+<td style="text-align:right;">
+0.57
+</td>
+<td style="text-align:right;">
+7250
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D40
+</td>
+<td style="text-align:left;">
+P_1589
+</td>
+<td style="text-align:right;">
+262
+</td>
+<td style="text-align:right;">
+272
+</td>
+<td style="text-align:right;">
+116
+</td>
+<td style="text-align:right;">
+0.81
+</td>
+<td style="text-align:right;">
+8704
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Table</strong> Overview of per donor properties after filtering.</p>
+<pre class="r"><code>kable(seu.RNA_combined.fix@meta.data %&gt;% 
+        group_by(donor) %&gt;% 
+        summarise(`Number of cells` = round(n(),0),
+                  `Median counts RNA` = round(median(nCount_RNA),0),
+                  `Median Number genes` = round(median(nFeature_RNA),0),
+                  `Median Mitochondrial counts (Median %)` = round(median(percent.mt),2), 
+                  `Median counts PROT` = round(median(nCount_PROT),0),
+                  `Number proteins` = round(median(nFeature_PROT),0)
+                  )) %&gt;%
+  kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+donor
+</th>
+<th style="text-align:right;">
+Number of cells
+</th>
+<th style="text-align:right;">
+Median counts RNA
+</th>
+<th style="text-align:right;">
+Median Number genes
+</th>
+<th style="text-align:right;">
+Median Mitochondrial counts (Median %)
+</th>
+<th style="text-align:right;">
+Median counts PROT
+</th>
+<th style="text-align:right;">
+Number proteins
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+D33
+</td>
+<td style="text-align:right;">
+522
+</td>
+<td style="text-align:right;">
+272
+</td>
+<td style="text-align:right;">
+112
+</td>
+<td style="text-align:right;">
+0.73
+</td>
+<td style="text-align:right;">
+7924
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D40
+</td>
+<td style="text-align:right;">
+516
+</td>
+<td style="text-align:right;">
+292
+</td>
+<td style="text-align:right;">
+126
+</td>
+<td style="text-align:right;">
+0.64
+</td>
+<td style="text-align:right;">
+7942
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="save-dataset" class="section level2">
+<h2>Save dataset</h2>
+<p>Seurat object with filtered cells and normalized counts is stored in “output/seu.fix_norm.rds” (intracellular protein modality) and “output/seu.live_norm.rds”(RNA and surface protein modalities).</p>
+<pre class="r fold-show"><code>## Save Seurat objects
+saveRDS(seu.RNA_combined.fix, file = &quot;output/seu.fix_norm.rds&quot;)
+saveRDS(seu.RNA_combined.live, file = &quot;output/seu.live_norm.rds&quot;)</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19042)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_Netherlands.1252  LC_CTYPE=English_Netherlands.1252   
+[3] LC_MONETARY=English_Netherlands.1252 LC_NUMERIC=C                        
+[5] LC_TIME=English_Netherlands.1252    
+
+attached base packages:
+[1] parallel  stats4    stats     graphics  grDevices utils     datasets 
+[8] methods   base     
+
+other attached packages:
+ [1] ggupset_0.3.0          RColorBrewer_1.1-2     clusterProfiler_3.18.1
+ [4] enrichplot_1.10.2      UCell_1.0.0            data.table_1.13.6     
+ [7] scales_1.1.1           cowplot_1.1.1          ggthemes_4.2.4        
+[10] kableExtra_1.3.1       knitr_1.31             org.Hs.eg.db_3.12.0   
+[13] AnnotationDbi_1.52.0   IRanges_2.24.1         S4Vectors_0.28.1      
+[16] Biobase_2.50.0         BiocGenerics_0.36.0    forcats_0.5.1         
+[19] stringr_1.4.0          dplyr_1.0.3            purrr_0.3.4           
+[22] readr_1.4.0            tidyr_1.1.2            tibble_3.0.5          
+[25] ggplot2_3.3.3          tidyverse_1.3.0        Matrix_1.2-18         
+[28] SeuratObject_4.0.0     Seurat_4.0.0           workflowr_1.6.2       
+
+loaded via a namespace (and not attached):
+  [1] reticulate_1.18      tidyselect_1.1.0     RSQLite_2.2.3       
+  [4] htmlwidgets_1.5.3    grid_4.0.3           BiocParallel_1.24.1 
+  [7] Rtsne_0.15           scatterpie_0.1.5     munsell_0.5.0       
+ [10] codetools_0.2-16     ica_1.0-2            future_1.21.0       
+ [13] miniUI_0.1.1.1       withr_2.4.1          colorspace_2.0-0    
+ [16] GOSemSim_2.16.1      highr_0.8            rstudioapi_0.13     
+ [19] ROCR_1.0-11          tensor_1.5           DOSE_3.16.0         
+ [22] listenv_0.8.0        labeling_0.4.2       git2r_0.28.0        
+ [25] polyclip_1.10-0      bit64_4.0.5          farver_2.0.3        
+ [28] downloader_0.4       rprojroot_2.0.2      parallelly_1.23.0   
+ [31] vctrs_0.3.6          generics_0.1.0       xfun_0.23           
+ [34] R6_2.5.0             graphlayouts_0.7.1   spatstat.utils_2.1-0
+ [37] cachem_1.0.1         fgsea_1.16.0         assertthat_0.2.1    
+ [40] promises_1.1.1       ggraph_2.0.5         gtable_0.3.0        
+ [43] globals_0.14.0       goftest_1.2-2        tidygraph_1.2.0     
+ [46] rlang_0.4.10         splines_4.0.3        lazyeval_0.2.2      
+ [49] broom_0.7.3          BiocManager_1.30.10  yaml_2.2.1          
+ [52] reshape2_1.4.4       abind_1.4-5          modelr_0.1.8        
+ [55] backports_1.2.1      httpuv_1.5.5         qvalue_2.22.0       
+ [58] tools_4.0.3          ellipsis_0.3.1       ggridges_0.5.3      
+ [61] Rcpp_1.0.6           plyr_1.8.6           ps_1.5.0            
+ [64] rpart_4.1-15         deldir_0.2-10        pbapply_1.4-3       
+ [67] viridis_0.5.1        zoo_1.8-8            haven_2.3.1         
+ [70] ggrepel_0.9.1        cluster_2.1.0        fs_1.5.0            
+ [73] magrittr_2.0.1       scattermore_0.7      DO.db_2.9           
+ [76] lmtest_0.9-38        reprex_1.0.0         RANN_2.6.1          
+ [79] whisker_0.4          fitdistrplus_1.1-3   matrixStats_0.57.0  
+ [82] hms_1.0.0            patchwork_1.1.1      mime_0.9            
+ [85] evaluate_0.14        xtable_1.8-4         readxl_1.3.1        
+ [88] gridExtra_2.3        compiler_4.0.3       shadowtext_0.0.7    
+ [91] KernSmooth_2.23-17   crayon_1.3.4         htmltools_0.5.1.1   
+ [94] mgcv_1.8-33          later_1.1.0.1        lubridate_1.7.9.2   
+ [97] DBI_1.1.1            tweenr_1.0.1         dbplyr_2.0.0        
+[100] MASS_7.3-53          cli_2.2.0            igraph_1.2.6        
+[103] pkgconfig_2.0.3      rvcheck_0.1.8        plotly_4.9.3        
+[106] xml2_1.3.2           webshot_0.5.2        rvest_0.3.6         
+[109] digest_0.6.27        sctransform_0.3.2    RcppAnnoy_0.0.18    
+[112] spatstat.data_2.1-0  rmarkdown_2.6        cellranger_1.1.0    
+[115] leiden_0.3.7         fastmatch_1.1-0      uwot_0.1.10         
+[118] shiny_1.6.0          lifecycle_0.2.0      nlme_3.1-149        
+[121] jsonlite_1.7.2       viridisLite_0.3.0    fansi_0.4.2         
+[124] pillar_1.4.7         lattice_0.20-41      fastmap_1.1.0       
+[127] httr_1.4.2           survival_3.2-7       GO.db_3.12.1        
+[130] glue_1.4.2           spatstat_1.64-1      png_0.1-7           
+[133] bit_4.0.4            ggforce_0.3.2        stringi_1.5.3       
+[136] blob_1.2.1           memoise_2.0.0        irlba_2.3.3         
+[139] future.apply_1.7.0  </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
