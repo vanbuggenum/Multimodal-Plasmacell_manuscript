@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 ```{r libraries, include=FALSE}
 source("code/load_packages.R")
 source("code/plot_QC_function.R") #change settings in script to get different layout per subpanel for this figure
-dir.create("output/paper_figures") # location where paper figures are stored
+#dir.create("output/paper_figures") # location where paper figures are stored
 
 panellabels <- c('a', 'b', 'c','d' , 'e', 'f', 'g', 'h', 'i', 'j', 'k')
 
@@ -38,12 +38,12 @@ colors.clusters <-  c("#009E73", "#D55E00","#F0E442","grey")
 
 The single-cell multi-omics data contains single-cell transcriptomic and proteomic and phospho-proteomic data of in-vitro generated plasmacells. The code below shows Quality control plots, QC-filtering, normalization and scaling of the dataset.
 
-## Convert matrix to Seurat objects
+### Count to Seurat
 
-Import all count matrixes (from data/raw folder), combine plates and create unfiltered Seurat objects. 
+Import all count matrixes (from data/Seq2Science folder), combine plates and create unfiltered Seurat objects. 
 
 ```{r convert_matrix_to_seurat}
-source("code/Import_and_create_seuratObj.R")
+#source("code/Import_and_create_seuratObj.R")
 ```
 
 
@@ -261,11 +261,11 @@ seu.PROT.fix.subset <- CreateSeuratObject(filtered.prot.counts, assay = "PROT")
 
 
 ```{r}
-PROT_tbl_subset.live <- as.data.frame(seu.RNA_combined.live@assays$PROT@counts) %>%
-  mutate(protein = rownames(seu.RNA_combined.live[["PROT"]])) %>%
+PROT_tbl_subset.live <- as.data.frame(seu.PROT_live@assays$PROT@counts) %>%
+  mutate(protein = rownames(seu.PROT_live[["PROT"]])) %>%
   dplyr::select(protein, everything()) %>%
-  gather("cell", "count", 2:c(ncol(seu.RNA_combined.live[["PROT"]])+1)) %>%
-  mutate(sample = gsub('.{5}$', '', cell) )
+  gather("cell", "count", 2:c(ncol(seu.PROT_live[["PROT"]])+1)) %>%
+  mutate(sample = gsub('.{9}$', '', cell) )
 ```
 
 ```{r p.suppl_Ab-QC_live, fig.width=7.2, fig.height=8.5}
