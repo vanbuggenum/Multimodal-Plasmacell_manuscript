@@ -26,7 +26,7 @@ The pages contain code to process, analyze and create figures presented in the f
 ## Attribution
 
 
-We are very thankful for the effords made by developers of [Seurat](https://satijalab.org/seurat/index.html), [MOFA+](https://biofam.github.io/MOFA2/) and  [workflowr](https://github.com/jdblischak/workflowr). These (well documented) R-packages enable respectively extensive multimodal data-analysis and reproducible code documentation. 
+We are very thankful for the efforts made by developers of [Seurat](https://satijalab.org/seurat/index.html), [MOFA+](https://biofam.github.io/MOFA2/) and  [workflowr](https://github.com/jdblischak/workflowr). These (well documented) R-packages enable respectively extensive multi-modal data-analysis and reproducible code documentation. 
 
 ------ 
 
