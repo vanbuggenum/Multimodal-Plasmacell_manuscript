@@ -30,7 +30,7 @@ We are very thankful for the efforts made by developers of [Seurat](https://sati
 
 ------ 
 
-The content in this repository is available under the [CC BY 4.0](https://github.com/vanbuggenum/QuRIE-seq_manuscript/blob/master/LICENSE.md) license. 
+The content in this repository is available under the [CC BY 4.0](https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/blob/master/LICENSE.md) license. 
 
 For proper attribution, please [cite]() our [publication (##)]()) containing description and analysis of all presented data and results.
 
