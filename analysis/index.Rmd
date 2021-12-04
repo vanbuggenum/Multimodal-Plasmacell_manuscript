@@ -10,18 +10,34 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Project summary
+## Abstract
+
+Plasma cells are key components of humoral immunity by secreting antibodies and providing protection against pathogens. These cells can be of IgM, IgA, or IgG subclass and migrate to class-specific niches. Localization and rareness of plasma cells make it challenge to define subclass-specific molecular hallmarks. Here, we describe how in-vitro differentiation of peripheral B-cells results in antibody-secreting plasma cells. Using a single-cell multi-modal sequencing approach (RAID) we find subclass-specific hallmark transcriptional profiles, surface protein expression and signaling pathway activation.
 
 ## In this repository
 
+The pages contain code to process, analyze and create figures presented in the full manuscript:
+
+* [QC](QC.html) processes count tables (available at [GSE189953](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE189953)): filter high quality cells; normalize and scale counts.   
+* [PC haracterization](cellstate.html) describes multi-modal characterization of 11-day old differentiated B-cells to plasma-cells.   
+* [Hallmarks Ig-classes](hallmarks.html) describes identification of Ig-classes and corresponding mRNA, surface protein levels and signalling activity: (phospho-)protein levels.   
+* [Supplements](supplements.html) contains supplementary data analysis of FACS, qPCR and ELISA experiments.  
+
 ## Attribution
 
-----
 
-Licence
+We are very thankful for the effords made by developers of [Seurat](https://satijalab.org/seurat/index.html), [MOFA+](https://biofam.github.io/MOFA2/) and  [workflowr](https://github.com/jdblischak/workflowr). These (well documented) R-packages enable respectively extensive multimodal data-analysis and reproducible code documentation. 
 
-Cite
+------ 
 
-----
+The content in this repository is available under the [CC BY 4.0](https://github.com/vanbuggenum/QuRIE-seq_manuscript/blob/master/LICENSE.md) license. 
+
+For proper attribution, please [cite]() our [publication (##)]()) containing description and analysis of all presented data and results.
+
+------
+
+
+
+
 
 
