@@ -1,6 +1,6 @@
 ---
 title: "QC and filtering"
-author: "vanBuggenum"
+author: ""
 output:
   workflowr::wflow_html:
     toc: TRUE
@@ -34,26 +34,27 @@ colors.clusters <-  c("#009E73", "#D55E00","#F0E442","grey")
 
 ```
 
-## Introduction
+The single-cell multi-omics data contains single-cell transcriptomic and proteomic and phospho-proteomic data of *in vitro* generated plasma cells. The code below generates quality control plots, performs filtering, normalization and scaling of the counts
 
-The single-cell multi-omics data contains single-cell transcriptomic and proteomic and phospho-proteomic data of in-vitro generated plasmacells. The code below shows Quality control plots, QC-filtering, normalization and scaling of the dataset.
+## Count matrix to Seurat object
 
-### Count to Seurat
-
-Import all count matrixes (from data/Seq2Science folder), combine plates and create unfiltered Seurat objects. 
-
-```{r convert_matrix_to_seurat}
-#source("code/Import_and_create_seuratObj.R")
-```
+Import all count matrixes, combine plates and create unfiltered Seurat objects. 
 
 
-```{r}
-seu_RNA <- readRDS("output/seu.RNA.rds")
+```{r import counts, warning=FALSE, message=FALSE}
+myfiles <- list.files(path="output/", pattern = ".rds$")
+## only read all raw files and create raw combined table if not done yet. Speeds up generation of html file
+if("seu.RNA.rds" %in%  myfiles){seu_RNA <- readRDS("output/seu.RNA.rds")
 seu.PROT_live <- readRDS("output/seu.PROT_live.rds")
-seu.PROT_fix <- readRDS("output/seu.PROT_fix.rds")
+seu.PROT_fix <- readRDS("output/seu.PROT_fix.rds")} else { 
+  source("code/Import_and_create_seuratObj.R")
+}
 ```
 
-## QC plots
+
+## QC plots and filters
+
+
 
 ```{r QC-filters}
 plot_RNA_nCount <- plot_QC_paper(seu_object = seu_RNA, 
@@ -152,10 +153,10 @@ ggsave(plot.QC, filename = "output/paper_figures/Suppl_QC_filters.png", width = 
 ```{r Suppl_QC_filters, fig.width=7.20472, fig.height=7.87402}
 plot.QC
 ```
-*Supplementary Figure* Thresholds for selection of high-quality samples and cells from the QuRIE-seq datasets.
+*Supplementary Figure* Thresholds for selection of high-quality samples and cells.
 
 
-1. Based on the indicated cut-offs, high-quality cells are filtered for further analysis:  
+1. Based on the indicated cut-offs, high-quality cells are filtered for further analysis.  
 
 ```{r filter cells and samples, class.source = 'fold-show'}
 ## Filter fixed protein dataset
@@ -174,11 +175,9 @@ seu.RNA_live.subset <- subset(seu.RNA_live, subset = percent.mt <=5 & nFeature_R
 seu.RNA_fix.subset <- subset(seu.RNA_fix) #, subset = percent.mt <= 5 & nFeature_RNA >= 300 # Nofilter because RNA not taken along.
 ```
 
-2. Filter low-detected genes
+2. Filter low-detected genes: Keep genes that are >1% cells detected.
 
-Keep genes that are >1% cells detected.
-
-```{r filter non-detected genes, class.source = 'fold-show'}
+```{r filter non-detected genes, class.source = 'fold-hide'}
 ## Additional filter features (genes) detected in 1% of cells
 seu.RNA_live.subset <- CreateSeuratObject(seu.RNA_live.subset[["RNA"]]@counts, min.cells = round(ncol(seu.RNA_live.subset)/100)) ## keep features detected in 1% of cells
 seu.RNA_fix.subset <- CreateSeuratObject(seu.RNA_fix.subset[["RNA"]]@counts, min.cells = round(ncol(seu.RNA_fix.subset)/100)) ## keep features detected in min 1% cells
@@ -186,7 +185,7 @@ seu.RNA_fix.subset <- CreateSeuratObject(seu.RNA_fix.subset[["RNA"]]@counts, min
 
 3. Merge Seurat objects from Protein & RNA modalities
 
-```{r merge.protRNA.data, class.source = 'fold-show'}
+```{r merge.protRNA.data, class.source = 'fold-hide'}
 ## Merge Seurat objects live dataset
 intersect <- colnames(seu.RNA_live.subset)[colnames(seu.RNA_live.subset) %in% colnames(seu.PROT.live.subset)]
 intersect <- colnames(seu.PROT.live.subset)[colnames(seu.PROT.live.subset) %in% intersect]
@@ -210,45 +209,15 @@ seu.RNA_combined.fix
 ```
 
 
-4. Antibody quality (Non-detected proteins) filter 
+4. Antibody quality (Non-detected proteins) filter: remove proteins with median counts < 0.2 (fixed cells), or < 1 (live cells) 
 
-```{r Functions_protein_plot}
-scale_x_reordered <- function(..., sep = "___") {
-  reg <- paste0(sep, ".+$")
-  ggplot2::scale_x_discrete(labels = function(x) gsub(reg, "", x), ...)
-}
-
-reorder_within <- function(x, by, within, fun = mean, sep = "___", ...) {
-  new_x <- paste(x, within, sep = sep)
-  stats::reorder(new_x, by, FUN = fun)
-}
-```
-
-```{r}
+```{r filter_prot_fix}
 PROT_tbl_subset.fix <- as.data.frame(seu.PROT.fix.subset@assays$PROT@counts) %>%
   mutate(protein = rownames(seu.PROT.fix.subset)) %>%
   dplyr::select(protein, everything()) %>%
   gather("cell", "count", 2:c(ncol(seu.PROT.fix.subset)+1)) %>%
   mutate(sample = gsub('.{5}$', '', cell) )
-```
 
-```{r p.suppl_Ab-QC_fix, fig.width=7.2, fig.height=7.2}
-ggplot(PROT_tbl_subset.fix, aes(reorder_within(protein, count, sample), count)) +
-     geom_boxplot(outlier.colour="black", outlier.shape=16,
-             outlier.size=0.5, notch=FALSE)  +
-     scale_x_reordered() +
-     facet_wrap(.~ sample, ncol=4,scales = "free_y") + 
-  theme_few()+
-    theme(axis.text.x=element_text(angle=90,hjust=1,vjust=.5,colour='gray50')) +
-  scale_y_log10() +
-  add.textsize +
-  coord_flip() +
-  labs(y="count (log10)", x = "Antibody (ordered per plate)")
-```
-*Supplementary Figure* Fixed dataset antibody counts per plate (ordered from high to low per plate (1586-1589))
-
-
-```{r filter_prot_fix}
 prot.median.fix <- aggregate(PROT_tbl_subset.fix[, 3], list(protein =PROT_tbl_subset.fix$protein), mean)
 
 prot.fix.toremove <- prot.median.fix$protein[prot.median.fix$x <=0.2]
@@ -257,34 +226,13 @@ filtered.prot.counts <- seu.PROT.fix.subset[["PROT"]]@counts[!c(rownames(seu.PRO
 
 seu.PROT.fix.subset <- CreateSeuratObject(filtered.prot.counts, assay = "PROT")
 
-```
-
-
-```{r}
+## Live cells
 PROT_tbl_subset.live <- as.data.frame(seu.PROT_live@assays$PROT@counts) %>%
   mutate(protein = rownames(seu.PROT_live[["PROT"]])) %>%
   dplyr::select(protein, everything()) %>%
   gather("cell", "count", 2:c(ncol(seu.PROT_live[["PROT"]])+1)) %>%
   mutate(sample = gsub('.{9}$', '', cell) )
-```
 
-```{r p.suppl_Ab-QC_live, fig.width=7.2, fig.height=8.5}
-ggplot(PROT_tbl_subset.live, aes(reorder_within(protein, count, sample), count)) +
-     geom_boxplot(outlier.colour="black", outlier.shape=16,
-             outlier.size=0.5, notch=FALSE)  +
-     scale_x_reordered() +
-     facet_wrap(.~ sample, ncol=4,scales = "free_y") + 
-  theme_few()+
-    theme(axis.text.x=element_text(angle=90,hjust=1,vjust=.5,colour='gray50')) +
-  scale_y_log10() +
-  add.textsize +
-  coord_flip() +
-  labs(y="count (log10)", x = "Antibody (ordered per plate)")
-```
-*Supplementary Figure* Live dataset antibody counts per plate (ordered from high to low per plate (1586-1589))
-
-
-```{r}
 prot.median.live <- aggregate(PROT_tbl_subset.live[, 3], list(protein =PROT_tbl_subset.live$protein), mean)
 
 prot.live.toremove <- prot.median.live$protein[prot.median.live$x <1]
@@ -296,9 +244,9 @@ seu.RNA_combined.live[["PROT"]] <- CreateAssayObject(counts = filtered.prot.coun
 ```
 
 
-5. Add metadata to object:
+5. Add metadata to objec.
 
-```{r add.metadata, class.source = 'fold-show'}
+```{r add.metadata, class.source = 'fold-hide'}
 ## metadata import
 metadata <- read_delim("data/metadata.txt", "\t", escape_double = FALSE, trim_ws = TRUE)
 metadata$sample <- as.factor(metadata$sample)
@@ -335,7 +283,9 @@ seu.RNA_combined.fix[["percent.mt"]] <- PercentageFeatureSet(seu.RNA_combined.fi
 
 ## Normalize and Scale
 
-```{r Normalize_and_scale, class.source = 'fold-show'}
+Finally, the datasets are normalized (SCT for RNA, CLR for (phospho-)protein), and scaled (regress out: nCount, percentage mitochondiral, and plate ID for RNA, and regress out: nCount and plate ID for protein).
+
+```{r Normalize_and_scale, class.source = 'fold-hide'}
 
 ## fix data normalize RNA
 DefaultAssay(seu.RNA_combined.fix) <- 'RNA'
@@ -374,7 +324,7 @@ seu.RNA_combined.live <- NormalizeData(seu.RNA_combined.live, normalization.meth
 
 Overview of the number of cells and data properties of all plates.
 
-#### Live-cells RNA & surface protein dataset
+### Live-cells RNA & surface protein dataset
 
 ```{r}
 seu.RNA_combined.live
@@ -408,7 +358,7 @@ kable(seu.RNA_combined.live@meta.data %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 ```
 
-#### Fixed cells intracellular proteins dataset
+### Fixed cells intracellular proteins dataset
 
 ```{r}
 seu.RNA_combined.fix
