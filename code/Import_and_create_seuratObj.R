@@ -1,13 +1,13 @@
 ## Created 2 different functions to import the counts from protein (CITE_count)or RNA libraries.
 
-read_CITE_count <- function(dir = "~/Work/Data/RAID/2021.Collabs.JvB002_EvB_114ru/data/02/CITEseq/CITEseq/CITE_counts/" , name) {
+read_CITE_count <- function(dir = "./data/raw/CITEseq/CITEseq/CITE_counts/" , name) {
   m <- read.delim(paste0(dir, name, ".txt") )
   m <- m[1:78,]
   colnames(m) <- substring(colnames(m),6)
   return(m)
 }
 
-read_RNA_count <- function(dir = "~/Work/Data/RAID/2021.Collabs.JvB002_EvB_114ru/data/02/COUNT_TABLES/COUNT_TABLES_" , name) {
+read_RNA_count <- function(dir = "./data/raw/COUNT_TABLES/COUNT_TABLES_" , name) {
   m <- read_delim(paste0(dir, name,"/COUNTS_",name,".tab"),
                   "\t", escape_double = FALSE, trim_ws = TRUE)
   # get umi count table
