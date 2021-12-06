@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="vanBuggenum" />
+
+
+<title>Cellstate</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Single-cell analysis of human IgM, IgA and IgG plama-cells</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="QC.html">QC</a>
+</li>
+<li>
+  <a href="cellstate.html">PC characterization</a>
+</li>
+<li>
+  <a href="hallmarks.html">Hallmarks Ig-classes</a>
+</li>
+<li>
+  <a href="supplements.html">Supplements</a>
+</li>
+<li>
+  <a href="license.html">Citation</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Cellstate</h1>
+<h4 class="author">vanBuggenum</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2021-12-06
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Multimodal-Plasmacell_manuscript/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20211005code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20211005)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20211005code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20211005)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomvanbuggenumMultimodalPlasmacellmanuscripttree791178a412ef69330afc63879f4e1114581c14c3targetblank791178aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/tree/791178a412ef69330afc63879f4e1114581c14c3" target="_blank">791178a</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomvanbuggenumMultimodalPlasmacellmanuscripttree791178a412ef69330afc63879f4e1114581c14c3targetblank791178aa" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/tree/791178a412ef69330afc63879f4e1114581c14c3" target="_blank">791178a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+
+Untracked files:
+    Untracked:  analysis/supplements.Rmd
+    Untracked:  code/Import_and_create_seuratobject.R
+    Untracked:  data/Seq2Science/
+    Untracked:  data/azimuth_PBMCs/
+    Untracked:  data/azimuth_bonemarrow/
+    Untracked:  data/citeseqcount_htseqcount.zip
+    Untracked:  data/genelist.plots.diffmarkers.txt
+    Untracked:  data/raw/
+    Untracked:  data/supplementary/
+    Untracked:  output/paper_figures/
+    Untracked:  output/seu.PROT_fix.rds
+    Untracked:  output/seu.PROT_live.rds
+    Untracked:  output/seu.RNA.rds
+    Untracked:  output/seu.fix_norm.rds
+    Untracked:  output/seu.fix_norm_cellstate.rds
+    Untracked:  output/seu.fix_norm_plasmacells.rds
+    Untracked:  output/seu.live_norm.rds
+    Untracked:  output/seu.live_norm_cellstate.rds
+    Untracked:  output/seu.live_norm_plasmacells.rds
+    Untracked:  output/seu.live_norm_plasmacells_RNA.rds
+
+Unstaged changes:
+    Modified:   code/load_packages.R
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/cellstate.Rmd</code>) and HTML (<code>docs/cellstate.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/blob/791178a412ef69330afc63879f4e1114581c14c3/analysis/cellstate.Rmd" target="_blank">791178a</a>
+</td>
+<td>
+jessievb
+</td>
+<td>
+2021-12-06
+</td>
+<td>
+Plasmacell and cell-cycle gating analysis
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<pre class="r"><code>seu.fix &lt;- readRDS( file = &quot;output/seu.fix_norm.rds&quot;)
+seu.live &lt;- readRDS(file = &quot;output/seu.live_norm.rds&quot;)</code></pre>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<ul>
+<li>Cell-Cycle scoring<br />
+</li>
+<li>Plasma cell markers (CD27high &amp; IgDlow)<br />
+</li>
+<li>Ig-subtype classification</li>
+</ul>
+</div>
+<div id="cell-cycle-state" class="section level2">
+<h2>Cell-cycle state</h2>
+<p>Cell-cycle scoring was performed scoring algorithm <a href="https://carmonalab.github.io/UCell/UCell_Seurat_vignette.html">UCell</a>. (For citation see (<a href="https://www.biorxiv.org/content/10.1101/2021.04.13.439670v1">this</a> preprint)</p>
+<pre class="r"><code>s.genes &lt;- cc.genes.updated.2019$s.genes
+g2m.genes &lt;- cc.genes.updated.2019$g2m.genes
+
+###          --- Live cells ------
+
+# Cell-cycle scoring was performed novel scoring algorithm https://carmonalab.github.io/UCell/UCell_Seurat_vignette.html
+# Genesets used also in Seurat Cell-cycle scoring
+seu.live &lt;- AddModuleScore_UCell(seu.live, assay = &quot;SCT&quot;,slot = &quot;data&quot;,features = cc.genes.updated.2019)
+
+## Fetch data for plotting
+data.CC.live &lt;- FetchData(seu.live, vars = c(&#39;G2M.Score&#39;, &#39;S.Score&#39;, &quot;Phase&quot;, &quot;donor&quot;, &quot;s.genes_UCell&quot;, &quot;g2m.genes_UCell&quot;))
+data.CC.live$MKI67 &lt;- FetchData(seu.live[[&quot;SCT&quot;]], &quot;MKI67&quot;, slot = &quot;scale.data&quot;)$MKI67
+
+## Plot CC score
+
+p.CCscore.MKI67.live &lt;- ggplot(data = data.CC.live, aes(x = g2m.genes_UCell, y =s.genes_UCell , color = MKI67)) +
+  geom_point( position = &#39;jitter&#39;, alpha = 0.8) +
+  scale_color_gradientn(colors = c(&#39;lightgrey&#39;, &#39;dodgerblue2&#39;)) +
+  geom_rect(mapping=aes(xmin=-0.01, xmax=0.1, ymin=-0.01, ymax=0.1), color=&quot;black&quot;, alpha=0)+
+  cowplot::theme_cowplot() + 
+  labs(title = &quot;RNA-based G2M and S-score mark \ncycling and non-cycling cells&quot;, x = &quot;G2M-score&quot;, y = &quot;S-score&quot;)+
+  add.textsize+
+  #facet_wrap(.~donor)+
+  annotate(geom = &quot;text&quot;, label = &quot;Non-\ncycling \n~90%&quot;, x=0.01, y = 0.09,hjust = 0,vjust = 1, size = 2) +
+  theme(legend.position = c(0.85,0.85), legend.key.size = unit(2, &#39;mm&#39;)) 
+
+## Catagorize cells based on CCscore and MKI67 as cycling or non-cycling. 
+
+data.CC.live &lt;- mutate(data.CC.live, Proliferation_state = ifelse(g2m.genes_UCell &gt;= 0.1 | s.genes_UCell &gt;=0.1 | MKI67 &gt;=1 , &quot;cycling&quot;,&quot;non-cycling&quot;))
+
+seu.live &lt;- AddMetaData(seu.live, metadata = data.CC.live$Proliferation_state, col.name = &quot;Cellcycle_state&quot;)
+
+Percentage_differentiated.live &lt;- data.CC.live %&gt;% dplyr::count(Proliferation_state = factor(Proliferation_state),group = factor(donor)) %&gt;% 
+  group_by(group)%&gt;%
+    mutate(pct = prop.table(n)) 
+
+## Plot percentage cycling per donor
+p.percentage.cyclinglive &lt;- ggplot(Percentage_differentiated.live, aes(x = Proliferation_state , y = pct, fill = group)) + #label = scales::percent(pct,accuracy = 0.1)
+    geom_col(position = &#39;dodge&#39;) + 
+    # geom_text(position = position_dodge(width = .9),    # move to center of bars
+    #           vjust = -0.5,    # nudge above top of bar
+    #           size = 1.8) + 
+    scale_y_continuous(labels = scales::percent) +
+  cowplot::theme_cowplot() + 
+  labs(title=&quot;~90% non-cycling cells \nacross three donors&quot;,x=&quot;&quot;, y = &quot;Percentage (%)&quot;)+
+scale_color_manual(&quot;Donor&quot;, values=c(&quot;#999999&quot;, &quot;#E69F00&quot;, &quot;#56B4E9&quot;))+
+scale_fill_manual(&quot;Donor&quot;,values=c(&quot;#999999&quot;, &quot;#E69F00&quot;, &quot;#56B4E9&quot;))+
+  add.textsize+
+  theme(legend.position = c(0.05,0.85), legend.key.size = unit(4, &#39;mm&#39;)) 
+
+
+###          --- fix cells ------
+
+# Cell-cycle scoring was performed novel scoring algorithm https://carmonalab.github.io/UCell/UCell_Seurat_vignette.html
+# Genesets used also in Seurat Cell-cycle scoring
+seu.fix &lt;- AddModuleScore_UCell(seu.fix, assay = &quot;SCT&quot;,slot = &quot;data&quot;,features = cc.genes.updated.2019)
+
+## Fetch data for plotting
+data.CC.fix &lt;- FetchData(seu.fix, vars = c(&#39;G2M.Score&#39;, &#39;S.Score&#39;, &quot;Phase&quot;, &quot;donor&quot;, &quot;s.genes_UCell&quot;, &quot;g2m.genes_UCell&quot;))
+data.CC.fix$MKI67 &lt;- FetchData(seu.fix[[&quot;SCT&quot;]], &quot;MKI67&quot;, slot = &quot;scale.data&quot;)$MKI67
+data.CC.fix$MKI67.PROT &lt;- FetchData(seu.fix[[&quot;PROT&quot;]], &quot;Ki67&quot;, slot = &quot;scale.data&quot;)$Ki67
+data.CC.fix$`p-Rb` &lt;- FetchData(seu.fix[[&quot;PROT&quot;]], &quot;p-Rb&quot;, slot = &quot;scale.data&quot;)$`p-Rb`
+data.CC.fix$CyclinA &lt;- FetchData(seu.fix[[&quot;PROT&quot;]], &quot;Cyclin A&quot;, slot = &quot;scale.data&quot;)$`Cyclin`
+## Plot CC score
+
+p.CCscore.MKI67.fix &lt;- ggplot(data = data.CC.fix, aes(x = g2m.genes_UCell, y =s.genes_UCell , color = MKI67)) +
+  geom_point( position = &#39;jitter&#39;, alpha = 0.8) +
+  scale_color_gradientn(colors = c(&#39;lightgrey&#39;, &#39;dodgerblue2&#39;)) +
+  cowplot::theme_cowplot() + 
+  labs(title = &quot;RNA-based G2M and S-score mark \ncycling and non-cycling cells&quot;, x = &quot;G2M-score&quot;, y = &quot;S-score&quot;)+
+  add.textsize+
+  #facet_wrap(.~donor)+
+  geom_vline(xintercept = 0.1) +
+  geom_hline(yintercept = 0.07) +
+  annotate(geom = &quot;text&quot;, label = &quot;Non-\ncycling&quot;, x=0.01, y = 0.025, size = 2) +
+  theme(legend.position = c(0.85,0.85), legend.key.size = unit(2, &#39;mm&#39;)) 
+
+##The advantage of dataset is intracellular phospho-protein markers detected in protein dataset, which can be used to filter filter non-deviding cells. p-Rb and Cyclin A are used:
+
+p.CCscore.pRb &lt;- ggplot(data = data.CC.fix, aes(x = `p-Rb`, y =CyclinA , color = MKI67.PROT)) +
+  geom_point( position = &#39;jitter&#39;, alpha = 0.8) +
+  scale_color_gradientn(colors = c(&#39;lightgrey&#39;, &#39;deeppink3&#39;)) +
+  cowplot::theme_cowplot() + 
+  labs(title = &quot;Intracellular protein markers classify fixed  \ndataset in cycling and non-cycling cells&quot;)+
+  add.textsize+
+  geom_rect(mapping=aes(xmin=-1.8, xmax=1.6, ymin=-2.8, ymax=2.3), color=&quot;black&quot;, alpha=0)+
+  annotate(geom = &quot;text&quot;, label = &quot;Non-\ncycling \n&gt;95%&quot;, x=-1.7, y = 0.6,hjust = 0,vjust = 1, size = 2)+
+  theme(legend.position = c(0.05,0.85), legend.key.size = unit(2, &#39;mm&#39;)) 
+
+
+## Catagorize cells based on CCscore and MKI67 as cycling or non-cycling. 
+
+data.CC.fix &lt;- mutate(data.CC.fix, Proliferation_state = ifelse( `p-Rb` &gt;= 1.6 | CyclinA &gt;= 2.3, &quot;cycling&quot;,&quot;non-cycling&quot;))
+
+
+seu.fix &lt;- AddMetaData(seu.fix, metadata = data.CC.fix$Proliferation_state, col.name = &quot;Cellcycle_state&quot;)
+
+Percentage_differentiated.fix &lt;- data.CC.fix %&gt;% dplyr::count(Proliferation_state = factor(Proliferation_state),group = factor(donor)) %&gt;% 
+  group_by(group)%&gt;%
+    mutate(pct = prop.table(n)) 
+
+## Plot percentage cycling per donor
+p.percentage.cycling.fix &lt;- ggplot(Percentage_differentiated.fix, aes(x = Proliferation_state , y = pct, fill = group, label = scales::percent(pct,accuracy = 0.1))) + 
+    geom_col(position = &#39;dodge&#39;) + 
+    geom_text(position = position_dodge(width = .9),    # move to center of bars
+              vjust = -0.5,    # nudge above top of bar
+              size = 1.8) + 
+    scale_y_continuous(labels = scales::percent) +
+  cowplot::theme_cowplot() + 
+  labs(title=&quot;Fixed dataset classification per donor \n&gt;95% non-cycling cells&quot;,x=&quot;&quot;, y = &quot;Percentage (%)&quot;)+
+scale_color_manual(&quot;Donor&quot;, values=c(&quot;#E69F00&quot;, &quot;#56B4E9&quot;))+
+scale_fill_manual(&quot;Donor&quot;,values=c(&quot;#E69F00&quot;, &quot;#56B4E9&quot;))+
+  add.textsize+
+  theme(legend.position = c(0.05,0.85), legend.key.size = unit(2, &#39;mm&#39;)) </code></pre>
+</div>
+<div id="differentiated-plasma-blastcells" class="section level2">
+<h2>Differentiated Plasma-Blast/Cells</h2>
+<pre class="r"><code>data.CC.fix$CD27 &lt;- FetchData(seu.fix[[&quot;PROT&quot;]], &quot;CD27&quot;, slot = &quot;scale.data&quot;)$CD27
+data.CC.fix$IgD &lt;- FetchData(seu.fix[[&quot;PROT&quot;]], &quot;IgD&quot;, slot = &quot;scale.data&quot;)$IgD
+
+data.CC.live$CD27 &lt;- FetchData(seu.live[[&quot;PROT&quot;]], &quot;CD27&quot;, slot = &quot;scale.data&quot;)$CD27
+data.CC.live$IgD &lt;- FetchData(seu.live[[&quot;PROT&quot;]], &quot;IgD&quot;, slot = &quot;scale.data&quot;)$IgD
+
+## ------ live
+p.scatter.CD27.IgD.live &lt;- ggplot(data = data.CC.live,aes(x = IgD, y = CD27, color = donor)) +
+  geom_point( position = &#39;jitter&#39;, alpha = 0.8) +
+  geom_rect(mapping=aes(xmin=-2.5, xmax=3, ymin=-2, ymax=2.8), color=&quot;black&quot;, alpha=0)+
+  cowplot::theme_cowplot() + 
+  labs(title = &quot;Protein-based gate of CD27+IgD- cells&quot;, x = &quot;IgD&quot;, y = &quot;CD27&quot;)+
+  theme(legend.position = &quot;none&quot;) +
+scale_color_manual(&quot;Donor&quot;, values=c(&quot;#999999&quot;, &quot;#E69F00&quot;, &quot;#56B4E9&quot;))+
+  annotate(geom = &quot;text&quot;, label = &quot;CD27+IgD- \n&gt;95%&quot;, x=-2.3, y = 2.5,hjust = 0,vjust = 1, size = 2)+
+  add.textsize  
+
+data.CC.live &lt;- mutate(data.CC.live, class_switch_plasma = ifelse(IgD &lt;= 3 &amp; CD27 &gt;= -2.5 , &quot;CD27+IgD-&quot;,&quot;other&quot;))
+seu.live &lt;- AddMetaData(seu.live, metadata = data.CC.live$class_switch_plasma, col.name = &quot;CD27_IgD_state&quot;)
+
+Percentage_class_switch_plasma.live &lt;- data.CC.live %&gt;% dplyr::count(class_switch_plasma = factor(class_switch_plasma),group = factor(donor)) %&gt;% 
+  group_by(group)%&gt;%
+    mutate(pct = prop.table(n)) 
+
+p.percentage.class_switch_plasma.live &lt;- ggplot(Percentage_class_switch_plasma.live, aes(x = class_switch_plasma , y = pct, fill = group, label = scales::percent(pct, accuracy = 0.1))) + 
+    geom_col(position = &#39;dodge&#39;) + 
+    geom_text(position = position_dodge(width = .9),    # move to center of bars
+              vjust = -0.5,    # nudge above top of bar
+              size = 1.8) + 
+    scale_y_continuous(labels = scales::percent) +
+  cowplot::theme_cowplot() + 
+  labs(title=&quot;~95% cells in all three donors \nare Plasma Blast/Cells&quot;,x=&quot;&quot;, y = &quot;Percentage (%)&quot;)+
+scale_fill_manual(name = &quot;Donor&quot;,values=c(&quot;#999999&quot;, &quot;#E69F00&quot;, &quot;#56B4E9&quot;)) +
+  theme(legend.position = c(0.7,0.85), legend.key.size = unit(2, &quot;mm&quot;))+
+  add.textsize
+
+## --- fix
+## fix
+p.scatter.CD27.IgD.fix &lt;- ggplot(data = data.CC.fix,aes(x = IgD, y = CD27, color = donor)) +
+  geom_point( position = &#39;jitter&#39;, alpha = 0.8) +
+  geom_rect(mapping=aes(xmin=-4, xmax=4.2, ymin=-1.3, ymax=2), color=&quot;black&quot;, alpha=0)+
+  cowplot::theme_cowplot() + 
+  labs(title = &quot;Protein-based gate of CD27+IgD- cells&quot;, x = &quot;IgD&quot;, y = &quot;CD27&quot;)+
+theme(legend.position = c(0.85,0.85)) +
+scale_color_manual(&quot;Donor&quot;, values=c( &quot;#E69F00&quot;, &quot;#56B4E9&quot;))+
+  add.textsize  +
+  xlim(c(NA,7.5))
+
+data.CC.fix &lt;- mutate(data.CC.fix, class_switch_plasma = ifelse(IgD &lt;= 4.2 &amp; CD27 &gt;= -1.3 , &quot;CD27+IgD-&quot;,&quot;other&quot;))
+seu.fix &lt;- AddMetaData(seu.fix, metadata = data.CC.fix$class_switch_plasma, col.name = &quot;CD27_IgD_state&quot;)
+
+Percentage_class_switch_plasma.fix &lt;- data.CC.fix %&gt;% dplyr::count(class_switch_plasma = factor(class_switch_plasma),group = factor(donor)) %&gt;% 
+  group_by(group)%&gt;%
+    mutate(pct = prop.table(n)) 
+
+p.percentage.class_switch_plasma.fix &lt;- ggplot(Percentage_class_switch_plasma.fix, aes(x = class_switch_plasma , y = pct, fill = group, label = scales::percent(pct, accuracy = 0.1))) + 
+    geom_col(position = &#39;dodge&#39;) + 
+    geom_text(position = position_dodge(width = .9),    # move to center of bars
+              vjust = -0.5,    # nudge above top of bar
+              size = 1.8) + 
+    scale_y_continuous(labels = scales::percent) +
+  cowplot::theme_cowplot() + 
+  labs(title=&quot;Fixed dataset % cells CD27+IgD-&quot;,x=&quot;&quot;, y = &quot;Percentage (%)&quot;)+
+scale_fill_manual(name = &quot;Donor&quot;,values=c( &quot;#E69F00&quot;, &quot;#56B4E9&quot;)) +
+  theme(legend.position = c(0.7,0.9), legend.key.size = unit(2, &#39;mm&#39;))+
+  add.textsize</code></pre>
+</div>
+<div id="cd27igdlow" class="section level2">
+<h2>CD27+IgDlow</h2>
+<p>To determine the cultures ‘differentiation state’ CD27-high &amp; IgD-low cells are gated, representing differentiated plasmablast/cells.</p>
+<pre class="r"><code>seu.live &lt;- SetIdent(seu.live,value = &quot;CD27_IgD_state&quot;)
+
+## RNA differential expression
+markers.CD27IgD.RNA &lt;- FindMarkers(seu.live, ident.1 = &quot;CD27+IgD-&quot;, ident.2 = &quot;other&quot;, assay = &quot;SCT&quot;, logfc.threshold = 0.01, test.use = &quot;wilcox&quot;, only.pos = T)
+markers.CD27IgD.RNA &lt;- filter(markers.CD27IgD.RNA, p_val &lt;= 0.05)
+
+p.CD27IgD.dotplot.genesign &lt;-DotPlot(seu.live,assay = &quot;SCT&quot;, features = rev(rownames(markers.CD27IgD.RNA)[1:20]), split.by = &quot;donor&quot;, group.by =  &quot;CD27_IgD_state&quot;, cols = &quot;RdBu&quot;,dot.scale = 3, scale.max = 100, scale.min = 0, scale = T, scale.by = &quot;radius&quot;, col.min = -0.5, col.max = 0.5) +
+  labs(x = &quot;Differentiation markers - RNA&quot;, y = &quot;&quot;) +
+  cowplot::theme_cowplot() + 
+  labs(title=paste0(&quot;Top 20 upregulated genes \n(&quot;, nrow(markers.CD27IgD.RNA),&quot; total)&quot;),x=&quot;Differential expressed genes \n(p-val &lt; 0.05, logfc &gt;= 0.01)&quot;, y = &quot;&quot;)+
+  coord_flip()+
+    add.textsize +
+  theme(legend.position = &quot;right&quot;, legend.key.size = unit(2, &#39;mm&#39;)) +
+  scale_y_discrete(labels = c(&quot;D1 \n&quot;,&quot;D2 \nCD27+IgD-&quot;, &quot;D3&quot;,&quot;D1 \n&quot;,&quot;D2 \nother&quot;, &quot;D3&quot;)) 
+#+  guides(size = &quot;none&quot;,color = &quot;none&quot;)
+
+p.CD27IgD.Vln.gene.markers &lt;- VlnPlot(seu.live, assay=&quot;SCT&quot;, features = c(&quot;CD27&quot;,&quot;IRF4&quot;, &quot;MZB1&quot;, &quot;PTPRC&quot;, &quot;MS4A1&quot;), split.by = &quot;donor&quot;, group.by =  &quot;CD27_IgD_state&quot;, ncol =3, cols = c(colors.donors,colors.donors), combine = T, stack = T, flip = T) +
+    add.textsize +
+  theme(legend.position = &quot;&quot;, legend.key.size = unit(2, &#39;mm&#39;)) + 
+  labs(title=&quot;CD27+IgD express plasmablast/cell \nRNA markers&quot;,x=&quot;&quot;, y = &quot;Expression&quot;)  +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
+ 
+## RNA differential expression
+markers.CD27IgD.RNA.neg &lt;- FindMarkers(seu.live, ident.1 = &quot;CD27+IgD-&quot;, ident.2 = &quot;other&quot;, assay = &quot;SCT&quot;, logfc.threshold = -0.01, test.use = &quot;wilcox&quot;, only.pos = F)
+markers.CD27IgD.RNA.neg &lt;- filter(markers.CD27IgD.RNA.neg, p_val &lt;= 0.05, avg_log2FC &lt; -0.01)
+
+p.CD27IgD.dotplot.genesign.neg &lt;-DotPlot(seu.live,assay = &quot;SCT&quot;, features = rev(rownames(markers.CD27IgD.RNA.neg)[1:20]), split.by = &quot;donor&quot;, group.by =  &quot;CD27_IgD_state&quot;, cols = &quot;RdBu&quot;,dot.scale = 3, scale.max = 100, scale.min = 0, scale = T, scale.by = &quot;size&quot;, col.min = -0.5, col.max = 0.5) +
+  labs(x = &quot;Differentiation markers - RNA&quot;, y = &quot;&quot;) +
+  cowplot::theme_cowplot() + 
+  labs(title=paste0(&quot;Top 20 downregulated genes \n(&quot;, nrow(markers.CD27IgD.RNA.neg),&quot; total)&quot;),x=&quot;Differential expressed genes \n(p-val &lt; 0.05, logfc &lt;= -0.01)&quot;, y = &quot;&quot;)+
+  coord_flip()+
+    add.textsize +
+  theme(legend.position = &quot;right&quot;, legend.key.size = unit(2, &#39;mm&#39;)) +
+  scale_y_discrete(labels = c(&quot;D1 \n&quot;,&quot;D2 \nCD27+IgD-&quot;, &quot;D3&quot;,&quot;D1 \n&quot;,&quot;D2 \nother&quot;, &quot;D3&quot;)) +
+    guides(size =  guide_legend(title = &quot;Percent \nexpressed&quot;),color = guide_colorbar(title = &quot;Average scaled\nexpression&quot;))
+#+  guides(size = &quot;none&quot;,color = &quot;none&quot;)
+
+ 
+## Surface proteins
+markers.CD27IgD.PROT &lt;- FindMarkers(seu.live, ident.1 = &quot;CD27+IgD-&quot;, ident.2 = &quot;other&quot;, assay = &quot;PROT&quot;, logfc.threshold = 0.01, test.use = &quot;wilcox&quot;, only.pos = T)
+markers.CD27IgD.PROT &lt;- filter(markers.CD27IgD.PROT, p_val &lt;= 0.05)
+
+p.CD27IgD.dotplot.PROTsign &lt;-DotPlot(seu.live,assay = &quot;PROT&quot;, features = rev(rownames(markers.CD27IgD.PROT)), split.by = &quot;donor&quot;, group.by =  &quot;CD27_IgD_state&quot;, cols = &quot;RdBu&quot;,dot.scale = 3, scale.max = 100, scale.min = 0, scale = T, scale.by = &quot;radius&quot;, col.min = -0.5, col.max = 0.5) +
+  cowplot::theme_cowplot() + 
+  labs(title=&quot;Differential upregulated \nSurface protein markers&quot;,x=&quot;Surface Proteins \n(p-val &lt; 0.005, logfc &gt;= 0.01)&quot;, y = &quot;&quot;)+
+  coord_flip()+
+    add.textsize +
+  theme(legend.position = &quot;right&quot;, legend.key.size = unit(2, &#39;mm&#39;)) +
+  scale_y_discrete(labels = c(&quot;D1 \n&quot;,&quot;D2 \nCD27+IgD-&quot;, &quot;D3&quot;,&quot;D1 \n&quot;,&quot;D2 \nother&quot;, &quot;D3&quot;))+
+  guides(size = &quot;none&quot;,color = &quot;none&quot;)
+
+markers.CD27IgD.PROT.neg &lt;- FindMarkers(seu.live, ident.1 = &quot;CD27+IgD-&quot;, ident.2 = &quot;other&quot;, assay = &quot;PROT&quot;, logfc.threshold = 0.01, test.use = &quot;wilcox&quot;, only.pos = F)
+markers.CD27IgD.PROT.neg &lt;- filter(markers.CD27IgD.PROT.neg, p_val &lt;= 0.005, avg_log2FC &lt; -0.01)
+
+p.CD27IgD.dotplot.PROTsign.neg &lt;-DotPlot(seu.live,assay = &quot;PROT&quot;, features = rev(rownames(markers.CD27IgD.PROT.neg)), split.by = &quot;donor&quot;, group.by =  &quot;CD27_IgD_state&quot;, cols = &quot;RdBu&quot;,dot.scale = 3, scale.max = 100, scale.min = 0, scale = T, scale.by = &quot;radius&quot;, col.min = -0.5, col.max = 0.5) +
+  cowplot::theme_cowplot() + 
+  labs(title=&quot;Differential downregulated \nSurface protein markers&quot;,x=&quot;Surface Proteins \n(p-val &lt; 0.005, logfc &lt;= -0.01)&quot;, y = &quot;&quot;)+
+  coord_flip()+
+    add.textsize +
+  theme(legend.position = &quot;right&quot;, legend.key.size = unit(2, &#39;mm&#39;)) +
+  scale_y_discrete(labels = c(&quot;D1 \n&quot;,&quot;D2 \nCD27+IgD-&quot;, &quot;D3&quot;,&quot;D1 \n&quot;,&quot;D2 \nother&quot;, &quot;D3&quot;))+
+    guides(size =  &quot;none&quot;,color = guide_colorbar(title = &quot;Average scaled\nexpression&quot;))
+#+guides(size = &quot;none&quot;,color = &quot;none&quot;)
+
+# 
+# p.CD27IgD.Vln.PROT.markers &lt;- VlnPlot(seu.live, assay=&quot;PROT&quot;, features = c(&quot;CD27&quot;,&quot;SLAMF7&quot;, &quot;CD44&quot;, &quot;CD45RB&quot;, &quot;LAG3&quot;), split.by = &quot;donor&quot;, group.by =  &quot;CD27_IgD_state&quot;, ncol =3, cols = c(colors.donors,colors.donors), combine = T, stack = T, flip = T) +
+#     add.textsize +
+#   theme(legend.position = &quot;right&quot;, legend.key.size = unit(2, &#39;mm&#39;)) + 
+#   labs(title=&quot;CD27+IgD express plasmablast/cell \nSurface protein markers&quot;,x=&quot;&quot;, y = &quot;Expression&quot;)  +
+#   theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
+
+
+## Intracellular proteins
+seu.fix &lt;- SetIdent(seu.fix,value = &quot;CD27_IgD_state&quot;)
+
+markers.CD27IgD.PROT.intra &lt;- FindMarkers(seu.fix, ident.1 = &quot;CD27+IgD-&quot;, ident.2 = &quot;other&quot;, assay = &quot;PROT&quot;, logfc.threshold = 0.05, test.use = &quot;wilcox&quot;, only.pos = T)
+markers.CD27IgD.PROT.intra &lt;- filter(markers.CD27IgD.PROT.intra, p_val &lt;= 0.05)
+
+
+p.CD27IgD.dotplot.PROT.intra.sign &lt;- DotPlot(seu.fix,assay = &quot;PROT&quot;, features = rev(rownames(markers.CD27IgD.PROT.intra)), split.by = &quot;donor&quot;, group.by =  &quot;CD27_IgD_state&quot;, cols = &quot;RdBu&quot;,dot.scale = 3, scale.max = 100, scale.min = 0, scale = T, scale.by = &quot;radius&quot;, col.min = -0.5, col.max = 0.5) +
+  cowplot::theme_cowplot() + 
+  labs(title=&quot;Differential upregulated \nIntracellular protein markers&quot;,x=&quot;Intracellular proteins \n(p-val &lt; 0.005, logfc &gt;= 0.01)&quot;, y = &quot;&quot;)+
+  coord_flip()+
+    add.textsize +
+  theme(legend.position = &quot;none&quot;, legend.key.size = unit(2, &#39;mm&#39;)) +
+  scale_y_discrete(labels = c(&quot;D2 \nCD27+IgD-&quot;, &quot;D3&quot;,&quot;D2 \nother&quot;, &quot;D3&quot;))
+
+markers.CD27IgD.PROT.intra.neg &lt;- FindMarkers(seu.fix, ident.1 = &quot;CD27+IgD-&quot;, ident.2 = &quot;other&quot;, assay = &quot;PROT&quot;, logfc.threshold = 0.01, test.use = &quot;wilcox&quot;, only.pos = F)
+markers.CD27IgD.PROT.intra.neg &lt;- filter(markers.CD27IgD.PROT.intra.neg, p_val &lt;= 0.005, avg_log2FC &lt; -0.01)
+
+p.CD27IgD.dotplot.PROTsign.intra.neg &lt;-DotPlot(seu.fix,assay = &quot;PROT&quot;, features = rev(rownames(markers.CD27IgD.PROT.intra.neg)), split.by = &quot;donor&quot;, group.by =  &quot;CD27_IgD_state&quot;, cols = &quot;RdBu&quot;,dot.scale = 3, scale.max = 100, scale.min = 0, scale = T, scale.by = &quot;radius&quot;, col.min = -0.5, col.max = 0.5) +
+  cowplot::theme_cowplot() + 
+  labs(title=&quot;Differential downregulated \nSurface protein markers&quot;,x=&quot;Intracellular Proteins \n(p-val &lt; 0.005, logfc &lt;= -0.01)&quot;, y = &quot;&quot;)+
+  coord_flip()+
+    add.textsize +
+  theme(legend.position = &quot;right&quot;, legend.key.size = unit(2, &#39;mm&#39;)) +
+  scale_y_discrete(labels = c(&quot;D1 \n&quot;,&quot;D2 \nCD27+IgD-&quot;, &quot;D3&quot;,&quot;D1 \n&quot;,&quot;D2 \nother&quot;, &quot;D3&quot;))+
+    guides(size =  &quot;none&quot;,color = guide_colorbar(title = &quot;Average scaled\nexpression&quot;))
+
+
+
+markers.forviolin &lt;- c(&quot;CD138&quot;,&quot;BLIMP1&quot;,&quot;IRF4&quot;, &quot;IRF8&quot;, &quot;XBP1&quot;, &quot;CD27&quot;)[c(&quot;CD138&quot;,&quot;BLIMP1&quot;,&quot;IRF4&quot;, &quot;IRF8&quot;, &quot;XBP1&quot;, &quot;CD27&quot;) %in% rev(rownames(markers.CD27IgD.PROT.intra))]
+
+
+p.CD27IgD.Vln.PROT.markers &lt;- VlnPlot(seu.fix, assay=&quot;PROT&quot;, features = rev(c(markers.forviolin)), split.by = &quot;donor&quot;, group.by =  &quot;CD27_IgD_state&quot;, ncol =3, cols = c(colors.donors[2:3],colors.donors[2:3]), combine = T, stack = T, flip = T) +
+    add.textsize +
+  theme(legend.position = &quot;right&quot;, legend.key.size = unit(2, &#39;mm&#39;)) + 
+  labs(title=&quot;CD27+IgD express plasmablast/cell \nIntracellular protein markers&quot;,x=&quot;&quot;, y = &quot;Expression&quot;)  +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
+
+p.CD27IgD.dotplot.PROT.intra.markers &lt;- DotPlot(seu.fix,assay = &quot;PROT&quot;, features = rev(c(markers.forviolin)), split.by = &quot;donor&quot;, group.by =  &quot;CD27_IgD_state&quot;, cols = &quot;RdBu&quot;,dot.scale = 3, scale.max = 100, scale.min = 0, scale = T, scale.by = &quot;radius&quot;, col.min = -1, col.max = 1) +
+  labs(x = &quot;Differentiation markers - Surface Proteins&quot;, y = &quot;&quot;) +
+  cowplot::theme_cowplot() + 
+  labs(title=&quot;CD27+IgD express plasmablast/cell \nIntracellular protein markers&quot;,x=&quot;Differentiation proteins&quot;, y = &quot;&quot;, colour = &quot;Legend Title\n&quot;)+
+  coord_flip()+
+    add.textsize +
+  theme(legend.position = &quot;right&quot;, legend.key.size = unit(2, &#39;mm&#39;)) +
+  scale_y_discrete(labels = c(&quot;D2 \nCD27+IgD-&quot;, &quot;D3&quot;,&quot;D2 \nother&quot;, &quot;D3&quot;)) +
+  guides(size = &quot;none&quot;,color = guide_colorbar(title = &quot;Average \nExpression&quot;))</code></pre>
+</div>
+<div id="ig-classifaction" class="section level2">
+<h2>Ig-classifaction</h2>
+<p>The supernatant of differentiated cells shows excretion of IgA and IgG antibodies, showing these cell-types should be within the population at 11 days. Using protein-measurments from antibodies against the major Ig-classes, and (in live-cell dataset) the Ig-genes, cells are clustered and represented in a UMAP.</p>
+<pre class="r"><code>## Run PCA on Ig proteins
+seu.fix &lt;- RunPCA(seu.fix, reduction.name = &#39;pcaIG&#39;, features = c(&quot;IgM&quot;,&quot;IgA&quot;,&quot;IgG&quot;, &quot;IgD&quot;, &quot;IgE&quot;))
+
+seu.fix &lt;- RunUMAP(seu.fix,dims = 1:4, reduction = &quot;pcaIG&quot;, reduction.name = &quot;IGUMAP&quot;)
+seu.fix &lt;- FindNeighbors(seu.fix, reduction = &quot;pcaIG&quot;,assay = &quot;PROT&quot;, dims = 1:4, graph.name = &quot;pcaIG_nn&quot;)
+seu.fix &lt;- FindClusters(seu.fix, graph.name = &quot;pcaIG_nn&quot;,  algorithm = 4,resolution = 0.2, verbose = FALSE)
+seu.fix[[&quot;clusters_pcaIG&quot;]] &lt;- Idents(object = seu.fix)
+
+
+seu.fix &lt;- RenameIdents(object = seu.fix, `1` = &quot;IgM&quot;, `2` = &quot;IgG&quot;, `3` = &quot;IgA&quot;)
+seu.fix[[&quot;clusters_pcaIG_named&quot;]] &lt;- Idents(object = seu.fix)
+
+
+p.umap.Ig.prot.fix &lt;- FeaturePlot(seu.fix, features = c(&quot;IgM&quot;,&quot;IgA&quot;,&quot;IgG&quot;),slot = &quot;scale.data&quot;, reduction = &#39;IGUMAP&#39;, max.cutoff = 2, 
+                  cols = c(&quot;lightgrey&quot;,&quot;deeppink3&quot;), ncol = 3, pt.size = 0.9)  &amp;
+  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;Scaled \ncounts&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = c(0.05,0.85), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=7, face = &quot;bold&quot;,hjust = 0.5))
+
+p.clusters.umap.fix &lt;- DimPlot(seu.fix, reduction = &#39;IGUMAP&#39;, label = TRUE, repel = TRUE, label.size = 2.5, cols = c(&quot;#009E73&quot;, &quot;#D55E00&quot;,&quot;#F0E442&quot;)
+)   &amp;
+  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;Clusters&quot;, title = &quot;Fixed cells clusters based on \nIg-protein marker expression&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = &quot;none&quot;, legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=6, face = &quot;bold&quot;))
+
+## ---- live cells
+
+## Run PCA on Ig proteins and on Ig genes
+seu.live &lt;- RunPCA(seu.live, assay = &quot;PROT&quot;,reduction.name = &#39;pcaIGPROT&#39;, features = c(&quot;IgM&quot;,&quot;IgA&quot;,&quot;IgG&quot;, &quot;IgD&quot;, &quot;IgE&quot;))
+
+
+
+
+seu.live &lt;- RunUMAP(seu.live,dims = 1:4, reduction = &quot;pcaIGPROT&quot;, reduction.name = &quot;IGUMAP&quot;)
+seu.live &lt;- FindNeighbors(seu.live, reduction = &quot;pcaIGPROT&quot;,assay = &quot;PROT&quot;, dims = 1:4, graph.name = &quot;pcaIG_nn&quot;)
+seu.live &lt;- FindClusters(seu.live, graph.name = &quot;pcaIG_nn&quot;,  algorithm = 4,resolution = 0.2, verbose = FALSE)
+seu.live[[&quot;clusters_pcaIG&quot;]] &lt;- Idents(object = seu.live)
+
+
+seu.live &lt;- RenameIdents(object = seu.live, `1` = &quot;IgM&quot;, `2` = &quot;IgG&quot;, `3` = &quot;IgA&quot;)
+seu.live[[&quot;clusters_pcaIG_named&quot;]] &lt;- Idents(object = seu.live)
+
+
+# 
+# 
+# Ig.genes &lt;- c(&quot;IGHM&quot;, sort(grep(&quot;^IGH[MHAG][0-9]&quot;, rownames(seu.live[[&quot;SCT&quot;]]), value = T)))
+# seu.live &lt;- RunPCA(seu.live,assay = &quot;SCT&quot;, reduction.name = &#39;pcaIGRNA&#39;, features = Ig.genes)
+# 
+# seu.live &lt;- FindMultiModalNeighbors(
+#   seu.live, reduction.list = list(&quot;pcaIGRNA&quot;, &quot;pcaIGPROT&quot;),
+#   dims.list = list(1:5, 1:4), modality.weight.name = &quot;RNA.weight&quot;
+# )
+# 
+# seu.live &lt;- RunUMAP(seu.live, nn.name = &quot;weighted.nn&quot;, reduction.name = &quot;wnn.umap&quot;, reduction.key = &quot;wnnUMAP_&quot;)
+# seu.live &lt;- FindClusters(seu.live, graph.name = &quot;wsnn&quot;, algorithm = 4, resolution = 0.2, verbose = FALSE)
+# seu.live[[&quot;clusters_wnn&quot;]] &lt;- Idents(object = seu.live)
+# 
+# 
+# seu.live &lt;- RenameIdents(object = seu.live, `1` = &quot;IgM&quot;, `2` = &quot;IgG&quot;, `3` = &quot;IgA&quot;, `4` = &quot;low Ig \ngenes&quot;)
+# seu.live[[&quot;clusters_wnnIG_named&quot;]] &lt;- Idents(object = seu.live)
+# 
+
+
+p.umap.Ig.prot.live &lt;- FeaturePlot(seu.live, features = c(&quot;IgM&quot;,&quot;IgA&quot;,&quot;IgG&quot;),slot = &quot;scale.data&quot;, reduction = &#39;IGUMAP&#39;, max.cutoff = 2, 
+                  cols = c(&quot;lightgrey&quot;,&quot;deeppink3&quot;), ncol = 3, pt.size = 0.5)  &amp;
+  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = c(0.85,0.26), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=7, face = &quot;bold&quot;,hjust = 0.5))
+
+p.umap.Ig.RNA.live &lt;- FeaturePlot(seu.live, features = c(&quot;IGHM&quot;,&quot;IGHA1&quot;,&quot;IGHG1&quot;),slot = &quot;scale.data&quot;, reduction = &#39;IGUMAP&#39;, max.cutoff = 3, 
+                  cols = c(&quot;lightgrey&quot;,&quot;dodgerblue3&quot;), ncol = 3, pt.size =  0.5)  &amp;
+  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = c(0.85,0.26), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=7, face = &quot;bold&quot;,hjust = 0.5))
+          
+p.clusters.umap.live &lt;- DimPlot(seu.live, reduction = &#39;IGUMAP&#39;, label = TRUE, repel = TRUE, label.size = 2.5,pt.size =  0.5, cols = c(&quot;#009E73&quot;, &quot;#D55E00&quot;,&quot;#F0E442&quot;,&quot;grey&quot;)
+)   &amp;
+  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;Clusters&quot;, title = &quot;Igsubtype classification based on \nProtein modality&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = &quot;none&quot;, legend.key.size = unit(1, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=6, face = &quot;bold&quot;))
+
+p.donor.umap.live &lt;- DimPlot(seu.live, reduction = &#39;IGUMAP&#39;, group.by = &quot;donor&quot;,label = F, pt.size =  0.5,repel = TRUE, label.size = 2.5, cols = colors.donors)   &amp;
+  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;Donor&quot;, title = &quot;Ig-subtypes classified across \nthree donors&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = c(0.85, 0.24), legend.key.size = unit(1, &#39;mm&#39;), legend.text =element_text(size=6), legend.title =element_text(size=7)  ) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=6, face = &quot;bold&quot;))</code></pre>
+</div>
+<div id="figure-2" class="section level2">
+<h2>Figure 2</h2>
+<pre class="r"><code>fig.2.row1 &lt;- plot_grid(p.CCscore.MKI67.live, 
+                        p.CCscore.pRb,
+                        p.percentage.cyclinglive,
+                     labels = panellabels[1:3], label_size = 10, ncol = 3, rel_widths = c(1.2,1.2,0.9))
+
+fig.2.row2 &lt;- plot_grid(p.scatter.CD27.IgD.live,
+                        p.CD27IgD.dotplot.PROT.intra.markers,
+                        p.CD27IgD.Vln.gene.markers,
+                     labels = panellabels[4:6], label_size = 10, ncol = 3, rel_widths = c(1.2,1.2,0.9))
+
+
+Fig.2.full &lt;- plot_grid(fig.2.row1, fig.2.row2, labels = &quot;&quot;, label_size = 10, ncol = 1, rel_heights = c(1,1))
+
+ggsave(Fig.2.full, filename = &quot;output/paper_figures/Fig.2.pdf&quot;, width = 183, height = 120, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
+ggsave(Fig.2.full, filename = &quot;output/paper_figures/Fig.2.png&quot;, width = 183, height = 120, units = &quot;mm&quot;,  dpi = 300)</code></pre>
+<pre class="r"><code>Fig.2.full</code></pre>
+<p><img src="figure/cellstate.Rmd/Figure2-1.png" width="691.2" style="display: block; margin: auto;" /></p>
+</div>
+<div id="figure-3" class="section level2">
+<h2>Figure 3</h2>
+<pre class="r"><code>fig.3.row1 &lt;- plot_grid(p.clusters.umap.live,  p.umap.Ig.prot.live,labels = panellabels[c(1,3)], label_size = 10, rel_widths = c(1,2.1))
+
+fig.3.row2 &lt;- plot_grid(p.donor.umap.live, p.umap.Ig.RNA.live,labels = panellabels[2], label_size = 10,
+          rel_widths = c(1,2.1))
+
+
+Fig.3.full &lt;- plot_grid(fig.3.row1, fig.3.row2, labels = &quot;&quot;, label_size = 10, ncol = 1, rel_heights = c(1,1))
+
+ggsave(Fig.3.full, filename = &quot;output/paper_figures/Fig.3.pdf&quot;, width = 183, height = 100, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
+ggsave(Fig.3.full, filename = &quot;output/paper_figures/Fig.3.png&quot;, width = 183, height = 100, units = &quot;mm&quot;,  dpi = 300)</code></pre>
+<pre class="r"><code>Fig.3.full</code></pre>
+<p><img src="figure/cellstate.Rmd/Figure3-1.png" width="691.2" style="display: block; margin: auto;" /></p>
+</div>
+<div id="supplementary-figures" class="section level2">
+<h2>Supplementary figures</h2>
+<pre class="r"><code>p.percentages &lt;- plot_grid(p.percentage.cycling.fix,
+          p.percentage.class_switch_plasma.live,
+          p.percentage.class_switch_plasma.fix,
+          labels = panellabels[1:3], label_size = 10, ncol = 3, rel_widths = c(1,1))
+
+p.dotplot.genes&lt;- plot_grid(p.CD27IgD.dotplot.genesign,
+          p.CD27IgD.dotplot.genesign.neg,
+          labels = c(panellabels[4:5]), label_size = 10, ncol = 2, rel_heights =  c(1,1))
+
+
+p.dotplot.proteins.surface &lt;- plot_grid(p.CD27IgD.dotplot.PROTsign,
+          p.CD27IgD.dotplot.PROTsign.neg,
+          labels = c(panellabels[6:7]), label_size = 10, ncol = 2, rel_heights =  c(1,1))
+
+p.dotplot.proteins.intra &lt;- plot_grid(p.CD27IgD.dotplot.PROT.intra.sign,p.CD27IgD.dotplot.PROTsign.intra.neg,
+          labels = c(panellabels[8:9]), label_size = 10, ncol = 2, rel_heights =  c(1,1))
+
+
+
+
+p.supplement.percentages.dotplots &lt;- plot_grid(p.percentages,
+                                               p.dotplot.genes,
+                                               p.dotplot.proteins.surface,
+                                               p.dotplot.proteins.intra,
+                                               labels = &quot;&quot;, label_size = 10, ncol = 1, rel_heights = c(1.5,1.7, 1.25,1.15))
+
+ggsave(p.supplement.percentages.dotplots, filename = &quot;output/paper_figures/Suppl_CC_CD27_dotplots.pdf&quot;, width = 183, height = 220, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
+ggsave(p.supplement.percentages.dotplots, filename = &quot;output/paper_figures/Suppl_CC_CD27_dotplots.png&quot;, width = 183, height = 220, units = &quot;mm&quot;,  dpi = 300)</code></pre>
+<pre class="r"><code>p.supplement.percentages.dotplots</code></pre>
+<p><img src="figure/cellstate.Rmd/Suppl_CC_CD27_dotplots-1.png" width="691.2" style="display: block; margin: auto;" /> <strong>Supplementary figure</strong> Additional information supplementing figure 2. <em>a.</em> fixed data percentage cycling. <em>b-c.</em> Percentages CD27+IgD- cells in datasets. <em>d-j</em> Differentially expressed genes and proteins.</p>
+<pre class="r"><code>p.umap.fix.all &lt;- plot_grid(p.clusters.umap.fix, 
+          p.umap.Ig.prot.fix, labels = panellabels[c(1,2)], 
+          label_size = 10,
+          rel_widths = c(1,3))
+
+ggsave(p.umap.fix.all, filename = &quot;output/paper_figures/Suppl_fix_IgClass.pdf&quot;, width = 183, height = 54, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
+ggsave(p.umap.fix.all, filename = &quot;output/paper_figures/Suppl_fix_IgClass.png&quot;, width = 183, height = 54, units = &quot;mm&quot;,  dpi = 300)</code></pre>
+<pre class="r"><code>p.umap.fix.all</code></pre>
+<p><img src="figure/cellstate.Rmd/Suppl_fix_IgClass-1.png" width="691.2" style="display: block; margin: auto;" /> <strong>Supplementary figure</strong> Fixed cells Ig-classes</p>
+</div>
+<div id="filter-save-seurat-dataobjects" class="section level2">
+<h2>Filter &amp; Save Seurat dataobjects</h2>
+<p>Fixed-cell dataset: (original and CD27+IgD- object )</p>
+<pre class="r"><code>message(&quot;Fixed dataset:&quot;)
+seu.fix</code></pre>
+<pre><code>An object of class Seurat 
+10114 features across 1038 samples within 3 assays 
+Active assay: PROT (76 features, 76 variable features)
+ 2 other assays present: RNA, SCT
+ 2 dimensional reductions calculated: pcaIG, IGUMAP</code></pre>
+<pre class="r"><code>seu.fix.filtered &lt;- subset(seu.fix, Cellcycle_state == &quot;non-cycling&quot; &amp; CD27_IgD_state == &quot;CD27+IgD-&quot;)
+message(&quot;CD27+IgD- object:&quot;)
+seu.fix.filtered</code></pre>
+<pre><code>An object of class Seurat 
+10114 features across 940 samples within 3 assays 
+Active assay: PROT (76 features, 76 variable features)
+ 2 other assays present: RNA, SCT
+ 2 dimensional reductions calculated: pcaIG, IGUMAP</code></pre>
+<p>Live-cell dataset: (original and CD27+IgD- object )</p>
+<pre class="r"><code>seu.live</code></pre>
+<pre><code>An object of class Seurat 
+20366 features across 1433 samples within 3 assays 
+Active assay: PROT (50 features, 50 variable features)
+ 2 other assays present: RNA, SCT
+ 2 dimensional reductions calculated: pcaIGPROT, IGUMAP</code></pre>
+<pre class="r"><code>seu.live.filtered &lt;- subset(seu.live, Cellcycle_state == &quot;non-cycling&quot; &amp; CD27_IgD_state == &quot;CD27+IgD-&quot;)
+
+seu.live.filtered</code></pre>
+<pre><code>An object of class Seurat 
+20366 features across 1231 samples within 3 assays 
+Active assay: PROT (50 features, 50 variable features)
+ 2 other assays present: RNA, SCT
+ 2 dimensional reductions calculated: pcaIGPROT, IGUMAP</code></pre>
+<p>Save seurat objects with all cells &amp; information on CC , CD27, and Ig-subclasses.</p>
+<pre class="r"><code>saveRDS(seu.fix, &quot;output/seu.fix_norm_cellstate.rds&quot;)
+saveRDS(seu.live, &quot;output/seu.live_norm_cellstate.rds&quot;)</code></pre>
+<p>Save seurat objects with selected non-cycling &amp; CD27+IgD- cells.</p>
+<pre class="r"><code>saveRDS(seu.fix.filtered, &quot;output/seu.fix_norm_plasmacells.rds&quot;)
+saveRDS(seu.live.filtered, &quot;output/seu.live_norm_plasmacells.rds&quot;)</code></pre>
+<pre class="r"><code>seu.live.filtered.RNA &lt;- seu.live.filtered
+DefaultAssay(seu.live.filtered.RNA) &lt;- &quot;RNA&quot;
+seu.live.filtered.RNA[[&quot;SCT&quot;]] &lt;- NULL
+
+seu.live.filtered.RNA[[&quot;PROT&quot;]] &lt;- NULL
+
+saveRDS(seu.live.filtered.RNA, &quot;output/seu.live_norm_plasmacells_RNA.rds&quot;)</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19042)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_Netherlands.1252  LC_CTYPE=English_Netherlands.1252   
+[3] LC_MONETARY=English_Netherlands.1252 LC_NUMERIC=C                        
+[5] LC_TIME=English_Netherlands.1252    
+
+attached base packages:
+[1] parallel  stats4    stats     graphics  grDevices utils     datasets 
+[8] methods   base     
+
+other attached packages:
+ [1] ggupset_0.3.0        RColorBrewer_1.1-2   enrichplot_1.10.2   
+ [4] UCell_1.0.0          data.table_1.14.2    scales_1.1.1        
+ [7] cowplot_1.1.1        ggthemes_4.2.4       kableExtra_1.3.4    
+[10] knitr_1.36           org.Hs.eg.db_3.12.0  AnnotationDbi_1.52.0
+[13] IRanges_2.24.1       S4Vectors_0.28.1     Biobase_2.50.0      
+[16] BiocGenerics_0.36.1  forcats_0.5.1        stringr_1.4.0       
+[19] dplyr_1.0.7          purrr_0.3.4          readr_2.1.0         
+[22] tidyr_1.1.4          tibble_3.1.5         ggplot2_3.3.5       
+[25] tidyverse_1.3.1      Matrix_1.3-4         SeuratObject_4.0.2  
+[28] Seurat_4.0.2         workflowr_1.6.2     
+
+loaded via a namespace (and not attached):
+  [1] utf8_1.2.2            reticulate_1.22       tidyselect_1.1.1     
+  [4] RSQLite_2.2.8         htmlwidgets_1.5.4     BiocParallel_1.24.1  
+  [7] grid_4.0.3            Rtsne_0.15            scatterpie_0.1.7     
+ [10] munsell_0.5.0         ragg_1.2.0            codetools_0.2-16     
+ [13] ica_1.0-2             future_1.23.0         miniUI_0.1.1.1       
+ [16] withr_2.4.2           colorspace_2.0-2      GOSemSim_2.16.1      
+ [19] highr_0.9             rstudioapi_0.13       ROCR_1.0-11          
+ [22] tensor_1.5            DOSE_3.16.0           listenv_0.8.0        
+ [25] labeling_0.4.2        git2r_0.28.0          polyclip_1.10-0      
+ [28] bit64_4.0.5           farver_2.1.0          rprojroot_2.0.2      
+ [31] parallelly_1.29.0     vctrs_0.3.8           generics_0.1.1       
+ [34] xfun_0.26             R6_2.5.1              graphlayouts_0.7.2   
+ [37] fgsea_1.16.0          spatstat.utils_2.2-0  cachem_1.0.6         
+ [40] assertthat_0.2.1      promises_1.2.0.1      ggraph_2.0.5         
+ [43] gtable_0.3.0          globals_0.14.0        goftest_1.2-2        
+ [46] tidygraph_1.2.0       rlang_0.4.11          systemfonts_1.0.3    
+ [49] splines_4.0.3         lazyeval_0.2.2        spatstat.geom_2.2-2  
+ [52] broom_0.7.10          yaml_2.2.1            reshape2_1.4.4       
+ [55] abind_1.4-5           modelr_0.1.8          backports_1.3.0      
+ [58] httpuv_1.6.3          qvalue_2.22.0         tools_4.0.3          
+ [61] ellipsis_0.3.2        spatstat.core_2.3-0   jquerylib_0.1.4      
+ [64] ggridges_0.5.3        Rcpp_1.0.7            plyr_1.8.6           
+ [67] rpart_4.1-15          deldir_1.0-2          pbapply_1.5-0        
+ [70] viridis_0.6.2         zoo_1.8-9             haven_2.4.3          
+ [73] ggrepel_0.9.1         cluster_2.1.0         here_1.0.1           
+ [76] fs_1.5.0              magrittr_2.0.1        RSpectra_0.16-0      
+ [79] scattermore_0.7       DO.db_2.9             lmtest_0.9-38        
+ [82] reprex_2.0.1          RANN_2.6.1            whisker_0.4          
+ [85] fitdistrplus_1.1-6    matrixStats_0.61.0    hms_1.1.1            
+ [88] patchwork_1.1.1       mime_0.12             evaluate_0.14        
+ [91] xtable_1.8-4          readxl_1.3.1          gridExtra_2.3        
+ [94] compiler_4.0.3        shadowtext_0.0.9      KernSmooth_2.23-17   
+ [97] crayon_1.4.2          htmltools_0.5.2       ggfun_0.0.4          
+[100] mgcv_1.8-33           later_1.3.0           tzdb_0.2.0           
+[103] lubridate_1.8.0       DBI_1.1.1             tweenr_1.0.2         
+[106] dbplyr_2.1.1          rappdirs_0.3.3        MASS_7.3-53          
+[109] cli_3.1.0             igraph_1.2.6          pkgconfig_2.0.3      
+[112] plotly_4.10.0         spatstat.sparse_2.0-0 xml2_1.3.2           
+[115] svglite_2.0.0         bslib_0.3.1           webshot_0.5.2        
+[118] rvest_1.0.2           digest_0.6.28         sctransform_0.3.2    
+[121] RcppAnnoy_0.0.19      spatstat.data_2.1-0   fastmatch_1.1-3      
+[124] rmarkdown_2.11        cellranger_1.1.0      leiden_0.3.9         
+[127] uwot_0.1.10           shiny_1.7.1           lifecycle_1.0.1      
+[130] nlme_3.1-149          jsonlite_1.7.2        limma_3.46.0         
+[133] viridisLite_0.4.0     fansi_0.5.0           pillar_1.6.4         
+[136] lattice_0.20-41       fastmap_1.1.0         httr_1.4.2           
+[139] survival_3.2-7        GO.db_3.12.1          glue_1.4.2           
+[142] png_0.1-7             bit_4.0.4             ggforce_0.3.3        
+[145] stringi_1.7.5         sass_0.4.0            blob_1.2.2           
+[148] textshaping_0.3.6     memoise_2.0.1         irlba_2.3.3          
+[151] future.apply_1.8.1   </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
