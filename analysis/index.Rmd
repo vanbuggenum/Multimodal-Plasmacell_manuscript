@@ -1,6 +1,6 @@
 ---
 title: "Documentation of analysis and figures"
-subtitle: "Multi-modal single-cell analysis of human plasma-cells"
+subtitle: "Multi-modal single-cell analysis of human antibody secreting cells"
 site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
@@ -12,7 +12,7 @@ editor_options:
 
 ## Abstract
 
-Plasma cells are key components of humoral immunity by secreting antibodies and providing protection against pathogens. These cells can be of IgM, IgA, or IgG subclass and migrate to class-specific niches. Localization and rareness of plasma cells make it challenge to define subclass-specific molecular hallmarks. Here, we describe how in-vitro differentiation of peripheral B-cells results in antibody-secreting plasma cells. Using a single-cell multi-modal sequencing approach (RAID) we find subclass-specific hallmark transcriptional profiles, surface protein expression and signaling pathway activation.
+Antibody secreting cells are key components of humoral immunity by secreting antibodies and providing protection against pathogens. These cells can be of IgM, IgA, or IgG subclass and migrate to class-specific niches. Localization and rareness of these cells make it challenge to define subclass-specific molecular hallmarks. Here, we describe how in-vitro differentiation of peripheral B-cells results in antibody-secreting cells. Using a single-cell multi-modal sequencing approach we find subclass-specific hallmark transcriptional profiles, surface protein expression and signaling pathway activation.
 
 ## In this repository
 
@@ -21,7 +21,7 @@ The pages contain code to process, analyze and create figures presented in the f
 * [QC](QC.html) processes count tables (available at [GSE189953](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE189953)): filter high quality cells; normalize and scale counts.   
 * [PC haracterization](cellstate.html) describes multi-modal characterization of 11-day old differentiated B-cells to plasma-cells.   
 * [Hallmarks Ig-classes](hallmarks.html) describes identification of Ig-classes and corresponding mRNA, surface protein levels and signalling activity: (phospho-)protein levels.   
-* [Supplements](supplements.html) contains supplementary data analysis of FACS, qPCR and ELISA experiments.  
+
 
 ## Attribution
 
