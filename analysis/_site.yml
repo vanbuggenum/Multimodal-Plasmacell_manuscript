@@ -1,13 +1,13 @@
 name: Multimodal-Plasmacell_manuscript
 output_dir: ../docs
 navbar:
-  title: Single-cell analysis of human IgM, IgA and IgG plama-cells
+  title: Multimodal phenotypic characteristics of human antibody secreting cells
   left:
   - text: Home
     href: index.html
   - text: QC
     href: QC.html
-  - text: PC characterization
+  - text: ASC characterization
     href: cellstate.html
   - text: Hallmarks Ig-classes
     href: hallmarks.html

@@ -12,7 +12,7 @@ editor_options:
 
 ## Abstract
 
-Antibody secreting cells are key components of humoral immunity by secreting antibodies and providing protection against pathogens. These cells can be of IgM, IgA, or IgG subclass and migrate to class-specific niches. Localization and rareness of these cells make it challenge to define subclass-specific molecular hallmarks. Here, we describe how in-vitro differentiation of peripheral B-cells results in antibody-secreting cells. Using a single-cell multi-modal sequencing approach we find subclass-specific hallmark transcriptional profiles, surface protein expression and signaling pathway activation.
+Antibody secreting cells are key components of humoral immunity by secreting antibodies and providing protection against pathogens. These cells can be of IgM, IgA, or IgG subclass and migrate to class-specific niches. Localization and rareness of these cells make it challenge to define subclass-specific molecular hallmarks. Here, we describe how in-vitro differentiation of peripheral B-cells results in antibody-secreting cells. Using a single-cell multi-modal sequencing approach we find subclass-specific hallmark transcriptional profiles, surface protein expression and signaling pathway activity.
 
 ## In this repository
 
@@ -32,7 +32,7 @@ We are very thankful for the efforts made by developers of [Seurat](https://sati
 
 The content in this repository is available under the [CC BY 4.0](https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/blob/master/LICENSE.md) license. 
 
-For proper attribution, please [cite]() our [publication (##)]()) containing description and analysis of all presented data and results.
+For proper attribution, please [cite](https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/blob/main/CITATION.bib) our [pre-print](https://www.biorxiv.org/content/10.1101/2022.03.31.486501v1).
 
 ------
 
