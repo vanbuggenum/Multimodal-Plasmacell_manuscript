@@ -11,7 +11,10 @@ editor_options:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-  message = F, warning = F, echo = T, eval = T
+  message = F,
+  warning = F,
+  echo = T,
+  eval = T
 )
 ```
 
@@ -20,33 +23,38 @@ source("code/load_packages.R")
 source("code/plot_QC_function.R") #change settings in script to get different layout per subpanel for this figure
 #dir.create("output/paper_figures") # location where paper figures are stored
 
-panellabels <- c('a', 'b', 'c','d' , 'e', 'f', 'g', 'h', 'i', 'j', 'k')
+panellabels <-
+  c('a', 'b', 'c', 'd' , 'e', 'f', 'g', 'h', 'i', 'j', 'k')
 
-add.textsize <- theme(axis.text.x = element_text(colour = 'black', size = 7),
-          axis.text.y = element_text(colour = 'black',size=7),
-          text = element_text(size=7),
-          axis.text=element_text(size=7),
-          plot.title = element_text(size=6)
-          )
+add.textsize <-
+  theme(
+    axis.text.x = element_text(colour = 'black', size = 7),
+    axis.text.y = element_text(colour = 'black', size = 7),
+    text = element_text(size = 7),
+    axis.text = element_text(size = 7),
+    plot.title = element_text(size = 6)
+  )
 
 colors.donors <- c("#999999", "#E69F00", "#56B4E9")
-colors.clusters <-  c("#009E73", "#D55E00","#F0E442","grey")
+colors.clusters <-  c("#009E73", "#D55E00", "#F0E442", "grey")
 
 ```
 
-The single-cell multi-omics data contains single-cell transcriptomic and proteomic and phospho-proteomic data of *in vitro* generated plasma cells. The code below generates quality control plots, performs filtering, normalization and scaling of the counts
+The single-cell multi-omics data contains single-cell transcriptomic and proteomic and phospho-proteomic data of *in vitro* generated antibody-secreting cells. The code below generates quality control plots, performs filtering, normalization and scaling of the counts
 
 ## Count matrix to Seurat object
 
 Import all count matrixes, combine plates and create unfiltered Seurat objects. 
 
 
-```{r import counts, warning=FALSE, message=FALSE}
+```{r import counts, echo=TRUE, message=FALSE, warning=FALSE}
 myfiles <- list.files(path="output/", pattern = ".rds$")
 ## only read all raw files and create raw combined table if not done yet. Speeds up generation of html file
-if("seu.RNA.rds" %in%  myfiles){seu_RNA <- readRDS("output/seu.RNA.rds")
-seu.PROT_live <- readRDS("output/seu.PROT_live.rds")
-seu.PROT_fix <- readRDS("output/seu.PROT_fix.rds")} else { 
+if ("seu.RNA.rds" %in%  myfiles) {
+  seu_RNA <- readRDS("output/seu.RNA.rds")
+  seu.PROT_live <- readRDS("output/seu.PROT_live.rds")
+  seu.PROT_fix <- readRDS("output/seu.PROT_fix.rds")
+} else {
   source("code/Import_and_create_seuratObj.R")
 }
 ```
@@ -57,95 +65,155 @@ seu.PROT_fix <- readRDS("output/seu.PROT_fix.rds")} else {
 
 
 ```{r QC-filters}
-plot_RNA_nCount <- plot_QC_paper(seu_object = seu_RNA, 
-                                 feature = "nCount_RNA", 
-                                 ytext = "Total UMI counts per cell",
-                                 xtext = "Plate number",
-                                 paneltitle = "Fixed cells (1586 to 1589) show lower counts",
-                                 colorviolin = "dodgerblue2" ) + 
-                        geom_vline(xintercept =6.5, size = 0.3, color = "red") +
-  annotate(geom = "text", x = 6.6, y=20000, label = "Fixed cells", hjust = 0, size = 2.5) +
-                        theme(axis.title.x = element_blank()) 
+plot_RNA_nCount <- plot_QC_paper(
+  seu_object = seu_RNA,
+  feature = "nCount_RNA",
+  ytext = "Total UMI counts per cell",
+  xtext = "Plate number",
+  paneltitle = "Fixed cells (1586 to 1589) show lower counts",
+  colorviolin = "dodgerblue2"
+) +
+  geom_vline(xintercept = 6.5,
+             size = 0.3,
+             color = "red") +
+  annotate(
+    geom = "text",
+    x = 6.6,
+    y = 20000,
+    label = "Fixed cells",
+    hjust = 0,
+    size = 2.5
+  ) +
+  theme(axis.title.x = element_blank())
 
-plot_RNA_ngenes <- plot_QC_paper(seu_object = seu_RNA, 
-                                 feature = "nFeature_RNA", 
-                                 ytext = "Total genes per cell",
-                                 xtext = "Plate number",
-                                 paneltitle = "Keep cells >300 genes",
-                                 colorviolin = "dodgerblue2" ) + 
-                        geom_hline(yintercept = 300, size = 0.3, color = "red") +
-                        theme(axis.title.x = element_blank())
-  
-plot_percent.mt <- plot_QC_paper(seu_object = seu_RNA, 
-                                 feature = "percent.mt", 
-                                 ytext = "% Mitochondrial counts",
-                                 xtext = "Plate number",
-                                 paneltitle = "Keep cells < 5 % mitochondrial genecounts",
-                                 colorviolin = "dodgerblue2" ) +
-                        geom_hline(yintercept = 5, color = "red", size = 0.3) +
-                        theme(axis.title.x = element_blank())
+plot_RNA_ngenes <- plot_QC_paper(
+  seu_object = seu_RNA,
+  feature = "nFeature_RNA",
+  ytext = "Total genes per cell",
+  xtext = "Plate number",
+  paneltitle = "Keep cells >300 genes",
+  colorviolin = "dodgerblue2"
+) +
+  geom_hline(yintercept = 300,
+             size = 0.3,
+             color = "red") +
+  theme(axis.title.x = element_blank())
 
-plot_percent.rb <- plot_QC_paper(seu_object = seu_RNA, 
-                                 feature = "percent.rb", 
-                                 ytext = "% Ribosomal counts",
-                                 xtext = "Plate number",
-                                 paneltitle = "comparable % ribosomal counts in all plates",
-                                 colorviolin = "dodgerblue2" ) +
-                        theme(axis.title.x = element_blank())
-  
-  
-plot_PROT_nCount.live <- plot_QC_paper(seu_object = seu.PROT_live, 
-                                 feature = "nCount_PROT", 
-                                 ytext =  "Total UMI counts per cell",
-                                 xtext = "Plate number",
-                                 paneltitle = "Keep cells > 1500 & < 9000 PROT counts",
-                                 colorviolin = "deeppink3" ) +
-                        geom_hline(yintercept = 1500, size = 0.3) +
-                        geom_hline(yintercept = 9000, size = 0.3) +
-                        theme(axis.title.x = element_blank())
+plot_percent.mt <- plot_QC_paper(
+  seu_object = seu_RNA,
+  feature = "percent.mt",
+  ytext = "% Mitochondrial counts",
+  xtext = "Plate number",
+  paneltitle = "Keep cells < 5 % mitochondrial genecounts",
+  colorviolin = "dodgerblue2"
+) +
+  geom_hline(yintercept = 5,
+             color = "red",
+             size = 0.3) +
+  theme(axis.title.x = element_blank())
 
-plot_PROT_nCount.fix <- plot_QC_paper(seu_object = seu.PROT_fix, 
-                                 feature = "nCount_PROT", 
-                                 ytext =  "Total UMI counts per cell",
-                                 xtext = "Plate number",
-                                 paneltitle = "Keep cells > 2500 & < 20000 PROT counts",
-                                 colorviolin = "deeppink3" ) +
-                        geom_hline(yintercept = 2500, size = 0.3) +
-                        geom_hline(yintercept = 20000, size = 0.3) +
-                        theme(axis.title.x = element_blank())
-
-plot_PROT_nproteins.live <- plot_QC_paper(seu_object = seu.PROT_live, 
-                                 feature = "nFeature_PROT", 
-                                 ytext =  "Total proteins per cell",
-                                 xtext = "Plate number",
-                                 paneltitle = "Keep cells >40 proteins",
-                                 colorviolin = "deeppink3" ) +
-                        geom_hline(yintercept = 40, size = 0.3, color = "red")+
-                        theme(axis.title.x = element_blank())
-
-plot_PROT_nproteins.fix <- plot_QC_paper(seu_object = seu.PROT_fix, 
-                                 feature = "nFeature_PROT", 
-                                 ytext =  "Total proteins per cell",
-                                 xtext = "Plate number",
-                                 paneltitle = "Keep cells >65 proteins",
-                                 colorviolin = "deeppink3" ) +
-                        geom_hline(yintercept = 65, size = 0.3, color = "red")+
-                        theme(axis.title.x = element_blank())
+plot_percent.rb <- plot_QC_paper(
+  seu_object = seu_RNA,
+  feature = "percent.rb",
+  ytext = "% Ribosomal counts",
+  xtext = "Plate number",
+  paneltitle = "comparable % ribosomal counts in all plates",
+  colorviolin = "dodgerblue2"
+) +
+  theme(axis.title.x = element_blank())
 
 
+plot_PROT_nCount.live <- plot_QC_paper(
+  seu_object = seu.PROT_live,
+  feature = "nCount_PROT",
+  ytext =  "Total UMI counts per cell",
+  xtext = "Plate number",
+  paneltitle = "Keep cells > 1500 & < 9000 PROT counts",
+  colorviolin = "deeppink3"
+) +
+  geom_hline(yintercept = 1500, size = 0.3) +
+  geom_hline(yintercept = 9000, size = 0.3) +
+  theme(axis.title.x = element_blank())
 
-plot.QC <- plot_grid(plot_RNA_nCount, 
-                     plot_RNA_ngenes,  
-                     plot_percent.mt, 
-                     plot_percent.rb,
-                     plot_PROT_nCount.live,
-                     plot_PROT_nCount.fix,
-                     plot_PROT_nproteins.live,
-                     plot_PROT_nproteins.fix,  
-                     labels = c('a', 'b', 'c','d' , 'e', 'f', 'g', 'h'), label_size = 10, ncol = 2)
+plot_PROT_nCount.fix <- plot_QC_paper(
+  seu_object = seu.PROT_fix,
+  feature = "nCount_PROT",
+  ytext =  "Total UMI counts per cell",
+  xtext = "Plate number",
+  paneltitle = "Keep cells > 2500 & < 20000 PROT counts",
+  colorviolin = "deeppink3"
+) +
+  geom_hline(yintercept = 2500, size = 0.3) +
+  geom_hline(yintercept = 20000, size = 0.3) +
+  theme(axis.title.x = element_blank())
 
-ggsave(plot.QC, filename = "output/paper_figures/Suppl_QC_filters.pdf", width = 183, height = 200, units = "mm",  dpi = 300, useDingbats = FALSE)
-ggsave(plot.QC, filename = "output/paper_figures/Suppl_QC_filters.png", width = 183, height = 200, units = "mm",  dpi = 300)
+plot_PROT_nproteins.live <-
+  plot_QC_paper(
+    seu_object = seu.PROT_live,
+    feature = "nFeature_PROT",
+    ytext =  "Total proteins per cell",
+    xtext = "Plate number",
+    paneltitle = "Keep cells >40 proteins",
+    colorviolin = "deeppink3"
+  ) +
+  geom_hline(yintercept = 40,
+             size = 0.3,
+             color = "red") +
+  theme(axis.title.x = element_blank())
+
+plot_PROT_nproteins.fix <- plot_QC_paper(
+  seu_object = seu.PROT_fix,
+  feature = "nFeature_PROT",
+  ytext =  "Total proteins per cell",
+  xtext = "Plate number",
+  paneltitle = "Keep cells >65 proteins",
+  colorviolin = "deeppink3"
+) +
+  geom_hline(yintercept = 65,
+             size = 0.3,
+             color = "red") +
+  theme(axis.title.x = element_blank())
+
+
+
+plot.QC <- plot_grid(
+  plot_RNA_nCount,
+  plot_RNA_ngenes,
+  plot_percent.mt,
+  plot_percent.rb,
+  plot_PROT_nCount.live,
+  plot_PROT_nCount.fix,
+  plot_PROT_nproteins.live,
+  plot_PROT_nproteins.fix,
+  labels = c('a', 'b', 'c', 'd' , 'e', 'f', 'g', 'h'),
+  label_size = 10,
+  ncol = 2
+)
+
+ggsave(
+  plot.QC,
+  filename = "output/paper_figures/Suppl_QC_filters.pdf",
+  width = 177,
+  height = 200,
+  units = "mm",
+  dpi = 300
+)
+ggsave(
+  plot.QC,
+  filename = "output/paper_figures/Suppl_QC_filters.eps",
+  width = 177,
+  height = 200,
+  units = "mm",
+  dpi = 300
+)
+ggsave(
+  plot.QC,
+  filename = "output/paper_figures/Suppl_QC_filters.png",
+  width = 177,
+  height = 200,
+  units = "mm",
+  dpi = 300
+)
 
 ```
 
@@ -244,7 +312,7 @@ seu.RNA_combined.live[["PROT"]] <- CreateAssayObject(counts = filtered.prot.coun
 ```
 
 
-5. Add metadata to objec.
+5. Add metadata to object.
 
 ```{r add.metadata, class.source = 'fold-hide'}
 ## metadata import
@@ -403,4 +471,3 @@ saveRDS(seu.RNA_combined.fix, file = "output/seu.fix_norm.rds")
 saveRDS(seu.RNA_combined.live, file = "output/seu.live_norm.rds")
 
 ```
-
