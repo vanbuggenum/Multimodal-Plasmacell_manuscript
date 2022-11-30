@@ -331,7 +331,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Single-cell analysis of human IgM, IgA and IgG plama-cells</a>
+      <a class="navbar-brand" href="index.html">Multimodal phenotypic characteristics of human antibody secreting cells</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -342,7 +342,7 @@ div.tocify {
   <a href="QC.html">QC</a>
 </li>
 <li>
-  <a href="cellstate.html">PC characterization</a>
+  <a href="cellstate.html">ASC characterization</a>
 </li>
 <li>
   <a href="hallmarks.html">Hallmarks Ig-classes</a>
@@ -387,7 +387,9 @@ div.tocify {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -396,7 +398,9 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -405,17 +409,28 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-12-04
+<strong>Last updated:</strong> 2022-11-30
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
 </p>
 <p>
-<strong>Knit directory:</strong> <code>Multimodal-Plasmacell_manuscript/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong>
+<code>Multimodal-Plasmacell_manuscript/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
 </p>
 <p>
-This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version
+1.6.2). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -424,91 +439,138 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
 </p>
 </div>
 <div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20211005code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20211005)</code> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20211005code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20211005)</code> </a>
 </p>
 </div>
-<div id="strongSeedstrongcodesetseed20211005code" class="panel-collapse collapse">
+<div id="strongSeedstrongcodesetseed20211005code"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>The command <code>set.seed(20211005)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+<p>The command <code>set.seed(20211005)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
 </p>
 </div>
-<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
 </p>
 </div>
 <div id="strongCachestrongnone" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
 </p>
 </div>
 <div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomvanbuggenumMultimodalPlasmacellmanuscripttree1853aaeba05c7b19f56a9fa39b34d7c21536bae8targetblank1853aaea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/tree/1853aaeba05c7b19f56a9fa39b34d7c21536bae8" target="_blank">1853aae</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomvanbuggenumMultimodalPlasmacellmanuscripttree7288a3fc857ea0d362c6ff59904fc182df53c6dctargetblank7288a3fa">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/tree/7288a3fc857ea0d362c6ff59904fc182df53c6dc" target="_blank">7288a3f</a>
+</a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomvanbuggenumMultimodalPlasmacellmanuscripttree1853aaeba05c7b19f56a9fa39b34d7c21536bae8targetblank1853aaea" class="panel-collapse collapse">
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomvanbuggenumMultimodalPlasmacellmanuscripttree7288a3fc857ea0d362c6ff59904fc182df53c6dctargetblank7288a3fa"
+class="panel-collapse collapse">
 <div class="panel-body">
 <p>
-Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/tree/1853aaeba05c7b19f56a9fa39b34d7c21536bae8" target="_blank">1853aae</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version
+<a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/tree/7288a3fc857ea0d362c6ff59904fc182df53c6dc" target="_blank">7288a3f</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
 </p>
 <p>
-Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
 </p>
 <pre><code>
 Ignored files:
@@ -516,7 +578,8 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Untracked files:
-    Untracked:  analysis/cellstate.Rmd
+    Untracked:  analysis/cellstate_sidetest.Rmd
+    Untracked:  analysis/hallmarks.Rmd
     Untracked:  analysis/supplements.Rmd
     Untracked:  code/Import_and_create_seuratobject.R
     Untracked:  data/Seq2Science/
@@ -524,8 +587,13 @@ Untracked files:
     Untracked:  data/azimuth_bonemarrow/
     Untracked:  data/citeseqcount_htseqcount.zip
     Untracked:  data/genelist.plots.diffmarkers.txt
+    Untracked:  data/genelist.plots.diffmarkers2.txt
     Untracked:  data/raw/
     Untracked:  data/supplementary/
+    Untracked:  output/MOFA_analysis_Donorgroup.hdf5
+    Untracked:  output/MOFA_analysis_Donorgroup.rds
+    Untracked:  output/MOFA_analysis_Donorgroup_clustered.rds
+    Untracked:  output/extra plots.docx
     Untracked:  output/paper_figures/
     Untracked:  output/seu.PROT_fix.rds
     Untracked:  output/seu.PROT_live.rds
@@ -537,18 +605,25 @@ Untracked files:
     Untracked:  output/seu.live_norm_cellstate.rds
     Untracked:  output/seu.live_norm_plasmacells.rds
     Untracked:  output/seu.live_norm_plasmacells_RNA.rds
+    Untracked:  output/top-PROT-loadings_IgA.tsv
+    Untracked:  output/top-PROT-loadings_IgG.tsv
+    Untracked:  output/top-PROT-loadings_IgM.tsv
+    Untracked:  output/top-gene-loadings_IgA.tsv
+    Untracked:  output/top-gene-loadings_IgG.tsv
+    Untracked:  output/top-gene-loadings_IgM.csv
+    Untracked:  output/top-gene-loadings_IgM.tsv
 
 Unstaged changes:
     Modified:   analysis/_site.yml
-    Deleted:    analysis/about.Rmd
+    Modified:   analysis/cellstate.Rmd
     Modified:   analysis/index.Rmd
-    Modified:   analysis/license.Rmd
-    Modified:   code/Import_and_create_seuratObj.R
     Modified:   code/load_packages.R
 
 </code></pre>
 <p>
-Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
 </p>
 </div>
 </div>
@@ -559,7 +634,11 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/QC.Rmd</code>) and HTML (<code>docs/QC.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/QC.Rmd</code>) and HTML
+(<code>docs/QC.html</code>) files. If you’ve configured a remote Git
+repository (see <code>?wflow_git_remote</code>), click on the hyperlinks
+in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -583,6 +662,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/blob/7288a3fc857ea0d362c6ff59904fc182df53c6dc/analysis/QC.Rmd" target="_blank">7288a3f</a>
+</td>
+<td>
+Jessie van Buggenum
+</td>
+<td>
+2022-11-30
+</td>
+<td>
+documentation of QC and filtering plots
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/vanbuggenum/Multimodal-Plasmacell_manuscript/858cad98066dbe204d45b231817b9f151e5ca9a4/docs/QC.html" target="_blank">858cad9</a>
+</td>
+<td>
+jessievb
+</td>
+<td>
+2021-12-04
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -658,113 +771,182 @@ quality check page and remove header title
 </div>
 </div>
 </div>
-<p>The single-cell multi-omics data contains single-cell transcriptomic and proteomic and phospho-proteomic data of <em>in vitro</em> generated plasma cells. The code below generates quality control plots, performs filtering, normalization and scaling of the counts</p>
+<p>The single-cell multi-omics data contains single-cell transcriptomic
+and proteomic and phospho-proteomic data of <em>in vitro</em> generated
+antibody-secreting cells. The code below generates quality control
+plots, performs filtering, normalization and scaling of the counts</p>
 <div id="count-matrix-to-seurat-object" class="section level2">
 <h2>Count matrix to Seurat object</h2>
-<p>Import all count matrixes, combine plates and create unfiltered Seurat objects.</p>
+<p>Import all count matrixes, combine plates and create unfiltered
+Seurat objects.</p>
 <pre class="r"><code>myfiles &lt;- list.files(path=&quot;output/&quot;, pattern = &quot;.rds$&quot;)
 ## only read all raw files and create raw combined table if not done yet. Speeds up generation of html file
-if(&quot;seu.RNA.rds&quot; %in%  myfiles){seu_RNA &lt;- readRDS(&quot;output/seu.RNA.rds&quot;)
-seu.PROT_live &lt;- readRDS(&quot;output/seu.PROT_live.rds&quot;)
-seu.PROT_fix &lt;- readRDS(&quot;output/seu.PROT_fix.rds&quot;)} else { 
+if (&quot;seu.RNA.rds&quot; %in%  myfiles) {
+  seu_RNA &lt;- readRDS(&quot;output/seu.RNA.rds&quot;)
+  seu.PROT_live &lt;- readRDS(&quot;output/seu.PROT_live.rds&quot;)
+  seu.PROT_fix &lt;- readRDS(&quot;output/seu.PROT_fix.rds&quot;)
+} else {
   source(&quot;code/Import_and_create_seuratObj.R&quot;)
 }</code></pre>
 </div>
 <div id="qc-plots-and-filters" class="section level2">
 <h2>QC plots and filters</h2>
-<pre class="r"><code>plot_RNA_nCount &lt;- plot_QC_paper(seu_object = seu_RNA, 
-                                 feature = &quot;nCount_RNA&quot;, 
-                                 ytext = &quot;Total UMI counts per cell&quot;,
-                                 xtext = &quot;Plate number&quot;,
-                                 paneltitle = &quot;Fixed cells (1586 to 1589) show lower counts&quot;,
-                                 colorviolin = &quot;dodgerblue2&quot; ) + 
-                        geom_vline(xintercept =6.5, size = 0.3, color = &quot;red&quot;) +
-  annotate(geom = &quot;text&quot;, x = 6.6, y=20000, label = &quot;Fixed cells&quot;, hjust = 0, size = 2.5) +
-                        theme(axis.title.x = element_blank()) 
+<pre class="r"><code>plot_RNA_nCount &lt;- plot_QC_paper(
+  seu_object = seu_RNA,
+  feature = &quot;nCount_RNA&quot;,
+  ytext = &quot;Total UMI counts per cell&quot;,
+  xtext = &quot;Plate number&quot;,
+  paneltitle = &quot;Fixed cells (1586 to 1589) show lower counts&quot;,
+  colorviolin = &quot;dodgerblue2&quot;
+) +
+  geom_vline(xintercept = 6.5,
+             size = 0.3,
+             color = &quot;red&quot;) +
+  annotate(
+    geom = &quot;text&quot;,
+    x = 6.6,
+    y = 20000,
+    label = &quot;Fixed cells&quot;,
+    hjust = 0,
+    size = 2.5
+  ) +
+  theme(axis.title.x = element_blank())
 
-plot_RNA_ngenes &lt;- plot_QC_paper(seu_object = seu_RNA, 
-                                 feature = &quot;nFeature_RNA&quot;, 
-                                 ytext = &quot;Total genes per cell&quot;,
-                                 xtext = &quot;Plate number&quot;,
-                                 paneltitle = &quot;Keep cells &gt;300 genes&quot;,
-                                 colorviolin = &quot;dodgerblue2&quot; ) + 
-                        geom_hline(yintercept = 300, size = 0.3, color = &quot;red&quot;) +
-                        theme(axis.title.x = element_blank())
-  
-plot_percent.mt &lt;- plot_QC_paper(seu_object = seu_RNA, 
-                                 feature = &quot;percent.mt&quot;, 
-                                 ytext = &quot;% Mitochondrial counts&quot;,
-                                 xtext = &quot;Plate number&quot;,
-                                 paneltitle = &quot;Keep cells &lt; 5 % mitochondrial genecounts&quot;,
-                                 colorviolin = &quot;dodgerblue2&quot; ) +
-                        geom_hline(yintercept = 5, color = &quot;red&quot;, size = 0.3) +
-                        theme(axis.title.x = element_blank())
+plot_RNA_ngenes &lt;- plot_QC_paper(
+  seu_object = seu_RNA,
+  feature = &quot;nFeature_RNA&quot;,
+  ytext = &quot;Total genes per cell&quot;,
+  xtext = &quot;Plate number&quot;,
+  paneltitle = &quot;Keep cells &gt;300 genes&quot;,
+  colorviolin = &quot;dodgerblue2&quot;
+) +
+  geom_hline(yintercept = 300,
+             size = 0.3,
+             color = &quot;red&quot;) +
+  theme(axis.title.x = element_blank())
 
-plot_percent.rb &lt;- plot_QC_paper(seu_object = seu_RNA, 
-                                 feature = &quot;percent.rb&quot;, 
-                                 ytext = &quot;% Ribosomal counts&quot;,
-                                 xtext = &quot;Plate number&quot;,
-                                 paneltitle = &quot;comparable % ribosomal counts in all plates&quot;,
-                                 colorviolin = &quot;dodgerblue2&quot; ) +
-                        theme(axis.title.x = element_blank())
-  
-  
-plot_PROT_nCount.live &lt;- plot_QC_paper(seu_object = seu.PROT_live, 
-                                 feature = &quot;nCount_PROT&quot;, 
-                                 ytext =  &quot;Total UMI counts per cell&quot;,
-                                 xtext = &quot;Plate number&quot;,
-                                 paneltitle = &quot;Keep cells &gt; 1500 &amp; &lt; 9000 PROT counts&quot;,
-                                 colorviolin = &quot;deeppink3&quot; ) +
-                        geom_hline(yintercept = 1500, size = 0.3) +
-                        geom_hline(yintercept = 9000, size = 0.3) +
-                        theme(axis.title.x = element_blank())
+plot_percent.mt &lt;- plot_QC_paper(
+  seu_object = seu_RNA,
+  feature = &quot;percent.mt&quot;,
+  ytext = &quot;% Mitochondrial counts&quot;,
+  xtext = &quot;Plate number&quot;,
+  paneltitle = &quot;Keep cells &lt; 5 % mitochondrial genecounts&quot;,
+  colorviolin = &quot;dodgerblue2&quot;
+) +
+  geom_hline(yintercept = 5,
+             color = &quot;red&quot;,
+             size = 0.3) +
+  theme(axis.title.x = element_blank())
 
-plot_PROT_nCount.fix &lt;- plot_QC_paper(seu_object = seu.PROT_fix, 
-                                 feature = &quot;nCount_PROT&quot;, 
-                                 ytext =  &quot;Total UMI counts per cell&quot;,
-                                 xtext = &quot;Plate number&quot;,
-                                 paneltitle = &quot;Keep cells &gt; 2500 &amp; &lt; 20000 PROT counts&quot;,
-                                 colorviolin = &quot;deeppink3&quot; ) +
-                        geom_hline(yintercept = 2500, size = 0.3) +
-                        geom_hline(yintercept = 20000, size = 0.3) +
-                        theme(axis.title.x = element_blank())
-
-plot_PROT_nproteins.live &lt;- plot_QC_paper(seu_object = seu.PROT_live, 
-                                 feature = &quot;nFeature_PROT&quot;, 
-                                 ytext =  &quot;Total proteins per cell&quot;,
-                                 xtext = &quot;Plate number&quot;,
-                                 paneltitle = &quot;Keep cells &gt;40 proteins&quot;,
-                                 colorviolin = &quot;deeppink3&quot; ) +
-                        geom_hline(yintercept = 40, size = 0.3, color = &quot;red&quot;)+
-                        theme(axis.title.x = element_blank())
-
-plot_PROT_nproteins.fix &lt;- plot_QC_paper(seu_object = seu.PROT_fix, 
-                                 feature = &quot;nFeature_PROT&quot;, 
-                                 ytext =  &quot;Total proteins per cell&quot;,
-                                 xtext = &quot;Plate number&quot;,
-                                 paneltitle = &quot;Keep cells &gt;65 proteins&quot;,
-                                 colorviolin = &quot;deeppink3&quot; ) +
-                        geom_hline(yintercept = 65, size = 0.3, color = &quot;red&quot;)+
-                        theme(axis.title.x = element_blank())
+plot_percent.rb &lt;- plot_QC_paper(
+  seu_object = seu_RNA,
+  feature = &quot;percent.rb&quot;,
+  ytext = &quot;% Ribosomal counts&quot;,
+  xtext = &quot;Plate number&quot;,
+  paneltitle = &quot;comparable % ribosomal counts in all plates&quot;,
+  colorviolin = &quot;dodgerblue2&quot;
+) +
+  theme(axis.title.x = element_blank())
 
 
+plot_PROT_nCount.live &lt;- plot_QC_paper(
+  seu_object = seu.PROT_live,
+  feature = &quot;nCount_PROT&quot;,
+  ytext =  &quot;Total UMI counts per cell&quot;,
+  xtext = &quot;Plate number&quot;,
+  paneltitle = &quot;Keep cells &gt; 1500 &amp; &lt; 9000 PROT counts&quot;,
+  colorviolin = &quot;deeppink3&quot;
+) +
+  geom_hline(yintercept = 1500, size = 0.3) +
+  geom_hline(yintercept = 9000, size = 0.3) +
+  theme(axis.title.x = element_blank())
 
-plot.QC &lt;- plot_grid(plot_RNA_nCount, 
-                     plot_RNA_ngenes,  
-                     plot_percent.mt, 
-                     plot_percent.rb,
-                     plot_PROT_nCount.live,
-                     plot_PROT_nCount.fix,
-                     plot_PROT_nproteins.live,
-                     plot_PROT_nproteins.fix,  
-                     labels = c(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;,&#39;d&#39; , &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;h&#39;), label_size = 10, ncol = 2)
+plot_PROT_nCount.fix &lt;- plot_QC_paper(
+  seu_object = seu.PROT_fix,
+  feature = &quot;nCount_PROT&quot;,
+  ytext =  &quot;Total UMI counts per cell&quot;,
+  xtext = &quot;Plate number&quot;,
+  paneltitle = &quot;Keep cells &gt; 2500 &amp; &lt; 20000 PROT counts&quot;,
+  colorviolin = &quot;deeppink3&quot;
+) +
+  geom_hline(yintercept = 2500, size = 0.3) +
+  geom_hline(yintercept = 20000, size = 0.3) +
+  theme(axis.title.x = element_blank())
 
-ggsave(plot.QC, filename = &quot;output/paper_figures/Suppl_QC_filters.pdf&quot;, width = 183, height = 200, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
-ggsave(plot.QC, filename = &quot;output/paper_figures/Suppl_QC_filters.png&quot;, width = 183, height = 200, units = &quot;mm&quot;,  dpi = 300)</code></pre>
+plot_PROT_nproteins.live &lt;-
+  plot_QC_paper(
+    seu_object = seu.PROT_live,
+    feature = &quot;nFeature_PROT&quot;,
+    ytext =  &quot;Total proteins per cell&quot;,
+    xtext = &quot;Plate number&quot;,
+    paneltitle = &quot;Keep cells &gt;40 proteins&quot;,
+    colorviolin = &quot;deeppink3&quot;
+  ) +
+  geom_hline(yintercept = 40,
+             size = 0.3,
+             color = &quot;red&quot;) +
+  theme(axis.title.x = element_blank())
+
+plot_PROT_nproteins.fix &lt;- plot_QC_paper(
+  seu_object = seu.PROT_fix,
+  feature = &quot;nFeature_PROT&quot;,
+  ytext =  &quot;Total proteins per cell&quot;,
+  xtext = &quot;Plate number&quot;,
+  paneltitle = &quot;Keep cells &gt;65 proteins&quot;,
+  colorviolin = &quot;deeppink3&quot;
+) +
+  geom_hline(yintercept = 65,
+             size = 0.3,
+             color = &quot;red&quot;) +
+  theme(axis.title.x = element_blank())
+
+
+
+plot.QC &lt;- plot_grid(
+  plot_RNA_nCount,
+  plot_RNA_ngenes,
+  plot_percent.mt,
+  plot_percent.rb,
+  plot_PROT_nCount.live,
+  plot_PROT_nCount.fix,
+  plot_PROT_nproteins.live,
+  plot_PROT_nproteins.fix,
+  labels = c(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39; , &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;h&#39;),
+  label_size = 10,
+  ncol = 2
+)
+
+ggsave(
+  plot.QC,
+  filename = &quot;output/paper_figures/Suppl_QC_filters.pdf&quot;,
+  width = 177,
+  height = 200,
+  units = &quot;mm&quot;,
+  dpi = 300
+)
+ggsave(
+  plot.QC,
+  filename = &quot;output/paper_figures/Suppl_QC_filters.eps&quot;,
+  width = 177,
+  height = 200,
+  units = &quot;mm&quot;,
+  dpi = 300
+)
+ggsave(
+  plot.QC,
+  filename = &quot;output/paper_figures/Suppl_QC_filters.png&quot;,
+  width = 177,
+  height = 200,
+  units = &quot;mm&quot;,
+  dpi = 300
+)</code></pre>
 <pre class="r"><code>plot.QC</code></pre>
-<p><img src="figure/QC.Rmd/Suppl_QC_filters-1.png" width="691.65312" style="display: block; margin: auto;" /> <em>Supplementary Figure</em> Thresholds for selection of high-quality samples and cells.</p>
+<p><img src="figure/QC.Rmd/Suppl_QC_filters-1.png" width="691.65312" style="display: block; margin: auto;" />
+<em>Supplementary Figure</em> Thresholds for selection of high-quality
+samples and cells.</p>
 <ol style="list-style-type: decimal">
-<li>Based on the indicated cut-offs, high-quality cells are filtered for further analysis.</li>
+<li>Based on the indicated cut-offs, high-quality cells are filtered for
+further analysis.</li>
 </ol>
 <pre class="r fold-show"><code>## Filter fixed protein dataset
 seu.PROT.fix.subset &lt;- subset(seu.PROT_fix, subset = nCount_PROT &gt;= 2500 &amp; nCount_PROT &lt; 20000)
@@ -781,7 +963,8 @@ seu.RNA_fix &lt;- subset(seu_RNA, idents = c(1586:1589))
 seu.RNA_live.subset &lt;- subset(seu.RNA_live, subset = percent.mt &lt;=5 &amp; nFeature_RNA &gt;= 300)
 seu.RNA_fix.subset &lt;- subset(seu.RNA_fix) #, subset = percent.mt &lt;= 5 &amp; nFeature_RNA &gt;= 300 # Nofilter because RNA not taken along.</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li>Filter low-detected genes: Keep genes that are &gt;1% cells detected.</li>
+<li>Filter low-detected genes: Keep genes that are &gt;1% cells
+detected.</li>
 </ol>
 <pre class="r fold-hide"><code>## Additional filter features (genes) detected in 1% of cells
 seu.RNA_live.subset &lt;- CreateSeuratObject(seu.RNA_live.subset[[&quot;RNA&quot;]]@counts, min.cells = round(ncol(seu.RNA_live.subset)/100)) ## keep features detected in 1% of cells
@@ -816,7 +999,8 @@ seu.RNA_combined.fix</code></pre>
 Active assay: RNA (5019 features, 0 variable features)
  1 other assay present: PROT</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li>Antibody quality (Non-detected proteins) filter: remove proteins with median counts &lt; 0.2 (fixed cells), or &lt; 1 (live cells)</li>
+<li>Antibody quality (Non-detected proteins) filter: remove proteins
+with median counts &lt; 0.2 (fixed cells), or &lt; 1 (live cells)</li>
 </ol>
 <pre class="r"><code>PROT_tbl_subset.fix &lt;- as.data.frame(seu.PROT.fix.subset@assays$PROT@counts) %&gt;%
   mutate(protein = rownames(seu.PROT.fix.subset)) %&gt;%
@@ -847,7 +1031,7 @@ filtered.prot.counts.live &lt;- seu.RNA_combined.live[[&quot;PROT&quot;]]@counts
 
 seu.RNA_combined.live[[&quot;PROT&quot;]] &lt;- CreateAssayObject(counts = filtered.prot.counts.live)</code></pre>
 <ol start="5" style="list-style-type: decimal">
-<li>Add metadata to objec.</li>
+<li>Add metadata to object.</li>
 </ol>
 <pre class="r fold-hide"><code>## metadata import
 metadata &lt;- read_delim(&quot;data/metadata.txt&quot;, &quot;\t&quot;, escape_double = FALSE, trim_ws = TRUE)
@@ -884,7 +1068,10 @@ seu.RNA_combined.fix[[&quot;percent.mt&quot;]] &lt;- PercentageFeatureSet(seu.RN
 </div>
 <div id="normalize-and-scale" class="section level2">
 <h2>Normalize and Scale</h2>
-<p>Finally, the datasets are normalized (SCT for RNA, CLR for (phospho-)protein), and scaled (regress out: nCount, percentage mitochondiral, and plate ID for RNA, and regress out: nCount and plate ID for protein).</p>
+<p>Finally, the datasets are normalized (SCT for RNA, CLR for
+(phospho-)protein), and scaled (regress out: nCount, percentage
+mitochondiral, and plate ID for RNA, and regress out: nCount and plate
+ID for protein).</p>
 <pre class="r fold-hide"><code>## fix data normalize RNA
 DefaultAssay(seu.RNA_combined.fix) &lt;- &#39;RNA&#39;
 seu.RNA_combined.fix &lt;- SCTransform(seu.RNA_combined.fix, assay = &quot;RNA&quot;, new.assay.name = &quot;SCT&quot;, vars.to.regress = c(&quot;nCount_RNA&quot;, &quot;percent.mt&quot;, &quot;plate&quot;), return.only.var.genes = FALSE, verbose = FALSE)
@@ -917,7 +1104,8 @@ seu.RNA_combined.live &lt;- NormalizeData(seu.RNA_combined.live, normalization.m
 </div>
 <div id="filtered-dataset-properties" class="section level2">
 <h2>Filtered dataset properties</h2>
-<p>Overview of the number of cells and data properties of all plates.</p>
+<p>Overview of the number of cells and data properties of all
+plates.</p>
 <div id="live-cells-rna-surface-protein-dataset" class="section level3">
 <h3>Live-cells RNA &amp; surface protein dataset</h3>
 <pre class="r"><code>seu.RNA_combined.live</code></pre>
@@ -925,7 +1113,8 @@ seu.RNA_combined.live &lt;- NormalizeData(seu.RNA_combined.live, normalization.m
 20366 features across 1433 samples within 3 assays 
 Active assay: PROT (50 features, 50 variable features)
  2 other assays present: RNA, SCT</code></pre>
-<p><strong>Table</strong> Overview of per plate properties after filtering.</p>
+<p><strong>Table</strong> Overview of per plate properties after
+filtering.</p>
 <pre class="r"><code>kable(seu.RNA_combined.live@meta.data %&gt;% 
         group_by(donor,plate) %&gt;% 
         summarise(`Number of cells` = round(n(),0),
@@ -1124,7 +1313,8 @@ P_1585
 </tr>
 </tbody>
 </table>
-<p><strong>Table</strong> Overview of per donor properties after filtering.</p>
+<p><strong>Table</strong> Overview of per donor properties after
+filtering.</p>
 <pre class="r"><code>kable(seu.RNA_combined.live@meta.data %&gt;% 
         group_by(donor) %&gt;% 
         summarise(`Number of cells` = round(n(),0),
@@ -1234,14 +1424,16 @@ D3
 </tbody>
 </table>
 </div>
-<div id="fixed-cells-intracellular-proteins-dataset" class="section level3">
+<div id="fixed-cells-intracellular-proteins-dataset"
+class="section level3">
 <h3>Fixed cells intracellular proteins dataset</h3>
 <pre class="r"><code>seu.RNA_combined.fix</code></pre>
 <pre><code>An object of class Seurat 
 10114 features across 1038 samples within 3 assays 
 Active assay: PROT (76 features, 76 variable features)
  2 other assays present: RNA, SCT</code></pre>
-<p><strong>Table</strong> Overview of per plate properties after filtering.</p>
+<p><strong>Table</strong> Overview of per plate properties after
+filtering.</p>
 <pre class="r"><code>kable(seu.RNA_combined.fix@meta.data %&gt;% 
         group_by(donor,plate) %&gt;% 
         summarise(`Number of cells` = round(n(),0),
@@ -1388,7 +1580,8 @@ P_1589
 </tr>
 </tbody>
 </table>
-<p><strong>Table</strong> Overview of per donor properties after filtering.</p>
+<p><strong>Table</strong> Overview of per donor properties after
+filtering.</p>
 <pre class="r"><code>kable(seu.RNA_combined.fix@meta.data %&gt;% 
         group_by(donor) %&gt;% 
         summarise(`Number of cells` = round(n(),0),
@@ -1478,21 +1671,24 @@ D3
 </div>
 <div id="save-dataset" class="section level2">
 <h2>Save dataset</h2>
-<p>Seurat object with filtered cells and normalized counts is stored in “output/seu.fix_norm.rds” (intracellular protein modality) and “output/seu.live_norm.rds”(RNA and surface protein modalities).</p>
+<p>Seurat object with filtered cells and normalized counts is stored in
+“output/seu.fix_norm.rds” (intracellular protein modality) and
+“output/seu.live_norm.rds”(RNA and surface protein modalities).</p>
 <pre class="r fold-show"><code>## Save Seurat objects
 saveRDS(seu.RNA_combined.fix, file = &quot;output/seu.fix_norm.rds&quot;)
 saveRDS(seu.RNA_combined.live, file = &quot;output/seu.live_norm.rds&quot;)</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
-<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
 </button>
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>R version 4.0.3 (2020-10-10)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 10 x64 (build 19042)
+Running under: Windows 10 x64 (build 19044)
 
 Matrix products: default
 
@@ -1523,7 +1719,7 @@ loaded via a namespace (and not attached):
   [7] grid_4.0.3            Rtsne_0.15            scatterpie_0.1.7     
  [10] munsell_0.5.0         ragg_1.2.0            codetools_0.2-16     
  [13] ica_1.0-2             future_1.23.0         miniUI_0.1.1.1       
- [16] withr_2.4.2           colorspace_2.0-2      GOSemSim_2.16.1      
+ [16] withr_2.4.3           colorspace_2.0-2      GOSemSim_2.16.1      
  [19] highr_0.9             rstudioapi_0.13       ROCR_1.0-11          
  [22] tensor_1.5            DOSE_3.16.0           listenv_0.8.0        
  [25] labeling_0.4.2        git2r_0.28.0          polyclip_1.10-0      
