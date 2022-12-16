@@ -11,7 +11,7 @@
 
 
 
-<title>Documentation of analysis and figures</title>
+<title>Multi-modal single-cell analysis of human antibody secreting cells</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -253,7 +253,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Multimodal phenotypic characteristics of human antibody secreting cells</a>
+      <a class="navbar-brand" href="index.html">Manuscript docs ASCs</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -301,9 +301,10 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Documentation of analysis and figures</h1>
-<h3 class="subtitle">Multi-modal single-cell analysis of human antibody
-secreting cells</h3>
+<h1 class="title toc-ignore">Multi-modal single-cell analysis of human
+antibody secreting cells</h1>
+<h3 class="subtitle">This repository contains scripts and data to
+produce the figures of the manuscript.</h3>
 
 </div>
 
@@ -332,7 +333,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-11-30
+<strong>Last updated:</strong> 2022-12-16
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -380,15 +381,15 @@ results.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomvanbuggenumMultimodalPlasmacellmanuscripttreec66af0e6377c1c47516cec618a21c7f6fedbf771targetblankc66af0ea">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomvanbuggenumMultimodalPlasmacellmanuscripttree8d88aa63fb75b96de5ed472d9b18700bdd213177targetblank8d88aa6a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/tree/c66af0e6377c1c47516cec618a21c7f6fedbf771" target="_blank">c66af0e</a>
+<a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/tree/8d88aa63fb75b96de5ed472d9b18700bdd213177" target="_blank">8d88aa6</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomvanbuggenumMultimodalPlasmacellmanuscripttreec66af0e6377c1c47516cec618a21c7f6fedbf771targetblankc66af0ea"
+id="strongRepositoryversionstrongahrefhttpsgithubcomvanbuggenumMultimodalPlasmacellmanuscripttree8d88aa63fb75b96de5ed472d9b18700bdd213177targetblank8d88aa6a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -398,7 +399,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/tree/c66af0e6377c1c47516cec618a21c7f6fedbf771" target="_blank">c66af0e</a>.
+<a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/tree/8d88aa63fb75b96de5ed472d9b18700bdd213177" target="_blank">8d88aa6</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -415,6 +416,29 @@ were generated:
 Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    output/MOFA_analysis_Donorgroup.hdf5
+    Ignored:    output/MOFA_analysis_Donorgroup.rds
+    Ignored:    output/MOFA_analysis_Donorgroup_clustered.rds
+    Ignored:    output/MOFA_analysis_Donorgroup_noIg.hdf5
+    Ignored:    output/MOFA_analysis_Donorgroup_noIg2.hdf5
+    Ignored:    output/extra plots.docx
+    Ignored:    output/seu.PROT_fix.rds
+    Ignored:    output/seu.PROT_live.rds
+    Ignored:    output/seu.RNA.rds
+    Ignored:    output/seu.fix_norm.rds
+    Ignored:    output/seu.fix_norm_cellstate.rds
+    Ignored:    output/seu.fix_norm_plasmacells.rds
+    Ignored:    output/seu.live_norm.rds
+    Ignored:    output/seu.live_norm_cellstate.rds
+    Ignored:    output/seu.live_norm_plasmacells.rds
+    Ignored:    output/seu.live_norm_plasmacells_RNA.rds
+    Ignored:    output/top-PROT-loadings_IgA.tsv
+    Ignored:    output/top-PROT-loadings_IgG.tsv
+    Ignored:    output/top-PROT-loadings_IgM.tsv
+    Ignored:    output/top-gene-loadings_IgA.tsv
+    Ignored:    output/top-gene-loadings_IgG.tsv
+    Ignored:    output/top-gene-loadings_IgM.csv
+    Ignored:    output/top-gene-loadings_IgM.tsv
 
 Untracked files:
     Untracked:  analysis/cellstate_sidetest.Rmd
@@ -429,30 +453,10 @@ Untracked files:
     Untracked:  data/genelist.plots.diffmarkers2.txt
     Untracked:  data/raw/
     Untracked:  data/supplementary/
-    Untracked:  output/MOFA_analysis_Donorgroup.hdf5
-    Untracked:  output/MOFA_analysis_Donorgroup.rds
-    Untracked:  output/MOFA_analysis_Donorgroup_clustered.rds
-    Untracked:  output/extra plots.docx
     Untracked:  output/paper_figures/
-    Untracked:  output/seu.PROT_fix.rds
-    Untracked:  output/seu.PROT_live.rds
-    Untracked:  output/seu.RNA.rds
-    Untracked:  output/seu.fix_norm.rds
-    Untracked:  output/seu.fix_norm_cellstate.rds
-    Untracked:  output/seu.fix_norm_plasmacells.rds
-    Untracked:  output/seu.live_norm.rds
-    Untracked:  output/seu.live_norm_cellstate.rds
-    Untracked:  output/seu.live_norm_plasmacells.rds
-    Untracked:  output/seu.live_norm_plasmacells_RNA.rds
-    Untracked:  output/top-PROT-loadings_IgA.tsv
-    Untracked:  output/top-PROT-loadings_IgG.tsv
-    Untracked:  output/top-PROT-loadings_IgM.tsv
-    Untracked:  output/top-gene-loadings_IgA.tsv
-    Untracked:  output/top-gene-loadings_IgG.tsv
-    Untracked:  output/top-gene-loadings_IgM.csv
-    Untracked:  output/top-gene-loadings_IgM.tsv
 
 Unstaged changes:
+    Modified:   .gitignore
     Modified:   analysis/cellstate.Rmd
     Modified:   code/load_packages.R
 
@@ -499,6 +503,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/blob/8d88aa63fb75b96de5ed472d9b18700bdd213177/analysis/index.Rmd" target="_blank">8d88aa6</a>
+</td>
+<td>
+Jessie van Buggenum
+</td>
+<td>
+2022-12-16
+</td>
+<td>
+update index and titles text
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/vanbuggenum/Multimodal-Plasmacell_manuscript/6baa7d6d81f9be39454086a7821ba6728c070cee/docs/index.html" target="_blank">6baa7d6</a>
+</td>
+<td>
+Jessie van Buggenum
+</td>
+<td>
+2022-11-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -746,14 +784,14 @@ Start workflowr project.
 </div>
 <div id="abstract" class="section level2">
 <h2>Abstract</h2>
-<p>Antibody secreting cells are key components of humoral immunity by
+<p>Antibody-secreting cells are components of humoral immunity by
 secreting antibodies and providing protection against pathogens. These
 cells can be of IgM, IgA, or IgG subclass and migrate to class-specific
-niches. Localization and rareness of these cells make it challenge to
+niches. These cells’ localisation and rareness make it challenging to
 define subclass-specific molecular hallmarks. Here, we describe how
 in-vitro differentiation of peripheral B-cells results in
-antibody-secreting cells. Using a single-cell multi-modal sequencing
-approach we find subclass-specific hallmark transcriptional profiles,
+antibody-secreting cells. We use a single-cell multi-modal sequencing
+approach to find subclass-specific hallmark transcriptional profiles,
 surface protein expression and signaling pathway activity.</p>
 </div>
 <div id="in-this-repository" class="section level2">
@@ -763,15 +801,16 @@ presented in the full manuscript:</p>
 <ul>
 <li><a href="QC.html">QC</a> processes count tables (available at <a
 href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE189953">GSE189953</a>):
-filter high quality cells; normalize and scale counts.<br />
+shows how to select high-quality cells; normalize and scale
+counts.<br />
 </li>
-<li><a href="cellstate.html">PC haracterization</a> describes
-multi-modal characterization of 11-day old differentiated B-cells to
-plasma-cells.<br />
+<li><a href="cellstate.html">PC haracterization</a> describes the
+multi-modal characterization of 11-day-old differentiated B-cells to
+antibody-secreting cells.<br />
 </li>
-<li><a href="hallmarks.html">Hallmarks Ig-classes</a> describes
+<li><a href="hallmarks.html">Hallmarks Ig-classes</a> describes the
 identification of Ig-classes and corresponding mRNA, surface protein
-levels and signalling activity: (phospho-)protein levels.</li>
+levels and signaling activity: (phospho-)protein levels.</li>
 </ul>
 </div>
 <div id="attribution" class="section level2">
@@ -780,8 +819,8 @@ levels and signalling activity: (phospho-)protein levels.</li>
 href="https://satijalab.org/seurat/index.html">Seurat</a>, <a
 href="https://biofam.github.io/MOFA2/">MOFA+</a> and <a
 href="https://github.com/jdblischak/workflowr">workflowr</a>. These
-(well documented) R-packages enable respectively extensive multi-modal
-data-analysis and reproducible code documentation.</p>
+(well-documented) R-packages enable respectively extensive multi-modal
+data analysis and reproducible code documentation.</p>
 <hr />
 <p>The content in this repository is available under the <a
 href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/blob/master/LICENSE.md">CC
