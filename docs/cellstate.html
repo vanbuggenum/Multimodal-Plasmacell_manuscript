@@ -12,7 +12,7 @@
 <meta name="author" content="vanBuggenum" />
 
 
-<title>Cellstate</title>
+<title>Identifying cell-states</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -330,7 +330,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Single-cell analysis of human IgM, IgA and IgG plama-cells</a>
+      <a class="navbar-brand" href="index.html">Manuscript docs ASCs</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -341,7 +341,7 @@ div.tocify {
   <a href="QC.html">QC</a>
 </li>
 <li>
-  <a href="cellstate.html">PC characterization</a>
+  <a href="cellstate.html">ASC characterization</a>
 </li>
 <li>
   <a href="hallmarks.html">Hallmarks Ig-classes</a>
@@ -378,7 +378,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Cellstate</h1>
+<h1 class="title toc-ignore">Identifying cell-states</h1>
 <h4 class="author">vanBuggenum</h4>
 
 </div>
@@ -386,7 +386,9 @@ div.tocify {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -395,7 +397,9 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -404,17 +408,28 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-12-06
+<strong>Last updated:</strong> 2022-12-16
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
 </p>
 <p>
-<strong>Knit directory:</strong> <code>Multimodal-Plasmacell_manuscript/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong>
+<code>Multimodal-Plasmacell_manuscript/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
 </p>
 <p>
-This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version
+1.6.2). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -423,98 +438,170 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
 </p>
 </div>
 <div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20211005code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20211005)</code> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20211005code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20211005)</code> </a>
 </p>
 </div>
-<div id="strongSeedstrongcodesetseed20211005code" class="panel-collapse collapse">
+<div id="strongSeedstrongcodesetseed20211005code"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>The command <code>set.seed(20211005)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+<p>The command <code>set.seed(20211005)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
 </p>
 </div>
-<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
 </p>
 </div>
 <div id="strongCachestrongnone" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
 </p>
 </div>
 <div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomvanbuggenumMultimodalPlasmacellmanuscripttree791178a412ef69330afc63879f4e1114581c14c3targetblank791178aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/tree/791178a412ef69330afc63879f4e1114581c14c3" target="_blank">791178a</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomvanbuggenumMultimodalPlasmacellmanuscripttree67dc2d2eb6d149f32bcec157da2e093fc9c0e923targetblank67dc2d2a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/tree/67dc2d2eb6d149f32bcec157da2e093fc9c0e923" target="_blank">67dc2d2</a>
+</a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomvanbuggenumMultimodalPlasmacellmanuscripttree791178a412ef69330afc63879f4e1114581c14c3targetblank791178aa" class="panel-collapse collapse">
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomvanbuggenumMultimodalPlasmacellmanuscripttree67dc2d2eb6d149f32bcec157da2e093fc9c0e923targetblank67dc2d2a"
+class="panel-collapse collapse">
 <div class="panel-body">
 <p>
-Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/tree/791178a412ef69330afc63879f4e1114581c14c3" target="_blank">791178a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version
+<a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/tree/67dc2d2eb6d149f32bcec157da2e093fc9c0e923" target="_blank">67dc2d2</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
 </p>
 <p>
-Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
 </p>
 <pre><code>
 Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    output/MOFA_analysis_Donorgroup.hdf5
+    Ignored:    output/MOFA_analysis_Donorgroup.rds
+    Ignored:    output/MOFA_analysis_Donorgroup_clustered.rds
+    Ignored:    output/MOFA_analysis_Donorgroup_noIg.hdf5
+    Ignored:    output/MOFA_analysis_Donorgroup_noIg2.hdf5
+    Ignored:    output/extra plots.docx
+    Ignored:    output/seu.PROT_fix.rds
+    Ignored:    output/seu.PROT_live.rds
+    Ignored:    output/seu.RNA.rds
+    Ignored:    output/seu.fix_norm.rds
+    Ignored:    output/seu.fix_norm_cellstate.rds
+    Ignored:    output/seu.fix_norm_plasmacells.rds
+    Ignored:    output/seu.live_norm.rds
+    Ignored:    output/seu.live_norm_cellstate.rds
+    Ignored:    output/seu.live_norm_plasmacells.rds
+    Ignored:    output/seu.live_norm_plasmacells_RNA.rds
+    Ignored:    output/top-PROT-loadings_IgA.tsv
+    Ignored:    output/top-PROT-loadings_IgG.tsv
+    Ignored:    output/top-PROT-loadings_IgM.tsv
+    Ignored:    output/top-gene-loadings_IgA.tsv
+    Ignored:    output/top-gene-loadings_IgG.tsv
+    Ignored:    output/top-gene-loadings_IgM.csv
+    Ignored:    output/top-gene-loadings_IgM.tsv
 
 Untracked files:
+    Untracked:  analysis/cellstate_sidetest.Rmd
+    Untracked:  analysis/hallmarks.Rmd
     Untracked:  analysis/supplements.Rmd
     Untracked:  code/Import_and_create_seuratobject.R
     Untracked:  data/Seq2Science/
@@ -522,26 +609,20 @@ Untracked files:
     Untracked:  data/azimuth_bonemarrow/
     Untracked:  data/citeseqcount_htseqcount.zip
     Untracked:  data/genelist.plots.diffmarkers.txt
+    Untracked:  data/genelist.plots.diffmarkers2.txt
     Untracked:  data/raw/
     Untracked:  data/supplementary/
     Untracked:  output/paper_figures/
-    Untracked:  output/seu.PROT_fix.rds
-    Untracked:  output/seu.PROT_live.rds
-    Untracked:  output/seu.RNA.rds
-    Untracked:  output/seu.fix_norm.rds
-    Untracked:  output/seu.fix_norm_cellstate.rds
-    Untracked:  output/seu.fix_norm_plasmacells.rds
-    Untracked:  output/seu.live_norm.rds
-    Untracked:  output/seu.live_norm_cellstate.rds
-    Untracked:  output/seu.live_norm_plasmacells.rds
-    Untracked:  output/seu.live_norm_plasmacells_RNA.rds
 
 Unstaged changes:
+    Modified:   .gitignore
     Modified:   code/load_packages.R
 
 </code></pre>
 <p>
-Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
 </p>
 </div>
 </div>
@@ -552,7 +633,12 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/cellstate.Rmd</code>) and HTML (<code>docs/cellstate.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/cellstate.Rmd</code>) and HTML
+(<code>docs/cellstate.html</code>) files. If you’ve configured a remote
+Git repository (see <code>?wflow_git_remote</code>), click on the
+hyperlinks in the table below to view the files as they were in that
+past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -576,6 +662,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/blob/67dc2d2eb6d149f32bcec157da2e093fc9c0e923/analysis/cellstate.Rmd" target="_blank">67dc2d2</a>
+</td>
+<td>
+Jessie van Buggenum
+</td>
+<td>
+2022-12-16
+</td>
+<td>
+Fig 1 and 2 and supplementary figures documentation
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/vanbuggenum/Multimodal-Plasmacell_manuscript/b6ab01be103ff76870a4281e316ddf23b5ed5f91/docs/cellstate.html" target="_blank">b6ab01b</a>
+</td>
+<td>
+jessievb
+</td>
+<td>
+2021-12-06
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -614,7 +734,11 @@ seu.live &lt;- readRDS(file = &quot;output/seu.live_norm.rds&quot;)</code></pre>
 </div>
 <div id="cell-cycle-state" class="section level2">
 <h2>Cell-cycle state</h2>
-<p>Cell-cycle scoring was performed scoring algorithm <a href="https://carmonalab.github.io/UCell/UCell_Seurat_vignette.html">UCell</a>. (For citation see (<a href="https://www.biorxiv.org/content/10.1101/2021.04.13.439670v1">this</a> preprint)</p>
+<p>Cell-cycle scoring was performed scoring algorithm <a
+href="https://carmonalab.github.io/UCell/UCell_Seurat_vignette.html">UCell</a>.
+(For citation see (<a
+href="https://www.biorxiv.org/content/10.1101/2021.04.13.439670v1">this</a>
+preprint)</p>
 <pre class="r"><code>s.genes &lt;- cc.genes.updated.2019$s.genes
 g2m.genes &lt;- cc.genes.updated.2019$g2m.genes
 
@@ -654,9 +778,6 @@ Percentage_differentiated.live &lt;- data.CC.live %&gt;% dplyr::count(Proliferat
 ## Plot percentage cycling per donor
 p.percentage.cyclinglive &lt;- ggplot(Percentage_differentiated.live, aes(x = Proliferation_state , y = pct, fill = group)) + #label = scales::percent(pct,accuracy = 0.1)
     geom_col(position = &#39;dodge&#39;) + 
-    # geom_text(position = position_dodge(width = .9),    # move to center of bars
-    #           vjust = -0.5,    # nudge above top of bar
-    #           size = 1.8) + 
     scale_y_continuous(labels = scales::percent) +
   cowplot::theme_cowplot() + 
   labs(title=&quot;~90% non-cycling cells \nacross three donors&quot;,x=&quot;&quot;, y = &quot;Percentage (%)&quot;)+
@@ -801,7 +922,9 @@ scale_fill_manual(name = &quot;Donor&quot;,values=c( &quot;#E69F00&quot;, &quot;
 </div>
 <div id="cd27igdlow" class="section level2">
 <h2>CD27+IgDlow</h2>
-<p>To determine the cultures ‘differentiation state’ CD27-high &amp; IgD-low cells are gated, representing differentiated plasmablast/cells.</p>
+<p>To determine the cultures ‘differentiation state’ CD27-high &amp;
+IgD-low cells are gated, representing differentiated
+plasmablast/cells.</p>
 <pre class="r"><code>seu.live &lt;- SetIdent(seu.live,value = &quot;CD27_IgD_state&quot;)
 
 ## RNA differential expression
@@ -864,14 +987,6 @@ p.CD27IgD.dotplot.PROTsign.neg &lt;-DotPlot(seu.live,assay = &quot;PROT&quot;, f
   theme(legend.position = &quot;right&quot;, legend.key.size = unit(2, &#39;mm&#39;)) +
   scale_y_discrete(labels = c(&quot;D1 \n&quot;,&quot;D2 \nCD27+IgD-&quot;, &quot;D3&quot;,&quot;D1 \n&quot;,&quot;D2 \nother&quot;, &quot;D3&quot;))+
     guides(size =  &quot;none&quot;,color = guide_colorbar(title = &quot;Average scaled\nexpression&quot;))
-#+guides(size = &quot;none&quot;,color = &quot;none&quot;)
-
-# 
-# p.CD27IgD.Vln.PROT.markers &lt;- VlnPlot(seu.live, assay=&quot;PROT&quot;, features = c(&quot;CD27&quot;,&quot;SLAMF7&quot;, &quot;CD44&quot;, &quot;CD45RB&quot;, &quot;LAG3&quot;), split.by = &quot;donor&quot;, group.by =  &quot;CD27_IgD_state&quot;, ncol =3, cols = c(colors.donors,colors.donors), combine = T, stack = T, flip = T) +
-#     add.textsize +
-#   theme(legend.position = &quot;right&quot;, legend.key.size = unit(2, &#39;mm&#39;)) + 
-#   labs(title=&quot;CD27+IgD express plasmablast/cell \nSurface protein markers&quot;,x=&quot;&quot;, y = &quot;Expression&quot;)  +
-#   theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
 
 
 ## Intracellular proteins
@@ -903,7 +1018,7 @@ p.CD27IgD.dotplot.PROTsign.intra.neg &lt;-DotPlot(seu.fix,assay = &quot;PROT&quo
 
 
 
-markers.forviolin &lt;- c(&quot;CD138&quot;,&quot;BLIMP1&quot;,&quot;IRF4&quot;, &quot;IRF8&quot;, &quot;XBP1&quot;, &quot;CD27&quot;)[c(&quot;CD138&quot;,&quot;BLIMP1&quot;,&quot;IRF4&quot;, &quot;IRF8&quot;, &quot;XBP1&quot;, &quot;CD27&quot;) %in% rev(rownames(markers.CD27IgD.PROT.intra))]
+markers.forviolin &lt;- c(&quot;CD138&quot;,&quot;BLIMP1&quot;,&quot;IRF4&quot;, &quot;IRF8&quot;, &quot;XBP1&quot;, &quot;CD27&quot;,&quot;CD24&quot;)[c(&quot;CD138&quot;,&quot;BLIMP1&quot;,&quot;IRF4&quot;, &quot;IRF8&quot;, &quot;XBP1&quot;, &quot;CD27&quot;,&quot;CD24&quot;) %in% rev(rownames(markers.CD27IgD.PROT.intra))]
 
 
 p.CD27IgD.Vln.PROT.markers &lt;- VlnPlot(seu.fix, assay=&quot;PROT&quot;, features = rev(c(markers.forviolin)), split.by = &quot;donor&quot;, group.by =  &quot;CD27_IgD_state&quot;, ncol =3, cols = c(colors.donors[2:3],colors.donors[2:3]), combine = T, stack = T, flip = T) +
@@ -922,43 +1037,63 @@ p.CD27IgD.dotplot.PROT.intra.markers &lt;- DotPlot(seu.fix,assay = &quot;PROT&qu
   scale_y_discrete(labels = c(&quot;D2 \nCD27+IgD-&quot;, &quot;D3&quot;,&quot;D2 \nother&quot;, &quot;D3&quot;)) +
   guides(size = &quot;none&quot;,color = guide_colorbar(title = &quot;Average \nExpression&quot;))</code></pre>
 </div>
+<div id="filter-save-seurat-dataobjects" class="section level2">
+<h2>Filter &amp; Save Seurat dataobjects</h2>
+<p>Fixed-cell dataset: (original and CD27+IgD- object )</p>
+<pre class="r"><code>message(&quot;Fixed dataset:&quot;)
+seu.fix</code></pre>
+<pre><code>An object of class Seurat 
+10114 features across 1038 samples within 3 assays 
+Active assay: PROT (76 features, 76 variable features)
+ 2 other assays present: RNA, SCT</code></pre>
+<pre class="r"><code>seu.fix.filtered &lt;- subset(seu.fix, Cellcycle_state == &quot;non-cycling&quot; &amp; CD27_IgD_state == &quot;CD27+IgD-&quot;)
+message(&quot;CD27+IgD- object:&quot;)
+seu.fix.filtered</code></pre>
+<pre><code>An object of class Seurat 
+10114 features across 940 samples within 3 assays 
+Active assay: PROT (76 features, 76 variable features)
+ 2 other assays present: RNA, SCT</code></pre>
+<p>Live-cell dataset: (original and CD27+IgD- object )</p>
+<pre class="r"><code>seu.live</code></pre>
+<pre><code>An object of class Seurat 
+20366 features across 1433 samples within 3 assays 
+Active assay: PROT (50 features, 50 variable features)
+ 2 other assays present: RNA, SCT</code></pre>
+<pre class="r"><code>seu.live.filtered &lt;- subset(seu.live, Cellcycle_state == &quot;non-cycling&quot; &amp; CD27_IgD_state == &quot;CD27+IgD-&quot;)
+
+seu.live.filtered</code></pre>
+<pre><code>An object of class Seurat 
+20366 features across 1231 samples within 3 assays 
+Active assay: PROT (50 features, 50 variable features)
+ 2 other assays present: RNA, SCT</code></pre>
+<p>Save seurat objects with all cells &amp; information on CC , CD27,
+and Ig-subclasses.</p>
+<pre class="r"><code>#saveRDS(seu.fix, &quot;output/seu.fix_norm_cellstate.rds&quot;)
+#saveRDS(seu.live, &quot;output/seu.live_norm_cellstate.rds&quot;)
+
+seu.fix &lt;- seu.fix.filtered
+seu.live &lt;- seu.live.filtered</code></pre>
+</div>
 <div id="ig-classifaction" class="section level2">
 <h2>Ig-classifaction</h2>
-<p>The supernatant of differentiated cells shows excretion of IgA and IgG antibodies, showing these cell-types should be within the population at 11 days. Using protein-measurments from antibodies against the major Ig-classes, and (in live-cell dataset) the Ig-genes, cells are clustered and represented in a UMAP.</p>
+<div id="seurat-protein-based" class="section level3">
+<h3>Seurat, protein-based</h3>
+<p>The supernatant of differentiated cells shows excretion of IgA and
+IgG antibodies, showing these cell-types should be within the population
+at 11 days. Using protein-measurements from antibodies against the major
+Ig-classes, and (in live-cell dataset) the Ig-genes, cells are clustered
+and represented in a UMAP.</p>
 <pre class="r"><code>## Run PCA on Ig proteins
 seu.fix &lt;- RunPCA(seu.fix, reduction.name = &#39;pcaIG&#39;, features = c(&quot;IgM&quot;,&quot;IgA&quot;,&quot;IgG&quot;, &quot;IgD&quot;, &quot;IgE&quot;))
 
 seu.fix &lt;- RunUMAP(seu.fix,dims = 1:4, reduction = &quot;pcaIG&quot;, reduction.name = &quot;IGUMAP&quot;)
 seu.fix &lt;- FindNeighbors(seu.fix, reduction = &quot;pcaIG&quot;,assay = &quot;PROT&quot;, dims = 1:4, graph.name = &quot;pcaIG_nn&quot;)
-seu.fix &lt;- FindClusters(seu.fix, graph.name = &quot;pcaIG_nn&quot;,  algorithm = 4,resolution = 0.2, verbose = FALSE)
+seu.fix &lt;- FindClusters(seu.fix, graph.name = &quot;pcaIG_nn&quot;,  algorithm = 3,resolution = 0.2, verbose = FALSE)
 seu.fix[[&quot;clusters_pcaIG&quot;]] &lt;- Idents(object = seu.fix)
 
 
-seu.fix &lt;- RenameIdents(object = seu.fix, `1` = &quot;IgM&quot;, `2` = &quot;IgG&quot;, `3` = &quot;IgA&quot;)
+seu.fix &lt;- RenameIdents(object = seu.fix, `0` = &quot;IgM&quot;, `1` = &quot;IgG&quot;, `2` = &quot;IgA&quot;)
 seu.fix[[&quot;clusters_pcaIG_named&quot;]] &lt;- Idents(object = seu.fix)
-
-
-p.umap.Ig.prot.fix &lt;- FeaturePlot(seu.fix, features = c(&quot;IgM&quot;,&quot;IgA&quot;,&quot;IgG&quot;),slot = &quot;scale.data&quot;, reduction = &#39;IGUMAP&#39;, max.cutoff = 2, 
-                  cols = c(&quot;lightgrey&quot;,&quot;deeppink3&quot;), ncol = 3, pt.size = 0.9)  &amp;
-  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;Scaled \ncounts&quot;) &amp;
-  theme_half_open()&amp; 
-  theme(legend.position = c(0.05,0.85), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
-  theme(axis.text.x = element_blank(),
-          axis.text.y = element_blank(),
-          text = element_text(size=7), axis.ticks = element_blank(),
-          axis.text=element_text(size=7),
-          plot.title = element_text(size=7, face = &quot;bold&quot;,hjust = 0.5))
-
-p.clusters.umap.fix &lt;- DimPlot(seu.fix, reduction = &#39;IGUMAP&#39;, label = TRUE, repel = TRUE, label.size = 2.5, cols = c(&quot;#009E73&quot;, &quot;#D55E00&quot;,&quot;#F0E442&quot;)
-)   &amp;
-  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;Clusters&quot;, title = &quot;Fixed cells clusters based on \nIg-protein marker expression&quot;) &amp;
-  theme_half_open()&amp; 
-  theme(legend.position = &quot;none&quot;, legend.key.size = unit(2, &#39;mm&#39;)) &amp;
-  theme(axis.text.x = element_blank(),
-          axis.text.y = element_blank(),
-          text = element_text(size=7), axis.ticks = element_blank(),
-          axis.text=element_text(size=7),
-          plot.title = element_text(size=6, face = &quot;bold&quot;))
 
 ## ---- live cells
 
@@ -970,39 +1105,40 @@ seu.live &lt;- RunPCA(seu.live, assay = &quot;PROT&quot;,reduction.name = &#39;p
 
 seu.live &lt;- RunUMAP(seu.live,dims = 1:4, reduction = &quot;pcaIGPROT&quot;, reduction.name = &quot;IGUMAP&quot;)
 seu.live &lt;- FindNeighbors(seu.live, reduction = &quot;pcaIGPROT&quot;,assay = &quot;PROT&quot;, dims = 1:4, graph.name = &quot;pcaIG_nn&quot;)
-seu.live &lt;- FindClusters(seu.live, graph.name = &quot;pcaIG_nn&quot;,  algorithm = 4,resolution = 0.2, verbose = FALSE)
+seu.live &lt;- FindClusters(seu.live, graph.name = &quot;pcaIG_nn&quot;,  algorithm = 3,resolution = 0.2, verbose = FALSE)
 seu.live[[&quot;clusters_pcaIG&quot;]] &lt;- Idents(object = seu.live)
 
 
-seu.live &lt;- RenameIdents(object = seu.live, `1` = &quot;IgM&quot;, `2` = &quot;IgG&quot;, `3` = &quot;IgA&quot;)
-seu.live[[&quot;clusters_pcaIG_named&quot;]] &lt;- Idents(object = seu.live)
+seu.live &lt;- RenameIdents(object = seu.live, `0` = &quot;IgM&quot;, `1` = &quot;IgG&quot;, `2` = &quot;IgA&quot;)
+seu.live[[&quot;clusters_pcaIG_named&quot;]] &lt;- Idents(object = seu.live)</code></pre>
+<pre class="r"><code>### Plots Ig-protein based clustering
+p.umap.Ig.prot.fix &lt;- FeaturePlot(seu.fix, features = c(&quot;IgM&quot;,&quot;IgA&quot;,&quot;IgG&quot;),slot = &quot;scale.data&quot;, reduction = &#39;IGUMAP&#39;, max.cutoff = 2, 
+                  cols = c(&quot;lightgrey&quot;,&quot;deeppink3&quot;), ncol = 3, pt.size = 0.9)  &amp;
+  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;Scaled \ncounts&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = c(0.85,0.85), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=7, face = &quot;bold&quot;,hjust = 0.5))
 
-
-# 
-# 
-# Ig.genes &lt;- c(&quot;IGHM&quot;, sort(grep(&quot;^IGH[MHAG][0-9]&quot;, rownames(seu.live[[&quot;SCT&quot;]]), value = T)))
-# seu.live &lt;- RunPCA(seu.live,assay = &quot;SCT&quot;, reduction.name = &#39;pcaIGRNA&#39;, features = Ig.genes)
-# 
-# seu.live &lt;- FindMultiModalNeighbors(
-#   seu.live, reduction.list = list(&quot;pcaIGRNA&quot;, &quot;pcaIGPROT&quot;),
-#   dims.list = list(1:5, 1:4), modality.weight.name = &quot;RNA.weight&quot;
-# )
-# 
-# seu.live &lt;- RunUMAP(seu.live, nn.name = &quot;weighted.nn&quot;, reduction.name = &quot;wnn.umap&quot;, reduction.key = &quot;wnnUMAP_&quot;)
-# seu.live &lt;- FindClusters(seu.live, graph.name = &quot;wsnn&quot;, algorithm = 4, resolution = 0.2, verbose = FALSE)
-# seu.live[[&quot;clusters_wnn&quot;]] &lt;- Idents(object = seu.live)
-# 
-# 
-# seu.live &lt;- RenameIdents(object = seu.live, `1` = &quot;IgM&quot;, `2` = &quot;IgG&quot;, `3` = &quot;IgA&quot;, `4` = &quot;low Ig \ngenes&quot;)
-# seu.live[[&quot;clusters_wnnIG_named&quot;]] &lt;- Idents(object = seu.live)
-# 
-
+p.clusters.umap.fix &lt;- DimPlot(seu.fix, reduction = &#39;IGUMAP&#39;,group.by =&quot;clusters_pcaIG_named&quot; , label = TRUE, repel = TRUE, label.size = 2.5, cols = c(&quot;#009E73&quot;, &quot;#D55E00&quot;,&quot;#F0E442&quot;)
+)   &amp;
+  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;Clusters&quot;, title = &quot;Fixed cells clusters based on \nIg-protein marker expression&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = &quot;none&quot;, legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=6, face = &quot;bold&quot;))
 
 p.umap.Ig.prot.live &lt;- FeaturePlot(seu.live, features = c(&quot;IgM&quot;,&quot;IgA&quot;,&quot;IgG&quot;),slot = &quot;scale.data&quot;, reduction = &#39;IGUMAP&#39;, max.cutoff = 2, 
                   cols = c(&quot;lightgrey&quot;,&quot;deeppink3&quot;), ncol = 3, pt.size = 0.5)  &amp;
   labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;&quot;) &amp;
   theme_half_open()&amp; 
-  theme(legend.position = c(0.85,0.26), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(legend.position = c(0.85,0.95), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
   theme(axis.text.x = element_blank(),
           axis.text.y = element_blank(),
           text = element_text(size=7), axis.ticks = element_blank(),
@@ -1013,7 +1149,7 @@ p.umap.Ig.RNA.live &lt;- FeaturePlot(seu.live, features = c(&quot;IGHM&quot;,&qu
                   cols = c(&quot;lightgrey&quot;,&quot;dodgerblue3&quot;), ncol = 3, pt.size =  0.5)  &amp;
   labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;&quot;) &amp;
   theme_half_open()&amp; 
-  theme(legend.position = c(0.85,0.26), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(legend.position = c(0.85,0.95), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
   theme(axis.text.x = element_blank(),
           axis.text.y = element_blank(),
           text = element_text(size=7), axis.ticks = element_blank(),
@@ -1034,50 +1170,476 @@ p.clusters.umap.live &lt;- DimPlot(seu.live, reduction = &#39;IGUMAP&#39;, label
 p.donor.umap.live &lt;- DimPlot(seu.live, reduction = &#39;IGUMAP&#39;, group.by = &quot;donor&quot;,label = F, pt.size =  0.5,repel = TRUE, label.size = 2.5, cols = colors.donors)   &amp;
   labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;Donor&quot;, title = &quot;Ig-subtypes classified across \nthree donors&quot;) &amp;
   theme_half_open()&amp; 
-  theme(legend.position = c(0.85, 0.24), legend.key.size = unit(1, &#39;mm&#39;), legend.text =element_text(size=6), legend.title =element_text(size=7)  ) &amp;
+  theme(legend.position = c(0.85, 0.95), legend.key.size = unit(1, &#39;mm&#39;), legend.text =element_text(size=6), legend.title =element_text(size=7)  ) &amp;
   theme(axis.text.x = element_blank(),
           axis.text.y = element_blank(),
           text = element_text(size=7), axis.ticks = element_blank(),
           axis.text=element_text(size=7),
           plot.title = element_text(size=6, face = &quot;bold&quot;))</code></pre>
+<pre class="r"><code>fix.meta &lt;- seu.fix.filtered@meta.data %&gt;%
+  mutate(cell = rownames(seu.fix.filtered@meta.data),
+         dataset = &quot;fix&quot;) 
+live.meta &lt;- seu.live.filtered@meta.data%&gt;%
+  mutate(cell = rownames(seu.live.filtered@meta.data),
+         dataset = &quot;live&quot;)</code></pre>
+</div>
+<div id="mofa-analysis" class="section level3">
+<h3>MOFA analysis</h3>
+<pre class="r"><code>library(MOFA2)</code></pre>
+<pre class="r"><code>fix.DT.RNA &lt;- seu.fix.filtered@assays$SCT@scale.data[rownames(seu.fix.filtered@assays$SCT@scale.data) %chin% VariableFeatures(seu.fix.filtered,assay = &quot;SCT&quot;),]
+fix.var.genes &lt;- rownames(fix.DT.RNA)
+
+fix.DT.PROT &lt;- seu.fix.filtered@assays$PROT@scale.data[rownames(seu.fix.filtered@assays$PROT@scale.data) %chin% VariableFeatures(seu.fix.filtered,assay = &quot;PROT&quot;),]
+fix.var.prot &lt;- rownames(fix.DT.PROT)
+
+live.DT.RNA &lt;- seu.live.filtered@assays$SCT@scale.data[rownames(seu.live.filtered@assays$SCT@scale.data) %chin% VariableFeatures(seu.live.filtered,assay = &quot;SCT&quot;),]
+live.var.genes &lt;- rownames(live.DT.RNA)
+
+live.DT.PROT &lt;- seu.live.filtered@assays$PROT@scale.data[rownames(seu.live.filtered@assays$PROT@scale.data) %chin% VariableFeatures(seu.live.filtered,assay = &quot;PROT&quot;),]
+live.var.prot &lt;- rownames(live.DT.PROT)
+
+fix.meta &lt;- seu.fix.filtered@meta.data %&gt;%
+  mutate(cell = rownames(seu.fix.filtered@meta.data),
+         dataset = &quot;fix&quot;) 
+live.meta &lt;- seu.live.filtered@meta.data%&gt;%
+  mutate(cell = rownames(seu.live.filtered@meta.data),
+         dataset = &quot;live&quot;)
+
+## 
+common.proteins &lt;- c(&quot;TACI&quot;,&quot;CD70&quot;,&quot;IgD&quot;,&quot;CD86&quot;,&quot;CD5&quot;,&quot;PDL1&quot;,&quot;PDL2&quot;,&quot;CD21&quot;,&quot;IgM&quot;,&quot;CD11b&quot;,&quot;CD53&quot;,&quot;CD45&quot;,&quot;CD80&quot;,&quot;IgG&quot;,&quot;IgA&quot;,&quot;IgE&quot;,&quot;BAFFR&quot;)
+
+fix.DT.RNA &lt;- data.table(fix.DT.RNA) %&gt;%
+  mutate(gene = fix.var.genes)
+
+fix.DT.PROT &lt;- data.table(fix.DT.PROT) %&gt;%
+  mutate(gene = fix.var.prot)
+fix.DT.PROT.unique &lt;- fix.DT.PROT[!(fix.var.prot %chin% common.proteins),] %&gt;%
+  mutate(gene = paste0(gene, &quot;_f&quot;))
+
+fix.DT.PROT.common &lt;- fix.DT.PROT[(fix.var.prot %chin% common.proteins),]
+fix.DT.PROT.rename &lt;- bind_rows(fix.DT.PROT.unique,fix.DT.PROT.common)
+#rownames(fix.DT.PROT.rename) &lt;- fix.DT.PROT.rename$gene
+
+live.DT.RNA &lt;- data.table(live.DT.RNA) %&gt;%
+  mutate(gene = live.var.genes)
+
+live.DT.PROT &lt;- data.table(live.DT.PROT) %&gt;%
+  mutate(gene = live.var.prot)
+live.DT.PROT.unique &lt;- live.DT.PROT[!(live.var.prot %chin% common.proteins),] %&gt;%
+  mutate(gene = paste0(gene, &quot;_l&quot;))
+live.DT.PROT.common &lt;- live.DT.PROT[(live.var.prot %chin% common.proteins),]
+live.DT.PROT.rename &lt;- bind_rows(live.DT.PROT.unique,live.DT.PROT.common)
+## merge data
+meta.all &lt;- merge.data.table(x = fix.meta, y=live.meta, all = TRUE)
+meta.all$sample &lt;- meta.all$cell
+meta.all$group &lt;- meta.all$donor
+
+RNA.all &lt;- merge.data.table(x = fix.DT.RNA, y=live.DT.RNA, all = TRUE)
+rownames(RNA.all) &lt;- RNA.all$gene
+RNA.all &lt;- RNA.all[,gene:=NULL]
+
+PROT.all &lt;- merge.data.table(x = fix.DT.PROT.rename, y=live.DT.PROT.rename, all = TRUE)
+
+rownames(PROT.all) &lt;- PROT.all$gene
+PROT.all &lt;- PROT.all[,gene:=NULL]
+
+RNA.live.only &lt;- RNA.all[rownames(RNA.all) %chin% VariableFeatures(seu.live.filtered, assay = &quot;SCT&quot;),]
+genes.RNA.live.only &lt;- rownames(RNA.all)[rownames(RNA.all) %chin% VariableFeatures(seu.live.filtered, assay = &quot;SCT&quot;)]
+RNA.live.only &lt;- as.matrix(RNA.live.only)
+#genes.RNA.live.only &lt;- tolower(genes.RNA.live.only)
+rownames(RNA.live.only) &lt;- genes.RNA.live.only
+#RNA.live.only[,c(which(meta.all$dataset== &quot;fix&quot;))] &lt;- NA #?
+
+## split data tables
+
+### PROT
+
+PROT.common &lt;- PROT.all[rownames(PROT.all) %chin% common.proteins,]
+list.common.prot &lt;- rownames(PROT.all)[rownames(PROT.all) %chin% common.proteins]
+PROT.common &lt;- as.matrix(PROT.common, rownames.value    = list.common.prot)
+#rownames(PROT.common) &lt;- paste0(rownames(PROT.common),&quot;_PROT&quot;)
+#PROT.IG &lt;- PROT.all[rownames(PROT.all) %chin% c(&quot;IgA&quot;, &quot;IgM&quot;, &quot;IgG&quot;, &quot;IgD&quot;, &quot;IgE&quot;),]
+#list.IG.prot &lt;- rownames(PROT.all)[rownames(PROT.all) %chin% c(&quot;IgA&quot;, &quot;IgM&quot;, &quot;IgG&quot;, &quot;IgD&quot;, &quot;IgE&quot;)]
+#PROT.IG &lt;- as.matrix(PROT.IG, rownames.value   = list.IG.prot)
+
+PROT.fix &lt;- PROT.all[c(rownames(PROT.all) %chin% fix.DT.PROT.unique$gene),]
+list.fix.prot &lt;-rownames(PROT.all)[c(rownames(PROT.all) %chin% fix.DT.PROT.unique$gene)]
+PROT.fix &lt;- as.matrix(PROT.fix, rownames.value  = list.fix.prot)
+#rownames(PROT.fix) &lt;- paste0(rownames(PROT.fix),&quot;_PROT&quot;)
+
+PROT.live &lt;- PROT.all[c(rownames(PROT.all) %chin% live.DT.PROT.unique$gene) ,]
+list.live.prot &lt;-  rownames(PROT.all)[c(rownames(PROT.all) %chin% live.DT.PROT.unique$gene) ]
+PROT.live &lt;- as.matrix(PROT.live, rownames.value    = list.live.prot)
+
+
+### RNA 
+
+RNA.common &lt;- RNA.all[rownames(RNA.all) %chin% rownames(seu.fix.filtered[[&quot;SCT&quot;]])[rownames(seu.fix.filtered[[&quot;SCT&quot;]]) %chin% rownames(seu.live.filtered[[&quot;SCT&quot;]])],]
+list.common.RNA &lt;- rownames(RNA.all)[rownames(RNA.all) %chin% rownames(seu.fix.filtered[[&quot;SCT&quot;]])[rownames(seu.fix.filtered[[&quot;SCT&quot;]]) %chin% rownames(seu.live.filtered[[&quot;SCT&quot;]])]]
+list.common.RNA &lt;- tolower(list.common.RNA)
+RNA.common &lt;- as.matrix(RNA.common, rownames.value  = list.common.RNA)
+
+#RNA.IG &lt;- RNA.all[rownames(RNA.all) %chin% c(&quot;IgA&quot;, &quot;IgM&quot;, &quot;IgG&quot;, &quot;IgD&quot;, &quot;IgE&quot;),]
+#list.IG.RNA &lt;- rownames(RNA.all)[rownames(RNA.all) %chin% c(&quot;IgA&quot;, &quot;IgM&quot;, &quot;IgG&quot;, &quot;IgD&quot;, &quot;IgE&quot;)]
+#RNA.IG &lt;- as.matrix(RNA.IG, rownames.value = list.IG.RNA)
+
+RNA.fix &lt;- RNA.all[!c(rownames(RNA.all) %chin% list.common.RNA) &amp; rownames(RNA.all) %chin% rownames(seu.fix.filtered[[&quot;SCT&quot;]]),]
+list.fix.RNA &lt;-rownames(RNA.all)[!c(rownames(RNA.all) %chin% list.common.RNA) &amp; rownames(RNA.all) %chin% rownames(seu.fix.filtered[[&quot;SCT&quot;]])]
+list.fix.RNA &lt;- tolower(list.fix.RNA)
+RNA.fix &lt;- as.matrix(RNA.fix, rownames.value    = list.fix.RNA)
+
+RNA.live &lt;- RNA.all[!c(rownames(RNA.all) %chin% list.common.RNA) &amp; !c(rownames(RNA.all) %chin% list.fix.RNA) ,]
+list.live.RNA &lt;-  rownames(RNA.all)[!c(rownames(RNA.all) %chin% list.common.RNA) &amp; !c(rownames(RNA.all) %chin% list.fix.RNA) ]
+#list.live.RNA &lt;- tolower(list.live.RNA)
+RNA.live &lt;- as.matrix(RNA.live, rownames.value  = list.live.RNA)
+
+###
+all.features &lt;- c(rownames(RNA.live.only),rownames(PROT.common), rownames(PROT.live), rownames(PROT.fix))
+duplicated.features &lt;- all.features[duplicated(all.features)]
+
+RNA.live.only &lt;- data.table(RNA.live.only) %&gt;%
+  mutate(gene = rownames(RNA.live.only)) 
+
+rownames.rna.live.only &lt;- RNA.live.only$gene
+RNA.live.only &lt;- RNA.live.only %&gt;%
+  dplyr::select(-c(&quot;gene&quot;))
+RNA.live.only &lt;- as.matrix(RNA.live.only)
+#genes.RNA.live.only &lt;- tolower(genes.RNA.live.only)
+rownames(RNA.live.only) &lt;- rownames.rna.live.only
+
+all.features &lt;- c(rownames(RNA.live.only),rownames(PROT.common), rownames(PROT.live), rownames(PROT.fix))
+duplicated.features &lt;- all.features[duplicated(all.features)]</code></pre>
+<pre class="r"><code>myfiles &lt;- list.files(path=&quot;output/&quot;, pattern = &quot;.rds$&quot;)
+
+if(&quot;MOFA_analysis_Donorgroup.rds&quot; %in%  myfiles){mofa &lt;- readRDS(&quot;output/MOFA_analysis_Donorgroup.rds&quot;)} else { #If so, read object, else do:
+     
+      mofa &lt;- create_mofa(data = list(RNA = RNA.live.only,  PROT.common = PROT.common,PROT.live = PROT.live, PROT.fix = PROT.fix ), groups = meta.all$group)
+
+      # Default settings used (try 15 factors, excludes all non-informative factors)
+      data_opts &lt;- get_default_data_options(mofa)
+      model_opts &lt;- get_default_model_options(mofa)
+      train_opts &lt;- get_default_training_options(mofa)
+      train_opts$seed &lt;- 42 # use same seed for reproducibility
+      mofa &lt;- prepare_mofa(
+        object = mofa,
+        data_options = data_opts,
+        model_options = model_opts,
+        training_options = train_opts
+        )
+
+    mofa &lt;- run_mofa(mofa, outfile = &quot;output/MOFA_analysis_Donorgroup.hdf5&quot;, use_basilisk = TRUE)
+    mofa &lt;- run_umap(mofa)
+    samples_metadata(mofa) &lt;- meta.all
+    #saveRDS(mofa, file= &quot;output/MOFA_analysis_Donorgroup.rds&quot;)
+  
+}
+mofa</code></pre>
+<pre><code>Trained MOFA with the following characteristics: 
+ Number of views: 4 
+ Views names: RNA PROT.common PROT.live PROT.fix 
+ Number of features (per view): 3000 17 33 59 
+ Number of groups: 3 
+ Groups names: D1 D2 D3 
+ Number of samples (per group): 433 871 867 
+ Number of factors: 9 </code></pre>
+<div id="mofa-description" class="section level4">
+<h4>MOFA description</h4>
+<pre class="r"><code>p.mofaoverview.input &lt;- plot_data_overview(mofa)
+
+## Variance per factor
+p.variance.perfactor.all &lt;- plot_variance_explained(mofa, x=&quot;view&quot;, y=&quot;factor&quot;) +
+    labs(title = &quot;Variance explained by each factor per modality&quot;)  +
+  RotatedAxis()
+
+## variance total
+p.variance.total &lt;- plot_variance_explained(mofa, x=&quot;view&quot;, y=&quot;factor&quot;, plot_total = T)
+# 
+p.variance.total &lt;- plot_variance_explained(mofa, x=&quot;group&quot;, y=&quot;factor&quot;, plot_total = T)
+p.variance.total &lt;- p.variance.total[[2]] +
+  add.textsize +
+  labs(title = &quot;Total variance per modality&quot;) +
+  geom_text(aes(label=round(R2,1)), vjust=1.6, color=&quot;white&quot;, size=2.5) +
+  theme_classic()+
+  RotatedAxis()
+
+factors.selected &lt;- paste0(&quot;Factor&quot;,1:5)
+
+plot.rank.PROT &lt;- plot_weights(mofa, 
+  view = &quot;PROT.common&quot;, 
+  factors = factors.selected, 
+  nfeatures = 10, 
+  text_size =3
+) +   
+  labs(title = &quot;Top 10  Common Protein loadings per factor&quot;) +
+  theme(axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()
+)</code></pre>
+<pre class="r"><code>p.factors.Igclasses.PROT&lt;- plot_factors(mofa, 
+  factors = c(1:2),
+  color_by = &quot;IgM&quot;,dot_size = 1.2
+) +
+  labs(title=&quot;MOFA factor 1 &amp; 2 distinguish Ig-classes \nProtein expression&quot;)+
+  plot_factors(mofa, 
+  factors =c(1:2),
+  color_by = &quot;IgA&quot;,dot_size = 1.2
+)+
+  plot_factors(mofa, 
+  factors = c(1:2),
+  color_by = &quot;IgG&quot;,dot_size = 1.2
+) &amp;
+    add.textsize &amp;  
+  labs(x = &quot;Factor 1&quot;, y = &quot;Factor 2&quot;, color = &quot;Scaled \ncounts&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = c(0.85,0.95), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=7, face = &quot;bold&quot;,hjust = 0)) &amp;
+  scale_fill_gradient(low = &quot;white&quot;, high = &quot;deeppink3&quot;)
+
+p.factors.Igclasses.mRNA &lt;- plot_factors(mofa, 
+  factors =c(1:2),
+  color_by = &quot;IGHM&quot;,dot_size = 1.2, show_missing = F,alpha = 0.5
+) +labs(title=&quot;mRNA expression&quot;)+
+  plot_factors(mofa, 
+  factors = c(1:2),
+  color_by = &quot;IGHA1&quot;,dot_size = 1.2, show_missing = F,alpha = 0.5
+) +
+  plot_factors(mofa, 
+  factors =c(1:2),
+  color_by = &quot;IGHG1&quot;,dot_size = 1.2, show_missing = F,alpha = 0.5
+) &amp;
+    add.textsize &amp;  
+  labs(x = &quot;Factor 1&quot;, y = &quot;Factor 2&quot;, color = &quot;Scaled \ncounts&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = c(0.85,0.95), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=7, face = &quot;bold&quot;,hjust = 0))  &amp;
+  scale_fill_gradient(low = &quot;white&quot;, high = &quot;dodgerblue3&quot;)</code></pre>
+</div>
+<div id="clustering-ig-classes" class="section level4">
+<h4>Clustering Ig-classes</h4>
+<pre class="r"><code>clusters &lt;- cluster_samples(mofa, k=3, factors=c(1,2) )
+
+meta.all.cluster &lt;-  meta.all[,] %&gt;% 
+  left_join(data.frame(sample = names(clusters$cluster), cluster = clusters$cluster))
+meta.all.cluster$cluster &lt;- as.factor(meta.all.cluster$cluster)
+samples_metadata(mofa) &lt;-meta.all.cluster</code></pre>
+<pre class="r"><code>clustermeta &lt;- mofa@samples_metadata %&gt;%
+  mutate(IgClass = ifelse(cluster == &quot;1&quot;, &quot;IgM&quot;, ifelse(cluster == &quot;3&quot;, &quot;IgA&quot;, &quot;IgG&quot;)))
+
+samples_metadata(mofa) &lt;- clustermeta
+
+Percentage_cluster &lt;- clustermeta %&gt;% dplyr::count(IgClass = factor(IgClass),group = factor(donor)) %&gt;% 
+  group_by(group)%&gt;%
+    mutate(pct = prop.table(n)) 
+
+p.percentages.Igclasses.MOFAclusters &lt;- ggplot(Percentage_cluster, aes(x = IgClass , y = pct, fill = group, label = scales::percent(pct,accuracy = 0.1))) + 
+    geom_col(position = &#39;dodge&#39;) + 
+    geom_text(position = position_dodge(width = .9),    # move to center of bars
+              vjust = -0.5,    # nudge above top of bar
+              size = 1.8) + 
+    scale_y_continuous(labels = scales::percent) +
+  cowplot::theme_cowplot() + 
+  labs(title=&quot;Percentage Ig-class&quot;,x=&quot;&quot;, y = &quot;Percentage (%)&quot;)+
+  scale_x_discrete(labels = c(&quot;1&quot; = &quot;IgG&quot;, &quot;2&quot; ,&quot;3&quot;)) +
+scale_color_manual(&quot;Donor&quot;, values=c(&quot;#999999&quot;, &quot;#E69F00&quot;, &quot;#56B4E9&quot;))+
+scale_fill_manual(&quot;Donor&quot;,values=c(&quot;#999999&quot;, &quot;#E69F00&quot;, &quot;#56B4E9&quot;))+
+  add.textsize</code></pre>
+<pre class="r"><code>p.MOFA.factors.dataset &lt;- plot_factors(mofa, 
+  factors = c(1:2),
+  color_by = &quot;dataset&quot;,
+  alpha = 0.8,
+  dot_size = 1.2
+) +
+  labs(title = &quot;MOFA analysis integrates \nthe two datasets&quot;) +
+scale_fill_manual(&quot;Dataset&quot;,values=c(&quot;lightgrey&quot;, &quot;black&quot;)) &amp;
+    add.textsize &amp;  
+  labs(x = &quot;Factor 1&quot;, y = &quot;Factor 2&quot;, color = &quot;Scaled \ncounts&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = c(0.85,0.95), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=7, face = &quot;bold&quot;,hjust = 0)) 
+  
+p.MOFA.factors.donors &lt;- plot_factors(mofa, 
+  factors = c(1:2),
+  color_by = &quot;donor&quot;,
+  alpha = 0.8,
+  dot_size = 1.2
+) +labs(title = &quot;MOFA factors are computed \nacross three donors&quot;) +
+scale_fill_manual(&quot;Donor&quot;,values=colors.donors) &amp;
+    add.textsize &amp;  
+  labs(x = &quot;Factor 1&quot;, y = &quot;Factor 2&quot;, color = &quot;Donor&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = c(0.85,0.95), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=7, face = &quot;bold&quot;,hjust = 0)) 
+
+
+p.MOFA.factors.cluster &lt;-  plot_factors(mofa, 
+   factors =c(1:2),
+  color_by = &quot;IgClass&quot;,
+  dot_size = 1.2
+) +labs(title = &quot;k-means clustering on Factor 1 &amp; 2&quot;) +
+scale_fill_manual(&quot;Cluster&quot;,values= colors.clusters) &amp;
+  labs(x = &quot;Factor 1&quot;, y = &quot;Factor 2&quot;, color = &quot;Donor&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = c(0.85,0.95), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=10), axis.ticks = element_blank(),
+          axis.text=element_text(size=10),
+          plot.title = element_text(size=10, face = &quot;bold&quot;,hjust = 0)) </code></pre>
+<pre class="r"><code>p.loadings.scatter &lt;- plot_weights_scatter(mofa, factors = c(1,2), view = &quot;PROT.common&quot;)+
+  ggrepel::geom_text_repel(aes(x=x, y=y, label=feature), size=2.5, max.overlaps = 10)+
+   coord_cartesian(xlim =c(-0.5,0.5), ylim = c(-0.5,0.5)) +
+
+plot_weights_scatter(mofa, factors = c(1,2), view = &quot;PROT.fix&quot;)+
+  ggrepel::geom_text_repel(aes(x=x, y=y, label=feature), size=2.5, max.overlaps = 10)+
+   coord_cartesian(xlim =c(-0.6,0.6), ylim = c(-0.6,0.6)) +
+
+plot_weights_scatter(mofa, factors = c(1,2), view = &quot;PROT.live&quot;)+
+  ggrepel::geom_text_repel(aes(x=x, y=y, label=feature), size=2.5, max.overlaps = 10) +
+
+plot_weights_scatter(mofa, factors = c(1,2), view = &quot;RNA&quot;)+
+  ggrepel::geom_text_repel(aes(x=x, y=y, label=feature), size=2, max.overlaps =20) +
+   coord_cartesian(xlim =c(-0.002,0.002), ylim = c(-0.002,0.002)) &amp;
+  add.textsize
+
+p.topweights.positive &lt;- plot_top_weights(mofa, factors = c(1,2), sign = &quot;positive&quot;, view = &quot;RNA&quot;, nfeatures = 35) +
+  plot_top_weights(mofa, factors = c(1,2), sign = &quot;positive&quot;, view = &quot;PROT.common&quot;) /
+  plot_top_weights(mofa, factors =c(1,2), sign = &quot;positive&quot;, view = &quot;PROT.fix&quot;)/
+  plot_top_weights(mofa, factors = c(1,2), sign = &quot;positive&quot;, view = &quot;PROT.live&quot;) &amp;
+  add.textsize
+
+p.topweights.negative &lt;- plot_top_weights(mofa, factors = c(1,2), sign = &quot;negative&quot;, view = &quot;RNA&quot;, nfeatures = 35) +
+  plot_top_weights(mofa, factors = c(1,2), sign = &quot;negative&quot;, view = &quot;PROT.common&quot;) /
+  plot_top_weights(mofa, factors = c(1,2), sign = &quot;negative&quot;, view = &quot;PROT.fix&quot;)/
+  plot_top_weights(mofa, factors = c(1,2), sign = &quot;negative&quot;, view = &quot;PROT.live&quot;) &amp;
+  add.textsize
+
+p.MOFA.factors.clusters &lt;- plot_factors(mofa, 
+  factors = c(1:2),
+  color_by = &quot;dataset&quot;,
+  alpha = 0.5,
+  dot_size = 1.2
+) +
+  scale_color_manual(&quot;Dataset&quot;, values=c(&quot;yellow&quot;, &quot;blue&quot;))+
+  labs(title = &quot;MOFA factors integrate two \n datasets across donors&quot;) +
+scale_fill_manual(&quot;Donor&quot;,values=c(&quot;yellow&quot;, &quot;blue&quot;)) +
+  
+plot_factors(mofa, 
+  factors = c(1:2),
+  color_by = &quot;donor&quot;,
+  alpha = 0.8,
+  dot_size = 1.2
+) +scale_color_manual(&quot;Donor&quot;, values=c(&quot;#999999&quot;, &quot;#E69F00&quot;, &quot;#56B4E9&quot;))+
+  labs(title = &quot;Donors overlab (no batch/donor effects)&quot;) +
+scale_fill_manual(&quot;Donor&quot;,values=c(&quot;#999999&quot;, &quot;#E69F00&quot;, &quot;#56B4E9&quot;)) +
+  plot_factors(mofa, 
+   factors =c(1:2),
+  color_by = &quot;IgClass&quot;,
+  dot_size = 1.2
+) +
+  labs(title = &quot;K-means clustering on Factor 1&amp;2&quot;)+ scale_color_manual(&quot;Ig-class&quot;, values=c(&quot;#009E73&quot;, &quot;#D55E00&quot;, &quot;#CC79A7&quot;))+
+scale_fill_manual(&quot;Ig-class&quot;,values=c(c(&quot;#009E73&quot;, &quot;#D55E00&quot;, &quot;#CC79A7&quot;))) &amp; add.textsize</code></pre>
+</div>
+<div id="add-clusters-factors-to-seurat-object" class="section level4">
+<h4>Add clusters &amp; Factors to Seurat object</h4>
+<pre class="r"><code>fix.meta2 &lt;- fix.meta %&gt;%
+  mutate(sample_cell = rownames(fix.meta))
+
+clustermeta2 &lt;- clustermeta %&gt;%
+  mutate(sample_cell = sample) %&gt;%
+  dplyr::select(c(sample_cell,IgClass, clusterMOFA = cluster))
+
+factorvalues &lt;- get_factors(mofa,factors = c(1:2),as.data.frame = TRUE )
+
+factorvalues &lt;- factorvalues %&gt;%
+  dplyr::select(-group)%&gt;%
+  spread(factor,value)%&gt;%
+  mutate(sample_cell = sample) %&gt;%
+  dplyr::select(c(sample_cell,Factor1, Factor2))
+
+fix.meta.new &lt;- left_join(fix.meta2, clustermeta2)
+fix.meta.new &lt;- left_join(fix.meta.new,factorvalues)
+rownames(fix.meta.new) &lt;- fix.meta.new$sample_cell
+seu.fix &lt;- AddMetaData(seu.fix, fix.meta.new)
+seu.fix &lt;- SetIdent(seu.fix,value = &quot;IgClass&quot;)
+Idents(seu.fix) &lt;- factor(x = Idents(seu.fix), levels = c(&quot;IgM&quot;, &quot;IgG&quot;, &quot;IgA&quot;))</code></pre>
+<pre class="r"><code>live.meta2 &lt;- live.meta %&gt;%
+  mutate(sample_cell = rownames(live.meta))
+
+clustermeta2 &lt;- clustermeta %&gt;%
+  mutate(sample_cell = sample) %&gt;%
+  dplyr::select(c(sample_cell,IgClass))
+
+factorvalues &lt;- get_factors(mofa,factors = c(1:2),as.data.frame = TRUE )
+
+factorvalues &lt;- factorvalues %&gt;%
+  dplyr::select(-group)%&gt;%
+  spread(factor,value)%&gt;%
+  mutate(sample_cell = sample) %&gt;%
+  dplyr::select(c(sample_cell,Factor1, Factor2))
+
+live.meta.new &lt;- left_join(live.meta2, clustermeta2)
+live.meta.new &lt;- left_join(live.meta.new,factorvalues)
+rownames(live.meta.new) &lt;- live.meta.new$sample_cell
+seu.live &lt;- AddMetaData(seu.live, live.meta.new)
+seu.live &lt;- SetIdent(seu.live,value = &quot;IgClass&quot;)
+Idents(seu.live) &lt;- factor(x = Idents(seu.live), levels = c(&quot;IgM&quot;, &quot;IgG&quot;, &quot;IgA&quot;))</code></pre>
+</div>
+</div>
+</div>
+<div id="figure-1" class="section level2">
+<h2>Figure 1</h2>
+<pre class="r"><code>fig.1.row1 &lt;- plot_grid(p.CCscore.MKI67.live, 
+                        p.CCscore.pRb,
+                        p.percentage.cyclinglive,
+                     labels = panellabels[4:6], label_size = 10, ncol = 3, rel_widths = c(1.2,1.2,0.9))
+
+fig.1.row2 &lt;- plot_grid(p.scatter.CD27.IgD.live,
+                        p.CD27IgD.dotplot.PROT.intra.markers,
+                        p.CD27IgD.Vln.gene.markers,
+                     labels = panellabels[7:9], label_size = 10, ncol = 3, rel_widths = c(1.2,1.2,0.9))
+
+
+Fig.1.full &lt;- plot_grid(fig.1.row1, fig.1.row2, labels = &quot;&quot;, label_size = 10, ncol = 1, rel_heights = c(1,1))
+
+# #ggsave(Fig.1.full, filename = &quot;output/paper_figures/Fig1D-I.eps&quot;, width = 177, height = 120, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
+# #ggsave(Fig.1.full, filename = &quot;output/paper_figures/Fig1D-I.TIFF&quot;, width = 177, height = 120, units = &quot;mm&quot;,  dpi = 300)</code></pre>
+<pre class="r"><code>Fig.1.full</code></pre>
+<p><img src="figure/cellstate.Rmd/Figure1-1.png" width="691.2" style="display: block; margin: auto;" /></p>
 </div>
 <div id="figure-2" class="section level2">
 <h2>Figure 2</h2>
-<pre class="r"><code>fig.2.row1 &lt;- plot_grid(p.CCscore.MKI67.live, 
-                        p.CCscore.pRb,
-                        p.percentage.cyclinglive,
-                     labels = panellabels[1:3], label_size = 10, ncol = 3, rel_widths = c(1.2,1.2,0.9))
+<pre class="r"><code>fig.2.row1 &lt;- plot_grid( p.factors.Igclasses.PROT,p.MOFA.factors.dataset, labels = panellabels[c(1,2)], label_size = 10, rel_widths = c(2.1,0.9))
 
-fig.2.row2 &lt;- plot_grid(p.scatter.CD27.IgD.live,
-                        p.CD27IgD.dotplot.PROT.intra.markers,
-                        p.CD27IgD.Vln.gene.markers,
-                     labels = panellabels[4:6], label_size = 10, ncol = 3, rel_widths = c(1.2,1.2,0.9))
+fig.2.row2 &lt;- plot_grid( p.factors.Igclasses.mRNA,p.MOFA.factors.donors,labels = c(&quot;&quot;, panellabels[3]), label_size = 10,
+          rel_widths = c(2.1,0.9))
 
 
-Fig.2.full &lt;- plot_grid(fig.2.row1, fig.2.row2, labels = &quot;&quot;, label_size = 10, ncol = 1, rel_heights = c(1,1))
+fig.2.full &lt;- plot_grid(fig.2.row1, fig.2.row2, labels = &quot;&quot;, label_size = 10, ncol = 1, rel_heights = c(1,1))
 
-ggsave(Fig.2.full, filename = &quot;output/paper_figures/Fig.2.pdf&quot;, width = 183, height = 120, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
-ggsave(Fig.2.full, filename = &quot;output/paper_figures/Fig.2.png&quot;, width = 183, height = 120, units = &quot;mm&quot;,  dpi = 300)</code></pre>
-<pre class="r"><code>Fig.2.full</code></pre>
-<p><img src="figure/cellstate.Rmd/Figure2-1.png" width="691.2" style="display: block; margin: auto;" /></p>
-</div>
-<div id="figure-3" class="section level2">
-<h2>Figure 3</h2>
-<pre class="r"><code>fig.3.row1 &lt;- plot_grid(p.clusters.umap.live,  p.umap.Ig.prot.live,labels = panellabels[c(1,3)], label_size = 10, rel_widths = c(1,2.1))
-
-fig.3.row2 &lt;- plot_grid(p.donor.umap.live, p.umap.Ig.RNA.live,labels = panellabels[2], label_size = 10,
-          rel_widths = c(1,2.1))
-
-
-Fig.3.full &lt;- plot_grid(fig.3.row1, fig.3.row2, labels = &quot;&quot;, label_size = 10, ncol = 1, rel_heights = c(1,1))
-
-ggsave(Fig.3.full, filename = &quot;output/paper_figures/Fig.3.pdf&quot;, width = 183, height = 100, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
-ggsave(Fig.3.full, filename = &quot;output/paper_figures/Fig.3.png&quot;, width = 183, height = 100, units = &quot;mm&quot;,  dpi = 300)</code></pre>
-<pre class="r"><code>Fig.3.full</code></pre>
-<p><img src="figure/cellstate.Rmd/Figure3-1.png" width="691.2" style="display: block; margin: auto;" /></p>
+# #ggsave(fig.2.full, filename = &quot;output/paper_figures/Fig2.eps&quot;, width = 177, height = 120, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
+# #ggsave(fig.2.full, filename = &quot;output/paper_figures/Fig2.TIFF&quot;, width = 177, height = 120, units = &quot;mm&quot;,  dpi = 300)</code></pre>
+<pre class="r"><code>fig.2.full</code></pre>
+<p><img src="figure/cellstate.Rmd/fig.2.full-1.png" width="691.2" style="display: block; margin: auto;" /></p>
 </div>
 <div id="supplementary-figures" class="section level2">
 <h2>Supplementary figures</h2>
+<div id="supplement-cd27igd--subclasses-fig1" class="section level3">
+<h3>Supplement CD27+IgD- subclasses (fig1)</h3>
 <pre class="r"><code>p.percentages &lt;- plot_grid(p.percentage.cycling.fix,
           p.percentage.class_switch_plasma.live,
           p.percentage.class_switch_plasma.fix,
@@ -1104,77 +1666,367 @@ p.supplement.percentages.dotplots &lt;- plot_grid(p.percentages,
                                                p.dotplot.proteins.intra,
                                                labels = &quot;&quot;, label_size = 10, ncol = 1, rel_heights = c(1.5,1.7, 1.25,1.15))
 
-ggsave(p.supplement.percentages.dotplots, filename = &quot;output/paper_figures/Suppl_CC_CD27_dotplots.pdf&quot;, width = 183, height = 220, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
-ggsave(p.supplement.percentages.dotplots, filename = &quot;output/paper_figures/Suppl_CC_CD27_dotplots.png&quot;, width = 183, height = 220, units = &quot;mm&quot;,  dpi = 300)</code></pre>
+#ggsave(p.supplement.percentages.dotplots, filename = &quot;output/paper_figures/Suppl_CC_CD27_dotplots.eps&quot;, width = 177, height = 220, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
+#ggsave(p.supplement.percentages.dotplots, filename = &quot;output/paper_figures/Suppl_CC_CD27_dotplots.TIFF&quot;, width = 177, height = 220, units = &quot;mm&quot;,  dpi = 300)</code></pre>
 <pre class="r"><code>p.supplement.percentages.dotplots</code></pre>
-<p><img src="figure/cellstate.Rmd/Suppl_CC_CD27_dotplots-1.png" width="691.2" style="display: block; margin: auto;" /> <strong>Supplementary figure</strong> Additional information supplementing figure 2. <em>a.</em> fixed data percentage cycling. <em>b-c.</em> Percentages CD27+IgD- cells in datasets. <em>d-j</em> Differentially expressed genes and proteins.</p>
-<pre class="r"><code>p.umap.fix.all &lt;- plot_grid(p.clusters.umap.fix, 
-          p.umap.Ig.prot.fix, labels = panellabels[c(1,2)], 
+<p><img src="figure/cellstate.Rmd/Suppl_CC_CD27_dotplots-1.png" width="691.2" style="display: block; margin: auto;" />
+<strong>Supplementary figure</strong> Additional information
+supplementing figure 1. <em>a.</em> fixed data percentage cycling.
+<em>b-c.</em> Percentages CD27+IgD- cells in datasets. <em>d-j</em>
+Differentially expressed genes and proteins.</p>
+</div>
+<div id="supplement-mofa-properties-fig2" class="section level3">
+<h3>Supplement MOFA properties (fig2)</h3>
+</div>
+<div id="umap-on-shared-proteins" class="section level3">
+<h3>UMAP on shared proteins</h3>
+<pre class="r"><code>library(umap)
+
+common.prot &lt;- left_join(live.DT.PROT.common,fix.DT.PROT.common)
+
+umap.common.prot &lt;- umap(t(common.prot[,-&quot;gene&quot;]), random_state=42)
+
+
+meta_inorder &lt;- data.frame( sample = colnames(common.prot[,-&quot;gene&quot;]))
+meta_inorder &lt;- left_join(meta_inorder, meta.all)
+umap.labels &lt;- meta_inorder$dataset
+
+umap.common.prot.withmeta &lt;- cbind(data.frame(umap.common.prot$layout),umap.labels)
+
+reviewer_umap_commonProt &lt;- ggplot(as.data.frame(umap.common.prot.withmeta), aes(x = X1, y = X2, fill = umap.labels ))+
+  geom_point(size = 0.9, alpha = 0.8, shape = 21) +
+  labs(title = &quot;UMAP on common proteins \nshows full overlap of the two datasets&quot;) +
+scale_fill_manual(&quot;Dataset&quot;,values=c(&quot;lightgrey&quot;, &quot;black&quot;)) &amp;
+    add.textsize &amp;  
+  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;Scaled \ncounts&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = c(0.85,0.25), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=9), axis.ticks = element_blank(),
+          axis.text=element_text(size=9),
+          plot.title = element_text(size=9, face = &quot;bold&quot;,hjust = 0)) 
+reviewer_umap_commonProt</code></pre>
+<p><img src="figure/cellstate.Rmd/reviewer_umap_common_prot-1.png" width="230.4" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># 
+# ggsave(reviewer_umap_commonProt, filename = &quot;output/paper_figures/reviewer_umap_commonProt.png&quot;, width = 70, height = 80, units = &quot;mm&quot;,  dpi = 300)
+# ggsave(reviewer_umap_commonProt, filename = &quot;output/paper_figures/reviewer_umap_commonProt.eps&quot;, width = 70, height = 80, units = &quot;mm&quot;,  dpi = 300)</code></pre>
+<pre class="r"><code>p.mofa.suppl &lt;- plot_grid(
+p.mofaoverview.input,p.variance.perfactor.all,reviewer_umap_commonProt,NULL,plot.rank.PROT,p.MOFA.factors.cluster,labels = c(panellabels[c(1:2)],panellabels[4],&quot;&quot;,panellabels[c(3,5)]), 
+          label_size = 10,ncol = 3,
+          rel_widths = c(0.5,2,1), rel_heights = c(1,1))
+
+ ggsave(p.mofa.suppl, filename = &quot;output/paper_figures/Suppl_mofa.pdf&quot;, width = 483, height = 300, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
+ ggsave(p.mofa.suppl, filename = &quot;output/paper_figures/Suppl_mofa.png&quot;, width = 483, height = 300, units = &quot;mm&quot;,  dpi = 300)
+
+p.mofa.suppl</code></pre>
+<p><img src="figure/cellstate.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="supplement-seurat-protein-clustering-fig2"
+class="section level3">
+<h3>Supplement Seurat protein clustering (fig2)</h3>
+<pre class="r"><code>fig.2.suppl.row1 &lt;- plot_grid(p.clusters.umap.live,  p.umap.Ig.prot.live,labels = panellabels[c(1,3)], label_size = 10, rel_widths = c(1,3))
+
+fig.2.suppl.row2 &lt;- plot_grid(p.donor.umap.live, p.umap.Ig.RNA.live,labels = panellabels[2], label_size = 10,
+          rel_widths = c(1,3))
+
+p.umap.fix.all &lt;- plot_grid(p.clusters.umap.fix, 
+          p.umap.Ig.prot.fix, labels = panellabels[c(4,5)], 
           label_size = 10,
           rel_widths = c(1,3))
 
-ggsave(p.umap.fix.all, filename = &quot;output/paper_figures/Suppl_fix_IgClass.pdf&quot;, width = 183, height = 54, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
-ggsave(p.umap.fix.all, filename = &quot;output/paper_figures/Suppl_fix_IgClass.png&quot;, width = 183, height = 54, units = &quot;mm&quot;,  dpi = 300)</code></pre>
-<pre class="r"><code>p.umap.fix.all</code></pre>
-<p><img src="figure/cellstate.Rmd/Suppl_fix_IgClass-1.png" width="691.2" style="display: block; margin: auto;" /> <strong>Supplementary figure</strong> Fixed cells Ig-classes</p>
-</div>
-<div id="filter-save-seurat-dataobjects" class="section level2">
-<h2>Filter &amp; Save Seurat dataobjects</h2>
-<p>Fixed-cell dataset: (original and CD27+IgD- object )</p>
-<pre class="r"><code>message(&quot;Fixed dataset:&quot;)
-seu.fix</code></pre>
-<pre><code>An object of class Seurat 
-10114 features across 1038 samples within 3 assays 
-Active assay: PROT (76 features, 76 variable features)
- 2 other assays present: RNA, SCT
- 2 dimensional reductions calculated: pcaIG, IGUMAP</code></pre>
-<pre class="r"><code>seu.fix.filtered &lt;- subset(seu.fix, Cellcycle_state == &quot;non-cycling&quot; &amp; CD27_IgD_state == &quot;CD27+IgD-&quot;)
-message(&quot;CD27+IgD- object:&quot;)
-seu.fix.filtered</code></pre>
-<pre><code>An object of class Seurat 
-10114 features across 940 samples within 3 assays 
-Active assay: PROT (76 features, 76 variable features)
- 2 other assays present: RNA, SCT
- 2 dimensional reductions calculated: pcaIG, IGUMAP</code></pre>
-<p>Live-cell dataset: (original and CD27+IgD- object )</p>
-<pre class="r"><code>seu.live</code></pre>
-<pre><code>An object of class Seurat 
-20366 features across 1433 samples within 3 assays 
-Active assay: PROT (50 features, 50 variable features)
- 2 other assays present: RNA, SCT
- 2 dimensional reductions calculated: pcaIGPROT, IGUMAP</code></pre>
-<pre class="r"><code>seu.live.filtered &lt;- subset(seu.live, Cellcycle_state == &quot;non-cycling&quot; &amp; CD27_IgD_state == &quot;CD27+IgD-&quot;)
 
-seu.live.filtered</code></pre>
-<pre><code>An object of class Seurat 
-20366 features across 1231 samples within 3 assays 
-Active assay: PROT (50 features, 50 variable features)
- 2 other assays present: RNA, SCT
- 2 dimensional reductions calculated: pcaIGPROT, IGUMAP</code></pre>
-<p>Save seurat objects with all cells &amp; information on CC , CD27, and Ig-subclasses.</p>
-<pre class="r"><code>saveRDS(seu.fix, &quot;output/seu.fix_norm_cellstate.rds&quot;)
-saveRDS(seu.live, &quot;output/seu.live_norm_cellstate.rds&quot;)</code></pre>
-<p>Save seurat objects with selected non-cycling &amp; CD27+IgD- cells.</p>
-<pre class="r"><code>saveRDS(seu.fix.filtered, &quot;output/seu.fix_norm_plasmacells.rds&quot;)
-saveRDS(seu.live.filtered, &quot;output/seu.live_norm_plasmacells.rds&quot;)</code></pre>
-<pre class="r"><code>seu.live.filtered.RNA &lt;- seu.live.filtered
+fig.2.suppl.full &lt;- plot_grid(fig.2.suppl.row1, fig.2.suppl.row2,p.umap.fix.all, labels = &quot;&quot;, label_size = 10, ncol = 1, rel_heights = c(1,1,1))
+
+#ggsave(fig.2.suppl.full, filename = &quot;output/paper_figures/Suppl_SeuratCluster.eps&quot;, width = 177, height = 180, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
+#ggsave(fig.2.suppl.full, filename = &quot;output/paper_figures/Suppl_SeuratCluster.TIFF&quot;, width = 177, height = 180, units = &quot;mm&quot;,  dpi = 300)</code></pre>
+<pre class="r"><code>fig.2.suppl.full</code></pre>
+<p><img src="figure/cellstate.Rmd/fig.2.suppl.full-1.png" width="691.2" style="display: block; margin: auto;" /></p>
+<p><strong>Supplementary figure</strong> Fixed cells Ig-classes</p>
+</div>
+<div id="supplement-ig-class-and-elisa" class="section level3">
+<h3>Supplement Ig-class % and ELISA</h3>
+<p>Import ELISA results</p>
+<pre class="r"><code>#pzfx_tables(&quot;data/supplementary/Figure 3/Fig3ELISA/GM6642 Ig ELISA.pzfx&quot;)
+
+df.ELISA.IgA &lt;- read_pzfx(&quot;data/supplementary/Figure 3/Fig3ELISA/GM6642 Ig ELISA.pzfx&quot;, table = &quot;IgA production in time&quot;)
+
+df.ELISA.IgA &lt;- df.ELISA.IgA %&gt;% gather(sampleID,signal,2:ncol(df.ELISA.IgA))%&gt;%
+  mutate(sample = ROWTITLE,Cytokine = &quot;IgA&quot;)
+
+df.ELISA.IgG &lt;- read_pzfx(&quot;data/supplementary/Figure 3/Fig3ELISA/GM6642 Ig ELISA.pzfx&quot;, table = &quot;IgG production in time&quot;)
+
+df.ELISA.IgG &lt;- df.ELISA.IgG %&gt;% gather(sampleID,signal,2:ncol(df.ELISA.IgG))%&gt;%
+  mutate(sample = ROWTITLE,Cytokine = &quot;IgG&quot;)
+
+df.ELISA.IgM &lt;- read_pzfx(&quot;data/supplementary/Figure 3/Fig3ELISA/GM6642 Ig ELISA.pzfx&quot;, table = &quot;IgM production in time&quot;)
+
+df.ELISA.IgM &lt;- df.ELISA.IgM %&gt;% gather(sampleID,signal,2:ncol(df.ELISA.IgM))%&gt;%
+  mutate(sample = ROWTITLE,Cytokine = &quot;IgM&quot;)
+
+
+df.ELISA.all &lt;- rbind(df.ELISA.IgM, df.ELISA.IgA) %&gt;%
+  rbind(.,df.ELISA.IgG)%&gt;%
+  separate(sampleID,c(&quot;sampleID&quot;, &quot;rep&quot;), sep = &quot;_&quot;) 
+
+df.ELISA.all$sample &lt;- factor(df.ELISA.all$sample, levels = c(&quot;Day 0&quot; , &quot;Day 1&quot;,  &quot;Day 4&quot;,  &quot;Day 7&quot;,  &quot;Day 11&quot;))
+
+summarySE &lt;- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
+                      conf.interval=.95, .drop=TRUE) {
+    library(plyr)
+
+    # New version of length which can handle NA&#39;s: if na.rm==T, don&#39;t count them
+    length2 &lt;- function (x, na.rm=FALSE) {
+        if (na.rm) sum(!is.na(x))
+        else       length(x)
+    }
+
+    # This does the summary. For each group&#39;s data frame, return a vector with
+    # N, mean, and sd
+    datac &lt;- ddply(data, groupvars, .drop=.drop,
+      .fun = function(xx, col) {
+        c(N    = length2(xx[[col]], na.rm=na.rm),
+          mean = mean   (xx[[col]], na.rm=na.rm),
+          sd   = sd     (xx[[col]], na.rm=na.rm)
+        )
+      },
+      measurevar
+    )
+
+    # Rename the &quot;mean&quot; column    
+    datac &lt;- rename(datac, c(&quot;mean&quot; = measurevar))
+
+    datac$se &lt;- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
+
+    # Confidence interval multiplier for standard error
+    # Calculate t-statistic for confidence interval: 
+    # e.g., if conf.interval is .95, use .975 (above/below), and use df=N-1
+    ciMult &lt;- qt(conf.interval/2 + .5, datac$N-1)
+    datac$ci &lt;- datac$se * ciMult
+
+    return(datac)
+}
+
+tgc &lt;- summarySE(df.ELISA.all, measurevar=&quot;signal&quot;, groupvars=c(&quot;sample&quot;, &quot;Cytokine&quot;,&quot;sampleID&quot;))
+
+
+p.ELISA &lt;- ggplot(tgc, aes(x=sample, y=signal, colour=sampleID, group=sampleID)) + geom_point( size=2, shape=21, fill=&quot;white&quot;) + # 21 is filled circle
+    geom_errorbar(aes(ymin=signal-se, ymax=signal+se), colour=&quot;black&quot;, width=.1) +
+    geom_line() +
+    
+    xlab(&quot;&quot;) +
+    ylab(&quot;Concentration (ng/ml)&quot;) +
+    scale_colour_hue(name=&quot;Donor&quot;)+
+    theme_few()+
+  facet_wrap(.~Cytokine, scales = &quot;free_y&quot;)+
+  add.textsize+ theme(axis.text.x = element_text(angle = 45, hjust = 1))</code></pre>
+<pre class="r"><code>Suppl.IgG.validation &lt;- plot_grid(p.percentages.Igclasses.MOFAclusters,p.ELISA, labels = panellabels[1:2], label_size = 10, ncol = 2, rel_widths = c(1,2))
+
+#ggsave(Suppl.IgG.validation, filename = &quot;output/paper_figures/Suppl.IgG.validation.eps&quot;, width = 177, height = 60, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
+#ggsave(Suppl.IgG.validation, filename = &quot;output/paper_figures/Suppl.IgG.validation.TIFF&quot;, width = 177, height = 60, units = &quot;mm&quot;,  dpi = 300)</code></pre>
+<pre class="r"><code>Suppl.IgG.validation</code></pre>
+<p><img src="figure/cellstate.Rmd/Suppl.IgG.validation-1.png" width="691.2" style="display: block; margin: auto;" /></p>
+</div>
+<div id="pca-without-igs" class="section level3">
+<h3>PCA without IG’s</h3>
+<pre class="r"><code>## Run PCA without Ig
+seu.fix &lt;- RunPCA(seu.fix, reduction.name = &#39;pcanoIG&#39;, features = rownames(seu.fix)[!(rownames(seu.fix) %in% grep(rownames(seu.fix),pattern = &quot;^Ig&quot;,value = TRUE,invert = FALSE))])
+
+seu.fix &lt;- RunUMAP(seu.fix,dims = 1:4, reduction = &quot;pcanoIG&quot;, reduction.name = &quot;noIGUMAP&quot; )
+seu.fix &lt;- FindNeighbors(seu.fix, reduction = &quot;pcanoIG&quot;,assay = &quot;PROT&quot;, dims = 1:4, graph.name = &quot;pcanoIG_nn&quot;)
+seu.fix &lt;- FindClusters(seu.fix, graph.name = &quot;pcanoIG_nn&quot;,  algorithm = 3,resolution = 0.3, verbose = FALSE)
+seu.fix[[&quot;clusters_pcanoIG&quot;]] &lt;- Idents(object = seu.fix)
+
+
+p.umap.Ig.prot.fix2 &lt;- FeaturePlot(seu.fix, features = c(&quot;IgM&quot;,&quot;IgA&quot;,&quot;IgG&quot;),slot = &quot;scale.data&quot;, reduction = &#39;noIGUMAP&#39;, max.cutoff = 2, 
+                  cols = c(&quot;lightgrey&quot;,&quot;deeppink3&quot;), ncol = 3, pt.size = 0.5)  &amp;
+  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;Scaled \ncounts&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = c(0.85,0.85), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=7, face = &quot;bold&quot;,hjust = 0.5))
+
+p.clusters.umap.fix2 &lt;- DimPlot(seu.fix, reduction = &#39;noIGUMAP&#39;,group.by = &quot;clusters_pcaIG_named&quot;, label = TRUE, repel = TRUE, label.size = 2.5, cols = c(&quot;#009E73&quot;, &quot;#D55E00&quot;,&quot;#F0E442&quot;), pt.size = 0.5,
+)   &amp;
+  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;Ig-based \nclusters&quot;, title = &quot;Fixed cells PCA &amp; UMAP \nwithout Ig-proteins&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = &quot;none&quot;, legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=6, face = &quot;bold&quot;))
+
+
+
+# seu.fix &lt;- RenameIdents(object = seu.fix, `1` = &quot;IgM&quot;, `2` = &quot;IgG&quot;, `3` = &quot;IgA&quot;)
+# seu.fix[[&quot;clusters_pcaIG_named&quot;]] &lt;- Idents(object = seu.fix)
+
+## ---- live cells
+
+## Run PCA on Ig proteins and on Ig genes
+seu.live &lt;- RunPCA(seu.live, assay = &quot;PROT&quot;,reduction.name = &#39;pcanoIGPROT&#39;, features = rownames(seu.live@assays$PROT)[!(rownames(seu.live@assays$PROT) %in% grep(rownames(seu.live@assays$PROT),pattern = &quot;^Ig&quot;,value = TRUE,invert = FALSE))])
+
+
+seu.live &lt;- RunPCA(seu.live, assay = &quot;SCT&quot;,reduction.name = &#39;pcanoIGRNA&#39;, features = rownames(seu.live@assays$SCT)[!(rownames(seu.live@assays$SCT) %in% grep(rownames(seu.live@assays$SCT),pattern = &quot;^IG&quot;,value = TRUE,invert = FALSE))])
+
+
+seu.live &lt;- RunUMAP(seu.live,dims = 1:10, reduction = &quot;pcanoIGPROT&quot;, reduction.name = &quot;pcanoIGPROT_UMAP&quot; )
+
+p.clusters.umap.live_noIg_PROT &lt;- DimPlot(seu.live, reduction = &#39;pcanoIGPROT_UMAP&#39;,group.by = &quot;clusters_pcaIG_named&quot;, label = TRUE, repel = TRUE, label.size = 2.5,pt.size =  0.5, cols = c(&quot;#009E73&quot;, &quot;#D55E00&quot;,&quot;#F0E442&quot;,&quot;grey&quot;)
+)   &amp;
+  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;Clusters&quot;, title = &quot;Live cells UMAP based on \nprotein modality PCA \nwithout Ig-proteins&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = &quot;none&quot;, legend.key.size = unit(1, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=6, face = &quot;bold&quot;))
+
+p.umap.Ig.live_noIg_PROT &lt;- FeaturePlot(seu.live, features = c(&quot;IgM&quot;,&quot;IgA&quot;,&quot;IgG&quot;),slot = &quot;scale.data&quot;, reduction = &#39;pcanoIGPROT_UMAP&#39;, max.cutoff = 2, 
+                  cols = c(&quot;lightgrey&quot;,&quot;deeppink3&quot;), ncol = 3, pt.size = 0.5)  &amp;
+  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = c(0.85,0.95), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=7, face = &quot;bold&quot;,hjust = 0.5))
+
+seu.live &lt;- RunUMAP(seu.live,dims = 1:20, reduction = &quot;pcanoIGRNA&quot;, reduction.name = &quot;pcanoIGRNA_UMAP&quot; )
+
+
+
+p.clusters.umap.live_noIg_RNA &lt;-DimPlot(seu.live, reduction = &#39;pcanoIGRNA_UMAP&#39;,group.by = &quot;clusters_pcaIG_named&quot;, label = TRUE, repel = TRUE, label.size = 2.5,pt.size =  0.5, cols = c(&quot;#009E73&quot;, &quot;#D55E00&quot;,&quot;#F0E442&quot;,&quot;grey&quot;)
+)   &amp;
+  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;Clusters&quot;, title = &quot;Live cells UMAP based on \nRNA modality PCA \nwithout Ig-genes&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = &quot;none&quot;, legend.key.size = unit(1, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=6, face = &quot;bold&quot;))
+
+p.umap.Ig.live_noIg_RNA &lt;- FeaturePlot(seu.live, features = c(&quot;IGHM&quot;,&quot;IGHA1&quot;,&quot;IGHG1&quot;),slot = &quot;scale.data&quot;, reduction = &#39;pcanoIGRNA_UMAP&#39;, max.cutoff = 3, 
+                  cols = c(&quot;lightgrey&quot;,&quot;dodgerblue3&quot;), ncol = 3, pt.size =  0.5)  &amp;
+  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = c(0.85,0.95), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=7, face = &quot;bold&quot;,hjust = 0.5))
+# 
+# seu.live &lt;- FindMultiModalNeighbors(
+#   seu.live, reduction.list = list(&quot;pcanoIGRNA&quot;, &quot;pcanoIGPROT&quot;), 
+#   dims.list = list(1:10, 1:10), modality.weight.name = &quot;RNA.weight&quot;
+# )
+# 
+# seu.live &lt;- RunUMAP(seu.live, nn.name = &quot;weighted.nn&quot;, reduction.name = &quot;wnn.umap&quot;, reduction.key = &quot;wnnUMAP_&quot;)
+# seu.live &lt;- FindClusters(seu.live, graph.name = &quot;wsnn&quot;, algorithm = 3, resolution = 1.2, verbose = FALSE)
+# 
+# seu.live[[&quot;clusters_pcanoIG&quot;]] &lt;- Idents(object = seu.live)
+# 
+# 
+# p.umap.Ig.prot.live2 &lt;- FeaturePlot(seu.live, features = c(&quot;IgM&quot;,&quot;IgA&quot;,&quot;IgG&quot;),slot = &quot;scale.data&quot;, reduction = &#39;wnn.umap&#39;, max.cutoff = 2, 
+#                   cols = c(&quot;lightgrey&quot;,&quot;deeppink3&quot;), ncol = 3, pt.size = 0.5)  &amp;
+#   labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;&quot;) &amp;
+#   theme_half_open()&amp; 
+#   theme(legend.position = c(0.85,0.95), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+#   theme(axis.text.x = element_blank(),
+#           axis.text.y = element_blank(),
+#           text = element_text(size=7), axis.ticks = element_blank(),
+#           axis.text=element_text(size=7),
+#           plot.title = element_text(size=7, face = &quot;bold&quot;,hjust = 0.5))
+# 
+# p.umap.Ig.RNA.live2 &lt;- FeaturePlot(seu.live, features = c(&quot;IGHM&quot;,&quot;IGHA1&quot;,&quot;IGHG1&quot;),slot = &quot;scale.data&quot;, reduction = &#39;wnn.umap&#39;, max.cutoff = 3, 
+#                   cols = c(&quot;lightgrey&quot;,&quot;dodgerblue3&quot;), ncol = 3, pt.size =  0.5)  &amp;
+#   labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;&quot;) &amp;
+#   theme_half_open()&amp; 
+#   theme(legend.position = c(0.85,0.95), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+#   theme(axis.text.x = element_blank(),
+#           axis.text.y = element_blank(),
+#           text = element_text(size=7), axis.ticks = element_blank(),
+#           axis.text=element_text(size=7),
+#           plot.title = element_text(size=7, face = &quot;bold&quot;,hjust = 0.5))
+#           
+# p.clusters.umap.live2 &lt;- DimPlot(seu.live, reduction = &#39;wnn.umap&#39;,group.by = &quot;clusters_pcaIG_named&quot;, label = TRUE, repel = TRUE, label.size = 2.5,pt.size =  0.5, cols = c(&quot;#009E73&quot;, &quot;#D55E00&quot;,&quot;#F0E442&quot;,&quot;grey&quot;)
+# )   &amp;
+#   labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;Clusters&quot;, title = &quot;Live cells WNN &amp; UMAP \nwithout Ig-proteins or genes&quot;) &amp;
+#   theme_half_open()&amp; 
+#   theme(legend.position = &quot;none&quot;, legend.key.size = unit(1, &#39;mm&#39;)) &amp;
+#   theme(axis.text.x = element_blank(),
+#           axis.text.y = element_blank(),
+#           text = element_text(size=7), axis.ticks = element_blank(),
+#           axis.text=element_text(size=7),
+#           plot.title = element_text(size=6, face = &quot;bold&quot;))
+# 
+# p.donor.umap.live2 &lt;- DimPlot(seu.live, reduction = &#39;wnn.umap&#39;, group.by = &quot;donor&quot;,label = F, pt.size =  0.5,repel = TRUE, label.size = 2.5, cols = colors.donors)   &amp;
+#   labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;, color = &quot;Donor&quot;, title = &quot;No-Ig clustering overlap \nacross 3 donors&quot;) &amp;
+#   theme_half_open()&amp; 
+#   theme(legend.position = c(0.85, 0.95), legend.key.size = unit(1, &#39;mm&#39;), legend.text =element_text(size=6), legend.title =element_text(size=7)  ) &amp;
+#   theme(axis.text.x = element_blank(),
+#           axis.text.y = element_blank(),
+#           text = element_text(size=7), axis.ticks = element_blank(),
+#           axis.text=element_text(size=7),
+#           plot.title = element_text(size=6, face = &quot;bold&quot;))
+# 
+# seu.live &lt;- RenameIdents(object = seu.live, `1` = &quot;IgM&quot;, `2` = &quot;IgG&quot;, `3` = &quot;IgA&quot;)
+# seu.live[[&quot;clusters_pcaIG_named&quot;]] &lt;- Idents(object = seu.live)</code></pre>
+<pre class="r"><code>fig.2.suppl.row1_2 &lt;- plot_grid(p.clusters.umap.fix2,  p.umap.Ig.prot.fix2,labels = panellabels[c(1,3)], label_size = 10, rel_widths = c(1,3))
+
+fig.2.suppl.row2_2 &lt;- plot_grid(p.clusters.umap.live_noIg_RNA, p.umap.Ig.live_noIg_RNA,labels = panellabels[2], label_size = 10,
+          rel_widths = c(1,3))
+
+p.umap.fix.all_2 &lt;- plot_grid(p.clusters.umap.live_noIg_PROT, 
+          p.umap.Ig.live_noIg_PROT, labels = panellabels[c(4,5)], 
+          label_size = 10,
+          rel_widths = c(1,3))
+
+
+fig.2.suppl.full_2 &lt;- plot_grid(fig.2.suppl.row1_2, fig.2.suppl.row2_2,p.umap.fix.all_2, labels = &quot;&quot;, label_size = 10, ncol = 1, rel_heights = c(1,1,1))
+
+ ggsave(fig.2.suppl.full_2, filename = &quot;output/paper_figures/Suppl_SeuratCluster_noIg.pdf&quot;, width = 177, height = 180, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
+#  # ggsave(fig.2.suppl.full_2, filename = &quot;output/paper_figures/Suppl_SeuratCluster_noIg.TIFF&quot;, width = 177, height = 180, units = &quot;mm&quot;,  dpi = 300)
+ggsave(fig.2.suppl.full_2, filename = &quot;output/paper_figures/Suppl_SeuratCluster_noIg.png&quot;, width = 177, height = 180, units = &quot;mm&quot;,  dpi = 300)</code></pre>
+<pre class="r"><code>fig.2.suppl.full_2</code></pre>
+<p><img src="figure/cellstate.Rmd/fig.2.suppl.full_noIg-1.png" width="691.2" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="save-dataset" class="section level2">
+<h2>Save dataset</h2>
+<p>Save seurat objects with selected non-cycling &amp; CD27+IgD-
+cells.</p>
+<pre class="r"><code>#saveRDS(seu.fix, &quot;output/seu.fix_norm_plasmacells.rds&quot;)
+#saveRDS(seu.live, &quot;output/seu.live_norm_plasmacells.rds&quot;)
+
+#saveRDS(mofa, file= &quot;output/MOFA_analysis_Donorgroup_clustered.rds&quot;)</code></pre>
+<pre class="r"><code>seu.live.filtered.RNA &lt;- seu.live
 DefaultAssay(seu.live.filtered.RNA) &lt;- &quot;RNA&quot;
 seu.live.filtered.RNA[[&quot;SCT&quot;]] &lt;- NULL
 
 seu.live.filtered.RNA[[&quot;PROT&quot;]] &lt;- NULL
 
-saveRDS(seu.live.filtered.RNA, &quot;output/seu.live_norm_plasmacells_RNA.rds&quot;)</code></pre>
+#saveRDS(seu.live.filtered.RNA, &quot;output/seu.live_norm_plasmacells_RNA.rds&quot;)</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
-<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
 </button>
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>R version 4.0.3 (2020-10-10)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 10 x64 (build 19042)
+Running under: Windows 10 x64 (build 19044)
 
 Matrix products: default
 
@@ -1188,16 +2040,17 @@ attached base packages:
 [8] methods   base     
 
 other attached packages:
- [1] ggupset_0.3.0        RColorBrewer_1.1-2   enrichplot_1.10.2   
- [4] UCell_1.0.0          data.table_1.14.2    scales_1.1.1        
- [7] cowplot_1.1.1        ggthemes_4.2.4       kableExtra_1.3.4    
-[10] knitr_1.36           org.Hs.eg.db_3.12.0  AnnotationDbi_1.52.0
-[13] IRanges_2.24.1       S4Vectors_0.28.1     Biobase_2.50.0      
-[16] BiocGenerics_0.36.1  forcats_0.5.1        stringr_1.4.0       
-[19] dplyr_1.0.7          purrr_0.3.4          readr_2.1.0         
-[22] tidyr_1.1.4          tibble_3.1.5         ggplot2_3.3.5       
-[25] tidyverse_1.3.1      Matrix_1.3-4         SeuratObject_4.0.2  
-[28] Seurat_4.0.2         workflowr_1.6.2     
+ [1] plyr_1.8.6           umap_0.2.9.0         MOFA2_1.1.17        
+ [4] pzfx_0.3.0           ggupset_0.3.0        RColorBrewer_1.1-2  
+ [7] enrichplot_1.10.2    UCell_1.0.0          data.table_1.14.2   
+[10] scales_1.1.1         cowplot_1.1.1        ggthemes_4.2.4      
+[13] kableExtra_1.3.4     knitr_1.36           org.Hs.eg.db_3.12.0 
+[16] AnnotationDbi_1.52.0 IRanges_2.24.1       S4Vectors_0.28.1    
+[19] Biobase_2.50.0       BiocGenerics_0.36.1  forcats_0.5.1       
+[22] stringr_1.4.0        dplyr_1.0.7          purrr_0.3.4         
+[25] readr_2.1.0          tidyr_1.1.4          tibble_3.1.5        
+[28] ggplot2_3.3.5        tidyverse_1.3.1      Matrix_1.3-4        
+[31] SeuratObject_4.0.2   Seurat_4.0.2         workflowr_1.6.2     
 
 loaded via a namespace (and not attached):
   [1] utf8_1.2.2            reticulate_1.22       tidyselect_1.1.1     
@@ -1205,52 +2058,55 @@ loaded via a namespace (and not attached):
   [7] grid_4.0.3            Rtsne_0.15            scatterpie_0.1.7     
  [10] munsell_0.5.0         ragg_1.2.0            codetools_0.2-16     
  [13] ica_1.0-2             future_1.23.0         miniUI_0.1.1.1       
- [16] withr_2.4.2           colorspace_2.0-2      GOSemSim_2.16.1      
- [19] highr_0.9             rstudioapi_0.13       ROCR_1.0-11          
- [22] tensor_1.5            DOSE_3.16.0           listenv_0.8.0        
- [25] labeling_0.4.2        git2r_0.28.0          polyclip_1.10-0      
- [28] bit64_4.0.5           farver_2.1.0          rprojroot_2.0.2      
- [31] parallelly_1.29.0     vctrs_0.3.8           generics_0.1.1       
- [34] xfun_0.26             R6_2.5.1              graphlayouts_0.7.2   
- [37] fgsea_1.16.0          spatstat.utils_2.2-0  cachem_1.0.6         
- [40] assertthat_0.2.1      promises_1.2.0.1      ggraph_2.0.5         
- [43] gtable_0.3.0          globals_0.14.0        goftest_1.2-2        
- [46] tidygraph_1.2.0       rlang_0.4.11          systemfonts_1.0.3    
- [49] splines_4.0.3         lazyeval_0.2.2        spatstat.geom_2.2-2  
- [52] broom_0.7.10          yaml_2.2.1            reshape2_1.4.4       
- [55] abind_1.4-5           modelr_0.1.8          backports_1.3.0      
- [58] httpuv_1.6.3          qvalue_2.22.0         tools_4.0.3          
- [61] ellipsis_0.3.2        spatstat.core_2.3-0   jquerylib_0.1.4      
- [64] ggridges_0.5.3        Rcpp_1.0.7            plyr_1.8.6           
- [67] rpart_4.1-15          deldir_1.0-2          pbapply_1.5-0        
- [70] viridis_0.6.2         zoo_1.8-9             haven_2.4.3          
- [73] ggrepel_0.9.1         cluster_2.1.0         here_1.0.1           
- [76] fs_1.5.0              magrittr_2.0.1        RSpectra_0.16-0      
- [79] scattermore_0.7       DO.db_2.9             lmtest_0.9-38        
- [82] reprex_2.0.1          RANN_2.6.1            whisker_0.4          
- [85] fitdistrplus_1.1-6    matrixStats_0.61.0    hms_1.1.1            
- [88] patchwork_1.1.1       mime_0.12             evaluate_0.14        
- [91] xtable_1.8-4          readxl_1.3.1          gridExtra_2.3        
- [94] compiler_4.0.3        shadowtext_0.0.9      KernSmooth_2.23-17   
- [97] crayon_1.4.2          htmltools_0.5.2       ggfun_0.0.4          
-[100] mgcv_1.8-33           later_1.3.0           tzdb_0.2.0           
-[103] lubridate_1.8.0       DBI_1.1.1             tweenr_1.0.2         
-[106] dbplyr_2.1.1          rappdirs_0.3.3        MASS_7.3-53          
-[109] cli_3.1.0             igraph_1.2.6          pkgconfig_2.0.3      
-[112] plotly_4.10.0         spatstat.sparse_2.0-0 xml2_1.3.2           
-[115] svglite_2.0.0         bslib_0.3.1           webshot_0.5.2        
-[118] rvest_1.0.2           digest_0.6.28         sctransform_0.3.2    
-[121] RcppAnnoy_0.0.19      spatstat.data_2.1-0   fastmatch_1.1-3      
-[124] rmarkdown_2.11        cellranger_1.1.0      leiden_0.3.9         
-[127] uwot_0.1.10           shiny_1.7.1           lifecycle_1.0.1      
-[130] nlme_3.1-149          jsonlite_1.7.2        limma_3.46.0         
-[133] viridisLite_0.4.0     fansi_0.5.0           pillar_1.6.4         
-[136] lattice_0.20-41       fastmap_1.1.0         httr_1.4.2           
-[139] survival_3.2-7        GO.db_3.12.1          glue_1.4.2           
-[142] png_0.1-7             bit_4.0.4             ggforce_0.3.3        
-[145] stringi_1.7.5         sass_0.4.0            blob_1.2.2           
-[148] textshaping_0.3.6     memoise_2.0.1         irlba_2.3.3          
-[151] future.apply_1.8.1   </code></pre>
+ [16] withr_2.4.3           colorspace_2.0-2      GOSemSim_2.16.1      
+ [19] filelock_1.0.2        highr_0.9             rstudioapi_0.13      
+ [22] ROCR_1.0-11           tensor_1.5            DOSE_3.16.0          
+ [25] listenv_0.8.0         MatrixGenerics_1.2.1  labeling_0.4.2       
+ [28] git2r_0.28.0          polyclip_1.10-0       pheatmap_1.0.12      
+ [31] bit64_4.0.5           farver_2.1.0          rhdf5_2.34.0         
+ [34] rprojroot_2.0.2       basilisk_1.2.1        parallelly_1.29.0    
+ [37] vctrs_0.3.8           generics_0.1.1        xfun_0.26            
+ [40] R6_2.5.1              graphlayouts_0.7.2    rhdf5filters_1.2.1   
+ [43] DelayedArray_0.16.3   fgsea_1.16.0          spatstat.utils_2.2-0 
+ [46] cachem_1.0.6          assertthat_0.2.1      promises_1.2.0.1     
+ [49] ggraph_2.0.5          gtable_0.3.0          globals_0.14.0       
+ [52] goftest_1.2-2         tidygraph_1.2.0       rlang_0.4.11         
+ [55] systemfonts_1.0.3     splines_4.0.3         lazyeval_0.2.2       
+ [58] spatstat.geom_2.2-2   broom_0.7.10          yaml_2.2.1           
+ [61] reshape2_1.4.4        abind_1.4-5           modelr_0.1.8         
+ [64] backports_1.3.0       httpuv_1.6.3          qvalue_2.22.0        
+ [67] tools_4.0.3           ellipsis_0.3.2        spatstat.core_2.3-0  
+ [70] jquerylib_0.1.4       ggridges_0.5.3        Rcpp_1.0.7           
+ [73] basilisk.utils_1.2.2  openssl_1.4.5         rpart_4.1-15         
+ [76] deldir_1.0-2          pbapply_1.5-0         viridis_0.6.2        
+ [79] zoo_1.8-9             haven_2.4.3           ggrepel_0.9.1        
+ [82] cluster_2.1.0         fs_1.5.0              magrittr_2.0.1       
+ [85] RSpectra_0.16-0       scattermore_0.7       DO.db_2.9            
+ [88] lmtest_0.9-38         reprex_2.0.1          RANN_2.6.1           
+ [91] whisker_0.4           fitdistrplus_1.1-6    matrixStats_0.61.0   
+ [94] hms_1.1.1             patchwork_1.1.1       mime_0.12            
+ [97] evaluate_0.14         xtable_1.8-4          readxl_1.3.1         
+[100] gridExtra_2.3         compiler_4.0.3        shadowtext_0.0.9     
+[103] KernSmooth_2.23-17    crayon_1.4.2          htmltools_0.5.2      
+[106] ggfun_0.0.4           mgcv_1.8-33           later_1.3.0          
+[109] tzdb_0.2.0            lubridate_1.8.0       DBI_1.1.1            
+[112] corrplot_0.92         tweenr_1.0.2          dbplyr_2.1.1         
+[115] rappdirs_0.3.3        MASS_7.3-53           cli_3.1.0            
+[118] igraph_1.2.6          pkgconfig_2.0.3       plotly_4.10.0        
+[121] spatstat.sparse_2.0-0 xml2_1.3.2            svglite_2.0.0        
+[124] bslib_0.3.1           webshot_0.5.2         rvest_1.0.2          
+[127] digest_0.6.28         sctransform_0.3.2     RcppAnnoy_0.0.19     
+[130] spatstat.data_2.1-0   fastmatch_1.1-3       rmarkdown_2.11       
+[133] cellranger_1.1.0      leiden_0.3.9          uwot_0.1.10          
+[136] shiny_1.7.1           lifecycle_1.0.1       nlme_3.1-149         
+[139] jsonlite_1.7.2        Rhdf5lib_1.12.1       askpass_1.1          
+[142] limma_3.46.0          viridisLite_0.4.0     fansi_0.5.0          
+[145] pillar_1.6.4          lattice_0.20-41       fastmap_1.1.0        
+[148] httr_1.4.2            survival_3.2-7        GO.db_3.12.1         
+[151] glue_1.4.2            png_0.1-7             bit_4.0.4            
+[154] HDF5Array_1.18.1      ggforce_0.3.3         stringi_1.7.5        
+[157] sass_0.4.0            blob_1.2.2            textshaping_0.3.6    
+[160] memoise_2.0.1         irlba_2.3.3           future.apply_1.8.1   </code></pre>
 </div>
 </div>
 
