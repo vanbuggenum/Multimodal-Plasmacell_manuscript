@@ -9,3 +9,10 @@ analysis/*png
 analysis/*html
 analysis/*_cache
 analysis/site_libs
+output/*
+data/*
+data/*/*
+analysis/cellstate_sidetest.Rmd
+analysis/hallmarks2.Rmd
+analysis/cellstate_sidetest.Rmd
+analysis/supplements.Rmd
