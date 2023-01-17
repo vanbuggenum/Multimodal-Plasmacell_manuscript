@@ -11,6 +11,6 @@ editor_options:
 
 The content in this repository is available under the [CC BY 4.0](https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/blob/master/LICENSE.md) license. 
 
-For proper attribution, please [cite]() our [publication (##)]()) containing description and analysis of all presented data and results.
+For proper attribution, please [cite](https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/blob/master/CITATION.bib) our [publication](https://doi.org/10.1016/j.mcpro.2023.100492) containing description and analysis of all presented data and results.
 
 ------

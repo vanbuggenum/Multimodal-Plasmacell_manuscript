@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="vanBuggenum" />
+
+
+<title>Hallmark Ig-classes</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Manuscript docs ASCs</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="QC.html">QC</a>
+</li>
+<li>
+  <a href="cellstate.html">ASC characterization</a>
+</li>
+<li>
+  <a href="hallmarks.html">Hallmarks Ig-classes</a>
+</li>
+<li>
+  <a href="license.html">Citation</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Hallmark Ig-classes</h1>
+<h4 class="author">vanBuggenum</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2023-01-17
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong>
+<code>Multimodal-Plasmacell_manuscript/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version
+1.6.2). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20211005code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20211005)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20211005code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20211005)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomvanbuggenumMultimodalPlasmacellmanuscripttree95e922e0e923cc8661dd886c583394eeed3cd82atargetblank95e922ea">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/tree/95e922e0e923cc8661dd886c583394eeed3cd82a" target="_blank">95e922e</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomvanbuggenumMultimodalPlasmacellmanuscripttree95e922e0e923cc8661dd886c583394eeed3cd82atargetblank95e922ea"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/tree/95e922e0e923cc8661dd886c583394eeed3cd82a" target="_blank">95e922e</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    analysis/cellstate_sidetest.Rmd
+    Ignored:    analysis/hallmarks2.Rmd
+    Ignored:    analysis/supplements.Rmd
+    Ignored:    data/Seq2Science/
+    Ignored:    data/azimuth_PBMCs/
+    Ignored:    data/azimuth_bonemarrow/
+    Ignored:    data/citeseqcount_htseqcount.zip
+    Ignored:    data/genelist.plots.diffmarkers.txt
+    Ignored:    data/genelist.plots.diffmarkers2.txt
+    Ignored:    data/raw/
+    Ignored:    data/supplementary/
+    Ignored:    output/MOFA_analysis_Donorgroup.hdf5
+    Ignored:    output/MOFA_analysis_Donorgroup.rds
+    Ignored:    output/MOFA_analysis_Donorgroup_clustered.rds
+    Ignored:    output/MOFA_analysis_Donorgroup_noIg.hdf5
+    Ignored:    output/MOFA_analysis_Donorgroup_noIg2.hdf5
+    Ignored:    output/extra plots.docx
+    Ignored:    output/paper_figures/
+    Ignored:    output/seu.fix_norm.rds
+    Ignored:    output/seu.fix_norm_cellstate.rds
+    Ignored:    output/seu.fix_norm_plasmacells.rds
+    Ignored:    output/seu.live_norm.rds
+    Ignored:    output/seu.live_norm_cellstate.rds
+    Ignored:    output/seu.live_norm_plasmacells.rds
+    Ignored:    output/seu.live_norm_plasmacells_RNA.rds
+    Ignored:    output/top-PROT-loadings_IgA.tsv
+    Ignored:    output/top-PROT-loadings_IgG.tsv
+    Ignored:    output/top-PROT-loadings_IgM.tsv
+    Ignored:    output/top-gene-loadings_IgA.tsv
+    Ignored:    output/top-gene-loadings_IgG.tsv
+    Ignored:    output/top-gene-loadings_IgM.csv
+    Ignored:    output/top-gene-loadings_IgM.tsv
+
+Unstaged changes:
+    Modified:   .gitignore
+    Modified:   CITATION.bib
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/hallmarks.Rmd</code>) and HTML
+(<code>docs/hallmarks.html</code>) files. If you’ve configured a remote
+Git repository (see <code>?wflow_git_remote</code>), click on the
+hyperlinks in the table below to view the files as they were in that
+past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/blob/95e922e0e923cc8661dd886c583394eeed3cd82a/analysis/hallmarks.Rmd" target="_blank">95e922e</a>
+</td>
+<td>
+Jessie van Buggenum
+</td>
+<td>
+2023-01-17
+</td>
+<td>
+final docs
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<pre class="r"><code>seu.fix &lt;- readRDS( file = &quot;output/seu.fix_norm_plasmacells.rds&quot;)
+seu.fix &lt;- SetIdent(seu.fix,value = &quot;IgClass&quot;)
+Idents(seu.fix) &lt;- factor(x = Idents(seu.fix), levels = c(&quot;IgM&quot;, &quot;IgG&quot;, &quot;IgA&quot;))
+
+seu.live &lt;- readRDS(file = &quot;output/seu.live_norm_plasmacells.rds&quot;)
+seu.live &lt;-SetIdent(seu.live,value = &quot;IgClass&quot;)
+Idents(seu.live) &lt;- factor(x = Idents(seu.live), levels = c(&quot;IgM&quot;, &quot;IgG&quot;, &quot;IgA&quot;))</code></pre>
+<p>To explore differences between three Ig-classes, we analyse protein
+and gene weights from the MOFA model and determine differential
+expressed genes or proteins.</p>
+<pre class="r"><code># Read in the MOFA analysis file
+mofa &lt;- readRDS(file= &quot;output/MOFA_analysis_Donorgroup_clustered.rds&quot;)
+
+### Get all weights 
+weights.RNA &lt;- get_weights(mofa, views = &quot;RNA&quot;,as.data.frame = TRUE)
+
+weights.PROT.fix &lt;- get_weights(mofa, views = &quot;PROT.fix&quot;,as.data.frame = TRUE) %&gt;%
+  mutate(feature = gsub(&#39;.{2}$&#39;,x =  feature, replacement = &#39;&#39;) )
+weights.PROT.live &lt;- get_weights(mofa, views = &quot;PROT.live&quot;,as.data.frame = TRUE) %&gt;%
+  mutate(feature = gsub(&#39;.{2}$&#39;,x =  feature, replacement = &#39;&#39;) )
+weights.PROT.common &lt;- get_weights(mofa, views = &quot;PROT.common&quot;,as.data.frame = TRUE)
+
+weights.protein &lt;- rbind(weights.PROT.common,weights.PROT.live,weights.PROT.fix) %&gt;%
+  filter(factor == &quot;Factor1&quot; | factor == &quot;Factor2&quot;) %&gt;%
+  spread(factor,value)
+
+# Define lists of B cell selection, homing selection and diffgenes and diffprots
+list.Bcell.selection &lt;- c(&quot;CD25&quot;, &quot;CD32&quot;, &quot;CD20&quot;,&quot;CD19&quot;, &quot;CD22&quot;, &quot;CD40&quot;, &quot;CD86&quot;) 
+list.Bcell.selection.f &lt;- c( &quot;IgD&quot;, &quot;CD23&quot;, &quot;CD5&quot;, &quot;CD70&quot;)
+list.homing.selection.f &lt;- c(&quot;CXCR4&quot;, &quot;CXCR5&quot;,&quot;IntegrinA4&quot;)
+list.homing.selection &lt;- c(&quot;IntegrinB7&quot;, &quot;IntegrinB1&quot;,&quot;CD49d&quot;, &quot;CCR9&quot;, &quot;CD31&quot;, &quot;CD44&quot;,&quot;CXCR3&quot;)
+list.Bcell.selection.new &lt;- c( &quot;CD138&quot;, &quot;CD38&quot;, &quot;CD27&quot;, &quot;CD20&quot;,&quot;CD19&quot;)
+
+# Read in the genelist for plots
+genelist_plots_diffmarkers &lt;- read_delim(&quot;data/genelist.plots.diffmarkers2.txt&quot;, 
+    &quot;\t&quot;, escape_double = FALSE, trim_ws = TRUE)
+
+# Extract diffgenes and diffprots
+list.genes.select.diffgenes &lt;- c(unique(subset(genelist_plots_diffmarkers, modality == &quot;RNA&quot;)$gene))
+list.prot.select.diffprots &lt;- c(unique(subset(genelist_plots_diffmarkers,  modality == &quot;PROT&quot;)$gene))
+
+# Concatenate the lists
+list.dotplot.prots &lt;- c(list.prot.select.diffprots,list.homing.selection,list.homing.selection.f,list.Bcell.selection.f,list.Bcell.selection)
+
+# Add a new column with feature to plot
+weights.protein &lt;- weights.protein %&gt;%
+  mutate(features.toplot = ifelse(feature %in% c(list.dotplot.prots, &quot;IgM&quot;, &quot;IgA&quot;, &quot;IgG&quot;),as.character(feature),&quot;&quot;))</code></pre>
+<div id="fig.3" class="section level3">
+<h3>Fig.3</h3>
+<pre class="r"><code>view.labs &lt;- c(&quot;Common proteins&quot;, &quot;Live-cell proteins&quot;, &quot;Fixed-cell proteins&quot;)
+names(view.labs) &lt;- c(&quot;PROT.common&quot;, &quot;PROT.live&quot;, &quot;PROT.fix&quot;)
+
+p.loadings.scatter.prot &lt;- 
+ggplot(weights.protein, aes(Factor1, Factor2)) +
+    geom_hline(yintercept = 0, color = &quot;grey&quot;, alpha = 0.8)+
+      geom_vline(xintercept = 0, color = &quot;grey&quot;, alpha = 0.8)+
+  geom_point(size = 0.5) +
+  facet_wrap(~view,
+              labeller = labeller(view = view.labs),
+             scales = &quot;free&quot;) +
+  theme_few()+
+  ggrepel::geom_text_repel( data          = subset(weights.protein, Factor1 &gt; 10^-2 ),
+                            aes(x=Factor1, y=Factor2, label=feature), size=1.8, max.overlaps = Inf,
+     segment.size  = 0.15,
+    segment.color = &quot;grey50&quot;,
+    direction     = &quot;y&quot;,
+    hjust         = 0)+
+  
+      ggrepel::geom_text_repel(
+    data          = subset(weights.protein, Factor1 &lt; -10^-2&amp; Factor2 &gt;10^-2 ),
+    aes(x=Factor1, y=Factor2, label=feature), size=1.8, max.overlaps = Inf,
+      segment.size  = 0.15,
+    segment.color = &quot;grey50&quot;,
+    direction     = &quot;y&quot;,
+    hjust         = 1
+  ) +
+      ggrepel::geom_text_repel(
+    data          = subset(weights.protein, Factor1 &lt; -10^-2 &amp; Factor2 &lt;10^-2),
+    aes(x=Factor1, y=Factor2, label=feature), size=1.8, max.overlaps = Inf,
+     segment.size  = 0.15,
+    segment.color = &quot;grey50&quot;,
+    direction     = &quot;y&quot;,
+    hjust         = 1
+  )+
+     add.textsize   +
+    labs(title = &quot;Protein loading values contributing to Factor 1 and 2\nrepresent IgM, IgG or IgA associated (phospho-)proteins &quot;) +
+  theme(
+        panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank())
+
+# p.loadings.scatter.prot</code></pre>
+<pre class="r"><code>topposrna.factor1.IgA &lt;-  weights.RNA %&gt;%
+    spread(factor, value) %&gt;%
+  filter(Factor1 &gt;= 10^-8) %&gt;%
+  select(c(feature, Factor1, Factor2)) %&gt;%
+  mutate(sortFactor1 = Factor1) %&gt;%
+  arrange(-sortFactor1)
+  
+rownames(topposrna.factor1.IgA) &lt;- topposrna.factor1.IgA$feature
+
+topposPROT.fix.factor1.IgA &lt;- weights.PROT.fix %&gt;%
+    spread(factor, value) %&gt;%
+  filter(Factor1 &gt;= 10^-8) %&gt;%
+  arrange(-Factor1)
+rownames(topposPROT.fix.factor1.IgA) &lt;- topposPROT.fix.factor1.IgA$feature
+
+topposPROT.live.factor1.IgA &lt;- weights.PROT.live %&gt;%
+    spread(factor, value) %&gt;%
+  filter(Factor1 &gt;= 10^-8) %&gt;%
+  arrange(-Factor1)
+rownames(topposPROT.live.factor1.IgA) &lt;- topposPROT.live.factor1.IgA$feature
+
+topposPROT.common.factor1.IgA &lt;- weights.PROT.common %&gt;%
+    spread(factor, value) %&gt;%
+  filter(Factor1 &gt;= 10^-8) %&gt;%
+  arrange(-Factor1)
+rownames(topposPROT.common.factor1.IgA) &lt;- topposPROT.common.factor1.IgA$feature
+
+
+loadings.prot.IgA &lt;- rbind(topposPROT.fix.factor1.IgA,topposPROT.live.factor1.IgA,topposPROT.common.factor1.IgA)
+loadings.prot.IgA &lt;- arrange(loadings.prot.IgA, -Factor1)</code></pre>
+<pre class="r"><code>topnegrna.factor2.IgM &lt;- weights.RNA %&gt;%
+    spread(factor, value) %&gt;%
+  filter(Factor1 &lt;= -10^-8) %&gt;%
+  filter(Factor2 &lt;= -10^-8) %&gt;%
+  select(c(feature, Factor1, Factor2)) %&gt;%
+  mutate(sortminusFactor1times2 = -(Factor2*Factor1)) %&gt;%
+  arrange(sortminusFactor1times2)
+
+rownames(topnegrna.factor2.IgM) &lt;- topnegrna.factor2.IgM$feature
+
+##filter for not IgA
+##filter for not IgA
+#topnegrna.factor2.IgM &lt;-topnegrna.factor2.IgM[topnegrna.factor2.IgM$feature %in% topnegrna.factor1.IgMIgG$feature,]
+
+topnegPROT.fix.factor2.IgM &lt;- weights.PROT.fix %&gt;%
+  spread(factor, value) %&gt;%
+  filter(Factor1 &lt;= -10^-7) %&gt;%
+  filter(Factor2 &lt;= -10^-7) %&gt;%
+   arrange(Factor2)
+rownames(topnegPROT.fix.factor2.IgM) &lt;- topnegPROT.fix.factor2.IgM$feature
+
+topnegPROT.live.factor2.IgM &lt;- weights.PROT.live %&gt;%
+  spread(factor, value) %&gt;%
+  filter(Factor1 &lt;= -10^-7) %&gt;%
+  filter(Factor2 &lt;= -10^-7) %&gt;%
+  arrange(Factor2) 
+
+rownames(topnegPROT.live.factor2.IgM) &lt;- topnegPROT.live.factor2.IgM$feature
+
+topnegPROT.common.factor2.IgM &lt;- weights.PROT.common %&gt;%
+  spread(factor, value) %&gt;%
+  filter(Factor1 &lt;= -10^-7) %&gt;%
+  filter(Factor2 &lt;= -10^-7) %&gt;%
+  arrange(Factor2)
+rownames(topnegPROT.common.factor2.IgM) &lt;- topnegPROT.common.factor2.IgM$feature
+
+loadings.prot.IgM &lt;- rbind(topnegPROT.fix.factor2.IgM,topnegPROT.live.factor2.IgM,topnegPROT.common.factor2.IgM)
+loadings.prot.IgM &lt;- arrange(loadings.prot.IgM, -(Factor2*Factor1) )
+
+topposrna.factor2.IgG &lt;-weights.RNA %&gt;%
+    spread(factor, value) %&gt;%
+  filter(Factor1 &lt;= -10^-8) %&gt;%
+  filter(Factor2 &gt;= 10^-8) %&gt;%
+  select(c(feature, Factor1, Factor2)) %&gt;%
+  mutate(sortFactor2timesminus1 =  -(Factor2*-Factor1)) %&gt;%
+  arrange(sortFactor2timesminus1)
+rownames(topposrna.factor2.IgG) &lt;- topposrna.factor2.IgG$feature
+##filter for not IgA
+#topposrna.factor2.IgG &lt;-topposrna.factor2.IgG[topposrna.factor2.IgG$feature %in% topnegrna.factor1.IgMIgG$feature,]
+
+topposPROT.fix.factor2.IgG &lt;- weights.PROT.fix %&gt;%
+    spread(factor, value) %&gt;%
+  filter(Factor1 &lt;= -10^-7) %&gt;%
+  filter(Factor2 &gt;= 10^-7) %&gt;%
+  arrange(-Factor2) 
+
+rownames(topposPROT.fix.factor2.IgG) &lt;- topposPROT.fix.factor2.IgG$feature
+
+topposPROT.live.factor2.IgG &lt;- weights.PROT.live %&gt;%
+    spread(factor, value) %&gt;%
+  filter(Factor1 &lt;= -10^-7) %&gt;%
+  filter(Factor2 &gt;= 10^-7) %&gt;%
+  arrange(-Factor2) 
+
+rownames(topposPROT.live.factor2.IgG) &lt;- topposPROT.live.factor2.IgG$feature
+
+topposPROT.common.factor2.IgG &lt;- weights.PROT.common %&gt;%
+    spread(factor, value) %&gt;%
+  filter(Factor1 &lt;= -10^-7) %&gt;%
+  filter(Factor2 &gt;= 10^-7) %&gt;%
+  arrange(-Factor2)
+rownames(topposPROT.common.factor2.IgG) &lt;- topposPROT.common.factor2.IgG$feature
+
+loadings.prot.IgG &lt;- rbind(topposPROT.fix.factor2.IgG,topposPROT.live.factor2.IgG,topposPROT.common.factor2.IgG)
+loadings.prot.IgG &lt;- arrange(loadings.prot.IgG, -(Factor2*-Factor1))
+
+loadings.prot.IgM &lt;- select(loadings.prot.IgM, c(feature, view, Factor1, Factor2))
+loadings.prot.IgG &lt;- select(loadings.prot.IgG, c(feature, view, Factor1, Factor2))
+loadings.prot.IgA &lt;- select(loadings.prot.IgA, c(feature, view, Factor1, Factor2))
+
+# write_tsv(loadings.prot.IgM, file = &quot;output/top-PROT-loadings_IgM.tsv&quot;)
+# write_tsv(loadings.prot.IgA, file = &quot;output/top-PROT-loadings_IgA.tsv&quot;)
+# write_tsv(loadings.prot.IgG, file = &quot;output/top-PROT-loadings_IgG.tsv&quot;)</code></pre>
+<pre class="r"><code># write_tsv(topnegrna.factor2.IgM, file = &quot;output/top-gene-loadings_IgM.tsv&quot;)
+# write_tsv(topposrna.factor1.IgA, file = &quot;output/top-gene-loadings_IgA.tsv&quot;)
+# write_tsv(topposrna.factor2.IgG, file = &quot;output/top-gene-loadings_IgG.tsv&quot;)
+
+list.genes.loadings.top20 &lt;- rev(c(as.character(topnegrna.factor2.IgM$feature[1:20]),as.character(topposrna.factor1.IgA$feature[1:20]),as.character(topposrna.factor2.IgG$feature[1:20])))
+
+list.genes.loadings.top200 &lt;- rev(c(as.character(topnegrna.factor2.IgM$feature[1:200]),as.character(topposrna.factor2.IgG$feature[1:200]), as.character(topposrna.factor1.IgA$feature[1:200])))
+
+list.genes.loadings.top200 &lt;- rev(c(as.character(topnegrna.factor2.IgM$feature[1:200]),as.character(topposrna.factor2.IgG$feature[1:200]), as.character(topposrna.factor1.IgA$feature[1:200])))
+
+list.genes.loadings.all &lt;- rev(c(as.character(topnegrna.factor2.IgM$feature),as.character(topposrna.factor2.IgG$feature), as.character(topposrna.factor1.IgA$feature)))</code></pre>
+<pre class="r"><code>All.diff.PROT.live &lt;- unique(c(as.character(loadings.prot.IgM$feature),as.character(loadings.prot.IgG$feature),as.character(loadings.prot.IgA$feature)))
+All.diff.PROT.fix &lt;- unique(c(as.character(loadings.prot.IgM$feature),as.character(loadings.prot.IgG$feature),as.character(loadings.prot.IgA$feature)))
+
+p.dotplot.Bcell.markers.l &lt;- DotPlot(seu.live,assay = &quot;PROT&quot;,features = rev(sort((All.diff.PROT.live[All.diff.PROT.live %in%list.Bcell.selection.new] ))), cols = &quot;RdBu&quot;,dot.scale = 3, scale.min = 0, scale = T, scale.by = &quot;size&quot;, col.min = -0.5, col.max = 0.5)+coord_flip() +
+  labs(x = &quot;Proteins \n(live)&quot;, y = &quot;&quot;, title = &quot;B-cell markers expression \nsurface-proteins&quot;) +
+  add.textsize +
+  theme(legend.position = &quot;none&quot;, 
+        legend.key.size = unit(2, &#39;mm&#39;),
+        axis.ticks.x=element_blank(),
+        axis.text.y = element_text(angle=0, hjust=1))
+
+p.dotplot.Bcell.markers.f &lt;- DotPlot(seu.fix,assay = &quot;PROT&quot;,features = rev(c(All.diff.PROT.fix[All.diff.PROT.fix%in%list.Bcell.selection.f] )) , cols = &quot;RdBu&quot;,dot.scale = 3, scale.min = 0, scale = T, scale.by = &quot;size&quot;, col.min = -0.5, col.max = 0.5)+coord_flip() +
+  labs(x = &quot;Proteins (fixed)&quot;, y = &quot;&quot;) +
+  add.textsize +
+  theme(legend.position = &quot;none&quot;, 
+        legend.key.size = unit(2, &#39;mm&#39;),
+        axis.text.y = element_text(angle=0, hjust=1))
+
+
+
+p.dotplot.gene.diff.gene &lt;- DotPlot(seu.live,assay = &quot;SCT&quot;,features =sort(unique(list.genes.loadings.all[list.genes.loadings.all %in%list.genes.select.diffgenes])) , cols = &quot;RdBu&quot;,dot.scale = 3, scale.min = 0, scale.max = 100, scale = T, scale.by = &quot;size&quot;, col.min = -0.5, col.max = 0.5)+coord_flip() +
+  labs(x = &quot;Selected differentiation \ngenes&quot;, y = &quot;&quot;, title = &quot;PC differentiation markers \nand regulators&quot;)  +
+  add.textsize +
+  theme(legend.position = &quot;none&quot;, 
+        axis.text.y = element_text(angle=0, hjust=1,face = &quot;italic&quot;), 
+        legend.key.size = unit(2, &#39;mm&#39;),
+        axis.text.x = element_text(angle=0, hjust=0.5),
+        legend.box=&quot;vertical&quot;, legend.margin=margin())
+
+p.dotplot.gene.diff.prot.f &lt;- DotPlot(seu.fix,assay = &quot;PROT&quot;,features = sort((All.diff.PROT.fix[All.diff.PROT.fix%in%list.prot.select.diffprots])) , cols = &quot;RdBu&quot;,dot.scale = 3, scale.min = 0,   scale.max= 100, scale = T, scale.by = &quot;size&quot;, col.min = -0.5, col.max = 0.5)+coord_flip() +
+  labs(x = &quot;Proteins  \n(fixed)&quot;, y = &quot;&quot;, title = &quot;&quot;) +
+  add.textsize +
+  theme(legend.position = &quot;none&quot;, 
+        legend.key.size = unit(2, &#39;mm&#39;),
+        axis.text.y = element_text(angle=0, hjust=1))
+
+p.dotplot.Diff.markers &lt;- plot_grid(p.dotplot.gene.diff.gene,p.dotplot.gene.diff.prot.f, ncol = 1, rel_heights = c(1.15,1.35))
+
+p.dotplot.prot.TACI &lt;- DotPlot(seu.live,assay = &quot;PROT&quot;,features = unique(c(&quot;CD40&quot;, &quot;CD70&quot;, &quot;CD27&quot;, &quot;BCMA&quot;, &quot;TACI&quot;,&quot;BAFFR&quot;)[c(&quot;CD40&quot;, &quot;CD70&quot;, &quot;CD27&quot;, &quot;BCMA&quot;, &quot;TACI&quot;,&quot;BAFFR&quot;) %in%All.diff.PROT.fix]) , cols = &quot;RdBu&quot;,dot.scale = 3, scale.min = 0, scale = T, scale.by = &quot;size&quot;, col.min = -0.5, col.max = 0.5)+coord_flip() +
+  labs(x = &quot;Proteins \n(live)&quot;, y = &quot;&quot;, title = &quot;TACI-BCMA-BAFFR \nmembrane-protein levels&quot;)  +  
+  add.textsize +
+  theme(legend.position = &quot;none&quot;, 
+        legend.key.size = unit(2, &#39;mm&#39;),
+        axis.ticks.x=element_blank(),
+        axis.text.y = element_text(angle=0, hjust=1))
+
+p.dotplot.gene.homing.l &lt;- DotPlot(seu.live,assay = &quot;PROT&quot;,features = unique(list.homing.selection[list.homing.selection %in%All.diff.PROT.live]) , cols = &quot;RdBu&quot;,dot.scale = 3, scale.min = 0, scale = T, scale.by = &quot;size&quot;, col.min = -0.5, col.max = 0.5)+coord_flip() +
+  labs(x = &quot;Proteins \n(live)&quot;, y = &quot;&quot;, title = &quot;Homing receptors expression \n surface-proteins&quot;)  +  
+  add.textsize +
+  theme(legend.position = &quot;none&quot;, 
+        legend.key.size = unit(2, &#39;mm&#39;),
+        axis.ticks.x=element_blank(),
+        axis.text.y = element_text(angle=0, hjust=1))
+
+p.dotplot.gene.homing.f &lt;- DotPlot(seu.fix,assay = &quot;PROT&quot;,features = list.homing.selection.f[list.homing.selection.f %in%All.diff.PROT.fix], cols = &quot;RdBu&quot;,dot.scale = 3,  scale.min = 0, scale = T, scale.by = &quot;size&quot;, col.min = -0.5, col.max = 0.5)+coord_flip() +
+  labs(x = &quot;Proteins \n(fixed)&quot;, y = &quot;&quot;)  +
+  theme(legend.position = &quot;bottom&quot;, 
+        legend.key.size = unit(2, &#39;mm&#39;),
+        axis.text.x = element_text(angle=0, hjust=0.5),
+        legend.box=&quot;vertical&quot;, legend.margin=margin(),
+        axis.text.y = element_text(angle=0, hjust=1))+
+  add.textsize #
+
+p.dotplot.Bcell.markers &lt;- plot_grid(p.dotplot.Bcell.markers.l,p.dotplot.prot.TACI,labels = panellabels[c(2,4)], label_size = 10, ncol = 1,rel_heights = c(1,1.2))
+
+p.dotplot.gene.homing.f &lt;- addSmallLegend(p.dotplot.gene.homing.f, barwidth =4, barheight = 0.2, title_color = &quot;Avg. scaled \ncounts&quot;, spaceLegend = 0.001)
+
+p.dotplot.gene.homing&lt;- plot_grid( p.dotplot.gene.homing.l,p.dotplot.gene.homing.f, ncol = 1, rel_heights = c(1.6,1.4), labels = panellabels[c(5)], label_size = 10) </code></pre>
+<pre class="r"><code>p.Fig3.row1 &lt;- plot_grid(p.loadings.scatter.prot, labels = panellabels[c(1)], label_size = 10, ncol =1, rel_widths = c(1))
+# ggsave(p.Fig3.row1, filename = &quot;output/paper_figures/Fig3.A.pdf&quot;, width = 177, height = 80, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
+# ggsave(p.Fig3.row1, filename = &quot;output/paper_figures/Fig3.A.png&quot;, width = 177, height = 80, units = &quot;mm&quot;,  dpi = 300)
+
+p.Fig3.row2 &lt;- plot_grid(p.dotplot.Bcell.markers,p.dotplot.Diff.markers,
+p.dotplot.gene.homing, labels = c(&quot;&quot;,panellabels[c(3)]), label_size = 10, ncol =3, rel_widths = c(1,0.8,1.2))
+# ggsave(p.Fig3.row2, filename = &quot;output/paper_figures/Fig3.BCD.pdf&quot;, width = 177, height = 120, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
+# ggsave(p.Fig3.row2, filename = &quot;output/paper_figures/Fig3.BCD.png&quot;, width = 177, height = 120, units = &quot;mm&quot;,  dpi = 300)</code></pre>
+<pre class="r"><code>p.Fig3.row1</code></pre>
+<p><img src="figure/hallmarks.Rmd/Figure3.row1-1.png" width="691.2" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>p.Fig3.row2</code></pre>
+<p><img src="figure/hallmarks.Rmd/Figure3.row2-1.png" width="691.2" style="display: block; margin: auto;" /></p>
+</div>
+<div id="fig.4" class="section level3">
+<h3>Fig.4</h3>
+<pre class="r"><code>## plots cytokinereceptors
+
+cytokinerecept.list &lt;- c(&quot;IL2RA&quot;, &quot;IL2RB&quot;,&quot;IL2RG&quot;, &quot;IL6R&quot;, &quot;IL15RA&quot;, &quot;IFNAR1&quot;, &quot;IFNAR2&quot;)
+
+p.dotplot.gene.cytokinerecept &lt;- DotPlot(seu.live,assay = &quot;SCT&quot;,features = c(rev(cytokinerecept.list)), cols = &quot;RdBu&quot;,dot.scale = 3, scale.min = 0, scale = T, scale.by = &quot;size&quot;, col.min = -0.5, col.max = 0.5)+coord_flip() +
+  labs(x = &quot;Gene&quot;, y = &quot;&quot;, title = &quot;Cytokine receptor \nmRNA expression&quot;) +
+  add.textsize+
+    guides(size =  guide_legend(title = &quot;Percent \nexpressed&quot;),color = guide_colorbar(title = &quot;Avg. scaled\nexpression&quot;))
+#+  guides(size = &quot;none&quot;,color = &quot;none&quot;)
+
+p.vln.prot.cytokinerecept.IL6R &lt;- VlnPlot(seu.live, assay = &quot;PROT&quot;,features = c(&quot;IL6&quot;), pt.size = 0, cols = colors.clusters, ncol = 1, log = T) +
+  stat_summary(fun.y = median, geom=&#39;point&#39;, size = 2.5, colour = &quot;black&quot;, shape = 95) &amp;
+  labs(x = &quot;&quot;, y = &quot;IL6R protein (log)&quot;, title = &quot;&quot;) &amp;
+  add.textsize  +
+  theme(legend.position = &quot;none&quot;, 
+        legend.key.size = unit(2, &#39;mm&#39;),
+        axis.text.x = element_text(angle=0, hjust=0.5),
+        plot.title = element_blank())
+   
+
+p.vln.prot.cytokinerecept.IL2R &lt;- VlnPlot(seu.live, assay = &quot;PROT&quot;,features = c(&quot;CD25&quot;), pt.size = 0, cols = colors.clusters, ncol = 1, log = T) &amp; 
+  stat_summary(fun.y = median, geom=&#39;point&#39;, size = 2.5, colour = &quot;black&quot;, shape = 95) &amp;
+  labs(x = &quot;&quot;, y = &quot;IL2R protein (log)&quot;, title = &quot;Cytokine receptors \nprotein expression&quot;) &amp;
+  add.textsize +
+  theme(legend.position = &quot;none&quot;, 
+        legend.key.size = unit(2, &#39;mm&#39;),
+        axis.text.x = element_text(angle=0, hjust=0.5))
+   
+p.vln.prot.cytokinerecept &lt;- p.vln.prot.cytokinerecept.IL2R/p.vln.prot.cytokinerecept.IL6R
+
+p.cytokinerecept.levels &lt;- p.dotplot.gene.cytokinerecept +p.vln.prot.cytokinerecept
+
+
+#### JAKSTAT
+
+toplot.prot &lt;- c(&quot;pJAK1&quot;,&quot;pSTAT1&quot;, &quot;pSTAT3&quot;,&quot;pSTAT5&quot;, &quot;pSTAT6&quot;)
+
+p.dotplot.JAKSTAT.PROT &lt;-  DotPlot(seu.fix,assay = &quot;PROT&quot;,features = rev(toplot.prot), cols = &quot;RdBu&quot;,dot.scale = 3, scale.min = 0, scale = T, scale.by = &quot;size&quot;)+
+  coord_flip() +
+  labs(x = &quot;Intracellular phosphorylation&quot;, y = &quot;&quot;, title = &quot;Ig-specific JAK-STAT activity \nphospho-protein levels&quot;) +
+  add.textsize +
+    guides(size =  guide_legend(title = &quot;Percent \nexpressed&quot;),color = guide_colorbar(title = &quot;Avg. scaled\np-protein\nlevels&quot;))
+
+toplot.RNA &lt;- c(&quot;STAT1&quot;, &quot;STAT3&quot;,&quot;PRDM1&quot;, &quot;STAT6&quot;)
+
+p.dotplot.JAKSTAT.RNA &lt;-  DotPlot(seu.live,assay = &quot;SCT&quot;,features = rev(toplot.RNA), cols = &quot;RdBu&quot;,col.min = -0.5,col.max = 0.5,dot.scale = 3, scale.min = 0, scale = T, scale.by = &quot;size&quot;)+
+  coord_flip() +
+  labs(x = &quot;Transcription Factor (RNA expression)&quot;, y = &quot;&quot;, title = &quot;Ig-specific STAT \nmRNA expression&quot;) +
+  add.textsize +
+    guides(size =  guide_legend(title = &quot;Percent \nexpressed&quot;),color = guide_colorbar(title = &quot;Avg. scaled\nexpression&quot;))
+#+  guides(size = &quot;none&quot;,color = &quot;none&quot;)
+
+
+p.JAKSTAT &lt;- p.dotplot.JAKSTAT.RNA +p.dotplot.JAKSTAT.PROT 
+
+
+#### BCR activity
+
+p.MOFA.factors.cluster &lt;-  plot_factors(mofa, 
+   factors =c(1:2),
+  color_by = &quot;IgClass&quot;,
+  dot_size = 1.2
+) +labs(x = &quot;Factor 1&quot;, y = &quot;Factor 2&quot;, title = &quot;Differential BCR signaling activity \nacross three Ig-classes&quot;, color = &quot;Ig-class&quot;) +
+scale_fill_manual(&quot;Cluster&quot;,values= colors.clusters) +
+  add.textsize&amp;
+    theme_half_open()&amp; 
+  theme(legend.position = c(0.85,0.95), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=7, face = &quot;bold&quot;,hjust = 0)) 
+
+
+p.MOFA.factors.CD79a &lt;- plot_factors(mofa, 
+  factors = c(1:2),
+  color_by = &quot;pCD79a_f&quot;,dot_size = 1.2,show_missing = FALSE
+) &amp;
+    add.textsize &amp;  
+  labs(x = &quot;Factor 1&quot;, y = &quot;Factor 2&quot;, fill = &quot;Scaled \ncounts&quot;, title = &quot;pCD79a\nlevels&quot;) &amp;
+  theme_half_open()&amp; 
+  theme(legend.position = c(0.85,0.95), legend.key.size = unit(2, &#39;mm&#39;)) &amp;
+  theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          text = element_text(size=7), axis.ticks = element_blank(),
+          axis.text=element_text(size=7),
+          plot.title = element_text(size=7, face = &quot;bold&quot;,hjust = 0)) &amp;
+  scale_fill_gradient2( limits = c(-1, 1),low=&quot;dodgerblue3&quot;, mid=&quot;white&quot;, high=&quot;firebrick3&quot;,  oob = scales::squish)
+
+p.dotplot.BCR.sign.phospho &lt;- DotPlot(seu.fix,assay = &quot;PROT&quot;, features =  rev(c(&quot;pCD79a&quot;,  &quot;pBLNK&quot;, &quot;pSrc&quot;, &quot;pp38&quot;,&quot;pSyk&quot;,&quot;pp65&quot;, &quot;pJNK&quot;, &quot;p-c-Jun&quot;, &quot;pTOR&quot;, &quot;pAMPKb1&quot;, &quot;pIKKab&quot;)), cols = &quot;RdBu&quot;,dot.scale = 2,scale.min = 0, scale.max = 100, scale = T, scale.by = &quot;size&quot;, col.min = -1, col.max = 1)+ 
+  cowplot::theme_cowplot() + 
+  coord_flip()+
+  add.textsize +
+  labs(x = &quot;BCR signaling&quot;, y = &quot;&quot;, title =&quot;B-cell receptor related \nsignalling activity&quot;) +
+  theme(legend.position = &quot;right&quot;, legend.key.size = unit(2, &#39;mm&#39;)) +
+    guides(size =  guide_legend(title = &quot;Percent \nexpressed&quot;),color = guide_colorbar(title = &quot;Avg. scaled\np-protein\nlevels&quot;))</code></pre>
+<pre class="r"><code>p.cytokine_JAKSTAT &lt;- plot_grid( 
+              addSmallLegend(p.dotplot.gene.cytokinerecept, title_color = &quot;Avg. scaled \nexpression&quot;),
+              p.vln.prot.cytokinerecept,
+              addSmallLegend(p.dotplot.JAKSTAT.RNA, title_color = &quot;Avg. scaled \nexpression&quot;),
+              addSmallLegend(p.dotplot.JAKSTAT.PROT),
+            labels = c(panellabels[c(1:4)]), label_size = 10, ncol =4,rel_widths = c(1,0.6,1,1))
+
+
+p.BCR &lt;- plot_grid(p.MOFA.factors.cluster, p.MOFA.factors.CD79a,addSmallLegend(p.dotplot.BCR.sign.phospho), labels = c(panellabels[c(5)], &quot;&quot;,panellabels[c(6:7)]), label_size = 10, ncol =3,rel_widths = c(1,1.25,1))
+
+fig.4.signalling &lt;- plot_grid(p.cytokine_JAKSTAT, p.BCR, labels = &quot;&quot;, label_size = 10, ncol =1,rel_heights = c(1.2,1))
+
+
+# ggsave(fig.4.signalling, filename = &quot;output/paper_figures/Fig4.pdf&quot;, width = 177, height = 150, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
+# ggsave(fig.4.signalling, filename = &quot;output/paper_figures/Fig4.png&quot;, width = 177, height = 150, units = &quot;mm&quot;,  dpi = 300)
+
+fig.4.signalling</code></pre>
+<p><img src="figure/hallmarks.Rmd/Fig4-1.png" width="691.2" style="display: block; margin: auto;" /></p>
+</div>
+<div id="differential-geneexpression-per-ig-class-suppl"
+class="section level3">
+<h3>Differential geneexpression per Ig-class (suppl)</h3>
+<pre class="r"><code>## RNA sign Differences
+
+markers.OnevsAll &lt;- FindAllMarkers(seu.live, assay = &quot;SCT&quot;, logfc.threshold = 0.01, test.use = &quot;wilcox&quot;, only.pos = T, verbose = T)
+markers.OnevsAll &lt;- filter(markers.OnevsAll, p_val &lt;= 0.05)
+markers.IgMvsAll &lt;- filter(markers.OnevsAll, cluster == &quot;IgM&quot;)
+markers.IgAvsAll &lt;- filter(markers.OnevsAll, cluster == &quot;IgA&quot;)
+markers.IgGvsAll &lt;- filter(markers.OnevsAll, cluster == &quot;IgG&quot;)
+
+markers.IgAvsAll.list &lt;- unique(replace(rownames(markers.IgAvsAll), rownames(markers.IgAvsAll)==&quot;JCHAIN1&quot;, &quot;JCHAIN&quot;))
+markers.OnevsAll.list &lt;- unique(replace(rownames(markers.OnevsAll), rownames(markers.OnevsAll)==&quot;JCHAIN1&quot;, &quot;JCHAIN&quot;))</code></pre>
+<pre class="r"><code>p.dotplot.diff.genes.all &lt;- DotPlot(seu.live,assay = &quot;SCT&quot;, features =  rev(markers.OnevsAll.list), group.by =  &quot;clusters_pcaIG_named&quot;, cols = &quot;RdBu&quot;,dot.scale = 2,scale.min = 0, scale.max = 100, scale = T, scale.by = &quot;size&quot;, col.min = -1, col.max = 1) +
+  cowplot::theme_cowplot() + 
+  coord_flip()+
+  add.textsize +
+  theme(legend.position = &quot;right&quot;, legend.key.size = unit(2, &#39;mm&#39;))
+
+p.dotplot.diff.genes.IgM &lt;- DotPlot(seu.live,assay = &quot;SCT&quot;, features =  rev(rownames(markers.IgMvsAll)),split.by = &quot;donor&quot;, cols = &quot;RdBu&quot;,dot.scale = 2,scale.min = 0, scale.max = 100, scale = T, scale.by = &quot;size&quot;, col.min = -1, col.max = 1) +
+  cowplot::theme_cowplot() + 
+  coord_flip()+
+  add.textsize +
+  theme(legend.position = &quot;none&quot;, legend.key.size = unit(2, &#39;mm&#39;))+
+  labs(title=&quot;IgM versus others (88 genes)&quot;,x=&quot;Differential expressed genes (p-val &lt; 0.05, logfc &gt;= 0.01)&quot;, y = &quot;&quot;) +
+  scale_y_discrete(labels = c(&quot;D32 \n&quot;,&quot;D33 \nIgM&quot;, &quot;D40&quot;,&quot;D32 \n&quot;,&quot;D33 \nIgG&quot;, &quot;D40&quot;,&quot;D32 \n&quot;,&quot;D33 \nIgA&quot;, &quot;D40&quot;))
+
+p.dotplot.diff.genes.IgA &lt;- DotPlot(seu.live,assay = &quot;SCT&quot;, features =  rev(markers.IgAvsAll.list),split.by = &quot;donor&quot;, cols = &quot;RdBu&quot;,dot.scale = 2,scale.min = 0, scale.max = 100, scale = T, scale.by = &quot;size&quot;, col.min = -1, col.max = 1) +
+  cowplot::theme_cowplot() + 
+  coord_flip()+
+  add.textsize +
+  theme(legend.position = &quot;none&quot;, legend.key.size = unit(2, &#39;mm&#39;))+
+  labs(title=&quot;IgA versus others (28 genes)&quot;,x=&quot;Differential expressed genes (p-val &lt; 0.05, logfc &gt;= 0.01)&quot;, y = &quot;&quot;)+
+  scale_y_discrete(labels = c(&quot;D32 \n&quot;,&quot;D33 \nIgM&quot;, &quot;D40&quot;,&quot;D32 \n&quot;,&quot;D33 \nIgG&quot;, &quot;D40&quot;,&quot;D32 \n&quot;,&quot;D33 \nIgA&quot;, &quot;D40&quot;))
+
+p.dotplot.diff.genes.IgG &lt;- DotPlot(seu.live,assay = &quot;SCT&quot;, features =  rev(rownames(markers.IgGvsAll)),split.by = &quot;donor&quot;, cols = &quot;RdBu&quot;,dot.scale = 2,scale.min = 0, scale.max = 100, scale = T, scale.by = &quot;size&quot;, col.min = -1, col.max = 1) +
+  cowplot::theme_cowplot() + 
+  coord_flip()+
+  add.textsize +
+  theme(legend.position = &quot;right&quot;, legend.key.size = unit(2, &#39;mm&#39;))+
+  labs(title=&quot;IgG versus others (67 genes)&quot;,x=&quot;Differential expressed genes (p-val &lt; 0.05, logfc &gt;= 0.01)&quot;, y = &quot;&quot;)+
+  scale_y_discrete(labels = c(&quot;D32 \n&quot;,&quot;D33 \nIgM&quot;, &quot;D40&quot;,&quot;D32 \n&quot;,&quot;D33 \nIgG&quot;, &quot;D40&quot;,&quot;D32 \n&quot;,&quot;D33 \nIgA&quot;, &quot;D40&quot;))</code></pre>
+<pre class="r"><code>p.suppl.diff.genes &lt;- plot_grid(p.dotplot.diff.genes.IgM,p.dotplot.diff.genes.IgG, p.dotplot.diff.genes.IgA,ncol = 2, rel_widths = c(1,1.3), rel_heights = c(1,0.7), labels = panellabels[1:3], label_size = 10)
+
+
+# ggsave(p.suppl.diff.genes, filename = &quot;output/paper_figures/p.suppl.diff.genes.pdf&quot;, width = 183, height = 320, units = &quot;mm&quot;,  dpi = 300, useDingbats = FALSE)
+# ggsave(p.suppl.diff.genes, filename = &quot;output/paper_figures/p.suppl.diff.genes.png&quot;, width = 183, height = 320, units = &quot;mm&quot;,  dpi = 300)
+p.suppl.diff.genes</code></pre>
+<p><img src="figure/hallmarks.Rmd/unnamed-chunk-1-1.png" width="691.2" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19044)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_Netherlands.1252  LC_CTYPE=English_Netherlands.1252   
+[3] LC_MONETARY=English_Netherlands.1252 LC_NUMERIC=C                        
+[5] LC_TIME=English_Netherlands.1252    
+
+attached base packages:
+[1] parallel  stats4    stats     graphics  grDevices utils     datasets 
+[8] methods   base     
+
+other attached packages:
+ [1] MOFA2_1.1.17           ggupset_0.3.0          RColorBrewer_1.1-2    
+ [4] clusterProfiler_3.18.1 enrichplot_1.10.2      UCell_1.0.0           
+ [7] data.table_1.14.2      scales_1.1.1           cowplot_1.1.1         
+[10] ggthemes_4.2.4         kableExtra_1.3.4       knitr_1.36            
+[13] org.Hs.eg.db_3.12.0    AnnotationDbi_1.52.0   IRanges_2.24.1        
+[16] S4Vectors_0.28.1       Biobase_2.50.0         BiocGenerics_0.36.1   
+[19] forcats_0.5.1          stringr_1.4.0          dplyr_1.0.7           
+[22] purrr_0.3.4            readr_2.1.0            tidyr_1.1.4           
+[25] tibble_3.1.5           ggplot2_3.3.5          tidyverse_1.3.1       
+[28] Matrix_1.3-4           SeuratObject_4.0.2     Seurat_4.0.2          
+[31] workflowr_1.6.2       
+
+loaded via a namespace (and not attached):
+  [1] utf8_1.2.2            reticulate_1.22       tidyselect_1.1.1     
+  [4] RSQLite_2.2.8         htmlwidgets_1.5.4     BiocParallel_1.24.1  
+  [7] grid_4.0.3            Rtsne_0.15            scatterpie_0.1.7     
+ [10] munsell_0.5.0         codetools_0.2-16      ica_1.0-2            
+ [13] future_1.23.0         miniUI_0.1.1.1        withr_2.5.0          
+ [16] colorspace_2.0-2      GOSemSim_2.16.1       filelock_1.0.2       
+ [19] highr_0.9             rstudioapi_0.13       ROCR_1.0-11          
+ [22] tensor_1.5            DOSE_3.16.0           listenv_0.8.0        
+ [25] labeling_0.4.2        MatrixGenerics_1.2.1  git2r_0.28.0         
+ [28] polyclip_1.10-0       pheatmap_1.0.12       bit64_4.0.5          
+ [31] farver_2.1.0          rhdf5_2.34.0          downloader_0.4       
+ [34] rprojroot_2.0.2       basilisk_1.2.1        parallelly_1.29.0    
+ [37] vctrs_0.3.8           generics_0.1.1        xfun_0.26            
+ [40] R6_2.5.1              graphlayouts_0.7.2    rhdf5filters_1.2.1   
+ [43] DelayedArray_0.16.3   fgsea_1.16.0          spatstat.utils_2.2-0 
+ [46] cachem_1.0.6          assertthat_0.2.1      vroom_1.5.6          
+ [49] promises_1.2.0.1      ggraph_2.0.5          gtable_0.3.0         
+ [52] globals_0.14.0        goftest_1.2-2         tidygraph_1.2.0      
+ [55] rlang_0.4.11          systemfonts_1.0.3     splines_4.0.3        
+ [58] lazyeval_0.2.2        spatstat.geom_2.2-2   broom_0.7.10         
+ [61] BiocManager_1.30.16   yaml_2.2.1            reshape2_1.4.4       
+ [64] abind_1.4-5           modelr_0.1.8          backports_1.3.0      
+ [67] httpuv_1.6.3          qvalue_2.22.0         tools_4.0.3          
+ [70] ellipsis_0.3.2        spatstat.core_2.3-0   jquerylib_0.1.4      
+ [73] ggridges_0.5.3        Rcpp_1.0.7            plyr_1.8.6           
+ [76] basilisk.utils_1.2.2  rpart_4.1-15          deldir_1.0-2         
+ [79] pbapply_1.5-0         viridis_0.6.2         zoo_1.8-9            
+ [82] haven_2.4.3           ggrepel_0.9.1         cluster_2.1.0        
+ [85] fs_1.5.0              magrittr_2.0.1        scattermore_0.7      
+ [88] DO.db_2.9             lmtest_0.9-38         reprex_2.0.1         
+ [91] RANN_2.6.1            whisker_0.4           fitdistrplus_1.1-6   
+ [94] matrixStats_0.61.0    hms_1.1.1             patchwork_1.1.1      
+ [97] mime_0.12             evaluate_0.14         xtable_1.8-4         
+[100] readxl_1.3.1          gridExtra_2.3         compiler_4.0.3       
+[103] shadowtext_0.0.9      KernSmooth_2.23-17    crayon_1.4.2         
+[106] htmltools_0.5.2       ggfun_0.0.4           mgcv_1.8-33          
+[109] later_1.3.0           tzdb_0.2.0            lubridate_1.8.0      
+[112] DBI_1.1.1             corrplot_0.92         tweenr_1.0.2         
+[115] dbplyr_2.1.1          rappdirs_0.3.3        MASS_7.3-53          
+[118] cli_3.6.0             igraph_1.2.6          pkgconfig_2.0.3      
+[121] rvcheck_0.2.1         plotly_4.10.0         spatstat.sparse_2.0-0
+[124] xml2_1.3.2            svglite_2.0.0         bslib_0.3.1          
+[127] webshot_0.5.2         rvest_1.0.2           yulab.utils_0.0.4    
+[130] digest_0.6.28         sctransform_0.3.2     RcppAnnoy_0.0.19     
+[133] spatstat.data_2.1-0   fastmatch_1.1-3       rmarkdown_2.11       
+[136] cellranger_1.1.0      leiden_0.3.9          uwot_0.1.10          
+[139] shiny_1.7.1           lifecycle_1.0.1       nlme_3.1-149         
+[142] jsonlite_1.7.2        Rhdf5lib_1.12.1       limma_3.46.0         
+[145] viridisLite_0.4.0     fansi_0.5.0           pillar_1.6.4         
+[148] lattice_0.20-41       fastmap_1.1.0         httr_1.4.2           
+[151] survival_3.2-7        GO.db_3.12.1          glue_1.4.2           
+[154] png_0.1-7             bit_4.0.4             HDF5Array_1.18.1     
+[157] ggforce_0.3.3         stringi_1.7.5         sass_0.4.0           
+[160] blob_1.2.2            memoise_2.0.1         irlba_2.3.3          
+[163] future.apply_1.8.1   </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

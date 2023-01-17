@@ -162,6 +162,8 @@ scale_fill_manual("Donor",values=c("#E69F00", "#56B4E9"))+
 
 ## Differentiated Plasma-Blast/Cells
 
+To determine the cultures 'differentiation state' CD27-high & IgD-low cells are gated, representing differentiated plasmablast/cells. 
+
 ```{r generate_plot_panels}
 data.CC.fix$CD27 <- FetchData(seu.fix[["PROT"]], "CD27", slot = "scale.data")$CD27
 data.CC.fix$IgD <- FetchData(seu.fix[["PROT"]], "IgD", slot = "scale.data")$IgD
@@ -232,9 +234,6 @@ scale_fill_manual(name = "Donor",values=c( "#E69F00", "#56B4E9")) +
 
 ```
 
-## CD27+IgDlow
-
-To determine the cultures 'differentiation state' CD27-high & IgD-low cells are gated, representing differentiated plasmablast/cells. 
 
 ```{r generate_plot_panels_2}
 seu.live <- SetIdent(seu.live,value = "CD27_IgD_state")
@@ -353,7 +352,7 @@ p.CD27IgD.dotplot.PROT.intra.markers <- DotPlot(seu.fix,assay = "PROT", features
 ```
 
 
-## Filter & Save Seurat dataobjects
+#### General properties seurat datasets:
 
 Fixed-cell dataset: (original and CD27+IgD- object )
 ```{r seuratObject_fix}
@@ -375,9 +374,10 @@ seu.live.filtered
 ```
 
 
-Save seurat objects with all cells & information on CC , CD27, and Ig-subclasses. 
 
-```{r #saveRDS}
+```{r}
+##Save seurat objects with all cells & information on CC , CD27, and Ig-subclasses.
+
 #saveRDS(seu.fix, "output/seu.fix_norm_cellstate.rds")
 #saveRDS(seu.live, "output/seu.live_norm_cellstate.rds")
 
@@ -409,9 +409,6 @@ seu.fix[["clusters_pcaIG_named"]] <- Idents(object = seu.fix)
 ## Run PCA on Ig proteins and on Ig genes
 seu.live <- RunPCA(seu.live, assay = "PROT",reduction.name = 'pcaIGPROT', features = c("IgM","IgA","IgG", "IgD", "IgE"))
 
-
-
-
 seu.live <- RunUMAP(seu.live,dims = 1:4, reduction = "pcaIGPROT", reduction.name = "IGUMAP")
 seu.live <- FindNeighbors(seu.live, reduction = "pcaIGPROT",assay = "PROT", dims = 1:4, graph.name = "pcaIG_nn")
 seu.live <- FindClusters(seu.live, graph.name = "pcaIG_nn",  algorithm = 3,resolution = 0.2, verbose = FALSE)
@@ -421,9 +418,6 @@ seu.live[["clusters_pcaIG"]] <- Idents(object = seu.live)
 seu.live <- RenameIdents(object = seu.live, `0` = "IgM", `1` = "IgG", `2` = "IgA")
 seu.live[["clusters_pcaIG_named"]] <- Idents(object = seu.live)
 ```
-
-
-
 
 ```{r}
 ### Plots Ig-protein based clustering
@@ -999,7 +993,7 @@ fig.2.full
 
 ## Supplementary figures
 
-### Supplement CD27+IgD- subclasses (fig1)
+### Supplement CD27+IgD- subclasses 
 
 ```{r}
 p.percentages <- plot_grid(p.percentage.cycling.fix,
@@ -1036,12 +1030,9 @@ p.supplement.percentages.dotplots <- plot_grid(p.percentages,
 ```{r Suppl_CC_CD27_dotplots, fig.width= 7.2, fig.height= 8.65}
 p.supplement.percentages.dotplots
 ```
-**Supplementary figure** Additional information supplementing figure 1. *a.* fixed data percentage cycling. *b-c.* Percentages CD27+IgD- cells in datasets. *d-j*  Differentially expressed genes and proteins. 
+**Supplementary figure** Additional information supplementing figure 1. *A.* fixed data percentage cycling. *B-C.* Percentages CD27+IgD- cells in datasets. *D-J*  Differentially expressed genes and proteins. 
 
-
-### Supplement MOFA properties (fig2)
-
-### UMAP on shared proteins
+##### UMAP on shared proteins
 
 ```{r reviewer_umap_common_prot, fig.width=2.4, fig.height=2.36}
 library(umap)
@@ -1067,15 +1058,20 @@ scale_fill_manual("Dataset",values=c("lightgrey", "black")) &
   theme(legend.position = c(0.85,0.25), legend.key.size = unit(2, 'mm')) &
   theme(axis.text.x = element_blank(),
           axis.text.y = element_blank(),
-          text = element_text(size=9), axis.ticks = element_blank(),
-          axis.text=element_text(size=9),
-          plot.title = element_text(size=9, face = "bold",hjust = 0)) 
-reviewer_umap_commonProt
+          text = element_text(size=12), axis.ticks = element_blank(),
+          axis.text=element_text(size=12),
+          plot.title = element_text(size=12, face = "bold",hjust = 0)) 
+#reviewer_umap_commonProt
 # 
 # ggsave(reviewer_umap_commonProt, filename = "output/paper_figures/reviewer_umap_commonProt.png", width = 70, height = 80, units = "mm",  dpi = 300)
 # ggsave(reviewer_umap_commonProt, filename = "output/paper_figures/reviewer_umap_commonProt.eps", width = 70, height = 80, units = "mm",  dpi = 300)
 
 ```
+
+
+
+### Supplement MOFA properties and clustering
+
 
 ```{r}
 p.mofa.suppl <- plot_grid(
@@ -1085,12 +1081,15 @@ p.mofaoverview.input,p.variance.perfactor.all,reviewer_umap_commonProt,NULL,plot
 
  ggsave(p.mofa.suppl, filename = "output/paper_figures/Suppl_mofa.pdf", width = 483, height = 300, units = "mm",  dpi = 300, useDingbats = FALSE)
  ggsave(p.mofa.suppl, filename = "output/paper_figures/Suppl_mofa.png", width = 483, height = 300, units = "mm",  dpi = 300)
-
-p.mofa.suppl
 ```
 
 
-### Supplement Seurat protein clustering (fig2)
+```{r, fig, fig.width=7.2, fig.height=6}
+p.mofa.suppl
+```
+**Supplementary figure** Additional information on MOFA analysis 
+
+### Supplement Seurat protein clustering
 
 ```{r}
 
@@ -1115,106 +1114,8 @@ fig.2.suppl.full <- plot_grid(fig.2.suppl.row1, fig.2.suppl.row2,p.umap.fix.all,
 fig.2.suppl.full
 ```
 
-**Supplementary figure** Fixed cells Ig-classes
+**Supplementary figure** Ig-class protein based visualization
 
-### Supplement Ig-class % and ELISA
-
-Import ELISA results
-
-
-```{r}
-#pzfx_tables("data/supplementary/Figure 3/Fig3ELISA/GM6642 Ig ELISA.pzfx")
-
-df.ELISA.IgA <- read_pzfx("data/supplementary/Figure 3/Fig3ELISA/GM6642 Ig ELISA.pzfx", table = "IgA production in time")
-
-df.ELISA.IgA <- df.ELISA.IgA %>% gather(sampleID,signal,2:ncol(df.ELISA.IgA))%>%
-  mutate(sample = ROWTITLE,Cytokine = "IgA")
-
-df.ELISA.IgG <- read_pzfx("data/supplementary/Figure 3/Fig3ELISA/GM6642 Ig ELISA.pzfx", table = "IgG production in time")
-
-df.ELISA.IgG <- df.ELISA.IgG %>% gather(sampleID,signal,2:ncol(df.ELISA.IgG))%>%
-  mutate(sample = ROWTITLE,Cytokine = "IgG")
-
-df.ELISA.IgM <- read_pzfx("data/supplementary/Figure 3/Fig3ELISA/GM6642 Ig ELISA.pzfx", table = "IgM production in time")
-
-df.ELISA.IgM <- df.ELISA.IgM %>% gather(sampleID,signal,2:ncol(df.ELISA.IgM))%>%
-  mutate(sample = ROWTITLE,Cytokine = "IgM")
-
-
-df.ELISA.all <- rbind(df.ELISA.IgM, df.ELISA.IgA) %>%
-  rbind(.,df.ELISA.IgG)%>%
-  separate(sampleID,c("sampleID", "rep"), sep = "_") 
-
-df.ELISA.all$sample <- factor(df.ELISA.all$sample, levels = c("Day 0" , "Day 1",  "Day 4",  "Day 7",  "Day 11"))
-
-summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
-                      conf.interval=.95, .drop=TRUE) {
-    library(plyr)
-
-    # New version of length which can handle NA's: if na.rm==T, don't count them
-    length2 <- function (x, na.rm=FALSE) {
-        if (na.rm) sum(!is.na(x))
-        else       length(x)
-    }
-
-    # This does the summary. For each group's data frame, return a vector with
-    # N, mean, and sd
-    datac <- ddply(data, groupvars, .drop=.drop,
-      .fun = function(xx, col) {
-        c(N    = length2(xx[[col]], na.rm=na.rm),
-          mean = mean   (xx[[col]], na.rm=na.rm),
-          sd   = sd     (xx[[col]], na.rm=na.rm)
-        )
-      },
-      measurevar
-    )
-
-    # Rename the "mean" column    
-    datac <- rename(datac, c("mean" = measurevar))
-
-    datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
-
-    # Confidence interval multiplier for standard error
-    # Calculate t-statistic for confidence interval: 
-    # e.g., if conf.interval is .95, use .975 (above/below), and use df=N-1
-    ciMult <- qt(conf.interval/2 + .5, datac$N-1)
-    datac$ci <- datac$se * ciMult
-
-    return(datac)
-}
-
-tgc <- summarySE(df.ELISA.all, measurevar="signal", groupvars=c("sample", "Cytokine","sampleID"))
-
-
-p.ELISA <- ggplot(tgc, aes(x=sample, y=signal, colour=sampleID, group=sampleID)) + geom_point( size=2, shape=21, fill="white") + # 21 is filled circle
-    geom_errorbar(aes(ymin=signal-se, ymax=signal+se), colour="black", width=.1) +
-    geom_line() +
-    
-    xlab("") +
-    ylab("Concentration (ng/ml)") +
-    scale_colour_hue(name="Donor")+
-    theme_few()+
-  facet_wrap(.~Cytokine, scales = "free_y")+
-  add.textsize+ theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-```
-
-
-```{r}
-
-Suppl.IgG.validation <- plot_grid(p.percentages.Igclasses.MOFAclusters,p.ELISA, labels = panellabels[1:2], label_size = 10, ncol = 2, rel_widths = c(1,2))
-
-#ggsave(Suppl.IgG.validation, filename = "output/paper_figures/Suppl.IgG.validation.eps", width = 177, height = 60, units = "mm",  dpi = 300, useDingbats = FALSE)
-#ggsave(Suppl.IgG.validation, filename = "output/paper_figures/Suppl.IgG.validation.TIFF", width = 177, height = 60, units = "mm",  dpi = 300)
-```
-
-```{r Suppl.IgG.validation, fig.width=7.2, fig.height=3}
-Suppl.IgG.validation
-```
-
-
-
-### PCA without IG's
 
 ```{r}
 
@@ -1312,63 +1213,6 @@ p.umap.Ig.live_noIg_RNA <- FeaturePlot(seu.live, features = c("IGHM","IGHA1","IG
           text = element_text(size=7), axis.ticks = element_blank(),
           axis.text=element_text(size=7),
           plot.title = element_text(size=7, face = "bold",hjust = 0.5))
-# 
-# seu.live <- FindMultiModalNeighbors(
-#   seu.live, reduction.list = list("pcanoIGRNA", "pcanoIGPROT"), 
-#   dims.list = list(1:10, 1:10), modality.weight.name = "RNA.weight"
-# )
-# 
-# seu.live <- RunUMAP(seu.live, nn.name = "weighted.nn", reduction.name = "wnn.umap", reduction.key = "wnnUMAP_")
-# seu.live <- FindClusters(seu.live, graph.name = "wsnn", algorithm = 3, resolution = 1.2, verbose = FALSE)
-# 
-# seu.live[["clusters_pcanoIG"]] <- Idents(object = seu.live)
-# 
-# 
-# p.umap.Ig.prot.live2 <- FeaturePlot(seu.live, features = c("IgM","IgA","IgG"),slot = "scale.data", reduction = 'wnn.umap', max.cutoff = 2, 
-#                   cols = c("lightgrey","deeppink3"), ncol = 3, pt.size = 0.5)  &
-#   labs(x = "UMAP 1", y = "UMAP 2", color = "") &
-#   theme_half_open()& 
-#   theme(legend.position = c(0.85,0.95), legend.key.size = unit(2, 'mm')) &
-#   theme(axis.text.x = element_blank(),
-#           axis.text.y = element_blank(),
-#           text = element_text(size=7), axis.ticks = element_blank(),
-#           axis.text=element_text(size=7),
-#           plot.title = element_text(size=7, face = "bold",hjust = 0.5))
-# 
-# p.umap.Ig.RNA.live2 <- FeaturePlot(seu.live, features = c("IGHM","IGHA1","IGHG1"),slot = "scale.data", reduction = 'wnn.umap', max.cutoff = 3, 
-#                   cols = c("lightgrey","dodgerblue3"), ncol = 3, pt.size =  0.5)  &
-#   labs(x = "UMAP 1", y = "UMAP 2", color = "") &
-#   theme_half_open()& 
-#   theme(legend.position = c(0.85,0.95), legend.key.size = unit(2, 'mm')) &
-#   theme(axis.text.x = element_blank(),
-#           axis.text.y = element_blank(),
-#           text = element_text(size=7), axis.ticks = element_blank(),
-#           axis.text=element_text(size=7),
-#           plot.title = element_text(size=7, face = "bold",hjust = 0.5))
-#           
-# p.clusters.umap.live2 <- DimPlot(seu.live, reduction = 'wnn.umap',group.by = "clusters_pcaIG_named", label = TRUE, repel = TRUE, label.size = 2.5,pt.size =  0.5, cols = c("#009E73", "#D55E00","#F0E442","grey")
-# )   &
-#   labs(x = "UMAP 1", y = "UMAP 2", color = "Clusters", title = "Live cells WNN & UMAP \nwithout Ig-proteins or genes") &
-#   theme_half_open()& 
-#   theme(legend.position = "none", legend.key.size = unit(1, 'mm')) &
-#   theme(axis.text.x = element_blank(),
-#           axis.text.y = element_blank(),
-#           text = element_text(size=7), axis.ticks = element_blank(),
-#           axis.text=element_text(size=7),
-#           plot.title = element_text(size=6, face = "bold"))
-# 
-# p.donor.umap.live2 <- DimPlot(seu.live, reduction = 'wnn.umap', group.by = "donor",label = F, pt.size =  0.5,repel = TRUE, label.size = 2.5, cols = colors.donors)   &
-#   labs(x = "UMAP 1", y = "UMAP 2", color = "Donor", title = "No-Ig clustering overlap \nacross 3 donors") &
-#   theme_half_open()& 
-#   theme(legend.position = c(0.85, 0.95), legend.key.size = unit(1, 'mm'), legend.text =element_text(size=6), legend.title =element_text(size=7)  ) &
-#   theme(axis.text.x = element_blank(),
-#           axis.text.y = element_blank(),
-#           text = element_text(size=7), axis.ticks = element_blank(),
-#           axis.text=element_text(size=7),
-#           plot.title = element_text(size=6, face = "bold"))
-# 
-# seu.live <- RenameIdents(object = seu.live, `1` = "IgM", `2` = "IgG", `3` = "IgA")
-# seu.live[["clusters_pcaIG_named"]] <- Idents(object = seu.live)
 ```
 
 ```{r}
@@ -1395,6 +1239,103 @@ ggsave(fig.2.suppl.full_2, filename = "output/paper_figures/Suppl_SeuratCluster_
 fig.2.suppl.full_2
 ```
 
+**Supplementary figure** UMAP based on proteins/genes without Ig's. 
+
+
+### Supplement Ig-class % and ELISA
+
+Import ELISA results
+
+
+```{r}
+#pzfx_tables("data/supplementary/Figure 3/Fig3ELISA/GM6642 Ig ELISA.pzfx")
+
+df.ELISA.IgA <- read_pzfx("data/supplementary/Figure 3/Fig3ELISA/GM6642 Ig ELISA.pzfx", table = "IgA production in time")
+
+df.ELISA.IgA <- df.ELISA.IgA %>% gather(sampleID,signal,2:ncol(df.ELISA.IgA))%>%
+  mutate(sample = ROWTITLE,Cytokine = "IgA")
+
+df.ELISA.IgG <- read_pzfx("data/supplementary/Figure 3/Fig3ELISA/GM6642 Ig ELISA.pzfx", table = "IgG production in time")
+
+df.ELISA.IgG <- df.ELISA.IgG %>% gather(sampleID,signal,2:ncol(df.ELISA.IgG))%>%
+  mutate(sample = ROWTITLE,Cytokine = "IgG")
+
+df.ELISA.IgM <- read_pzfx("data/supplementary/Figure 3/Fig3ELISA/GM6642 Ig ELISA.pzfx", table = "IgM production in time")
+
+df.ELISA.IgM <- df.ELISA.IgM %>% gather(sampleID,signal,2:ncol(df.ELISA.IgM))%>%
+  mutate(sample = ROWTITLE,Cytokine = "IgM")
+
+
+df.ELISA.all <- rbind(df.ELISA.IgM, df.ELISA.IgA) %>%
+  rbind(.,df.ELISA.IgG)%>%
+  separate(sampleID,c("sampleID", "rep"), sep = "_") 
+
+df.ELISA.all$sample <- factor(df.ELISA.all$sample, levels = c("Day 0" , "Day 1",  "Day 4",  "Day 7",  "Day 11"))
+
+summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
+                      conf.interval=.95, .drop=TRUE) {
+    library(plyr)
+
+    # New version of length which can handle NA's: if na.rm==T, don't count them
+    length2 <- function (x, na.rm=FALSE) {
+        if (na.rm) sum(!is.na(x))
+        else       length(x)
+    }
+
+    # This does the summary. For each group's data frame, return a vector with
+    # N, mean, and sd
+    datac <- ddply(data, groupvars, .drop=.drop,
+      .fun = function(xx, col) {
+        c(N    = length2(xx[[col]], na.rm=na.rm),
+          mean = mean   (xx[[col]], na.rm=na.rm),
+          sd   = sd     (xx[[col]], na.rm=na.rm)
+        )
+      },
+      measurevar
+    )
+
+    # Rename the "mean" column    
+    datac <- rename(datac, c("mean" = measurevar))
+
+    datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
+
+    # Confidence interval multiplier for standard error
+    # Calculate t-statistic for confidence interval: 
+    # e.g., if conf.interval is .95, use .975 (above/below), and use df=N-1
+    ciMult <- qt(conf.interval/2 + .5, datac$N-1)
+    datac$ci <- datac$se * ciMult
+
+    return(datac)
+}
+
+tgc <- summarySE(df.ELISA.all, measurevar="signal", groupvars=c("sample", "Cytokine","sampleID"))
+
+
+p.ELISA <- ggplot(tgc, aes(x=sample, y=signal, colour=sampleID, group=sampleID)) + geom_point( size=2, shape=21, fill="white") + # 21 is filled circle
+    geom_errorbar(aes(ymin=signal-se, ymax=signal+se), colour="black", width=.1) +
+    geom_line() +
+    
+    xlab("") +
+    ylab("Concentration (ng/ml)") +
+    scale_colour_hue(name="Donor")+
+    theme_few()+
+  facet_wrap(.~Cytokine, scales = "free_y")+
+  add.textsize+ theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+
+```{r}
+
+Suppl.IgG.validation <- plot_grid(p.percentages.Igclasses.MOFAclusters,p.ELISA, labels = panellabels[1:2], label_size = 10, ncol = 2, rel_widths = c(1,2))
+
+#ggsave(Suppl.IgG.validation, filename = "output/paper_figures/Suppl.IgG.validation.eps", width = 177, height = 60, units = "mm",  dpi = 300, useDingbats = FALSE)
+#ggsave(Suppl.IgG.validation, filename = "output/paper_figures/Suppl.IgG.validation.TIFF", width = 177, height = 60, units = "mm",  dpi = 300)
+```
+
+```{r Suppl.IgG.validation, fig.width=7.2, fig.height=2}
+Suppl.IgG.validation
+```
 
 ## Save dataset
 
