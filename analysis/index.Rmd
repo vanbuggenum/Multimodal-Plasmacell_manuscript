@@ -32,7 +32,8 @@ We are very thankful for the efforts made by developers of [Seurat](https://sati
 
 The content in this repository is available under the [CC BY 4.0](https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/blob/master/LICENSE.md) license. 
 
-For proper attribution, please [cite](https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/blob/main/CITATION.bib) our [pre-print](https://www.biorxiv.org/content/10.1101/2022.03.31.486501v1).
+For proper attribution, please [cite](https://github.com/vanbuggenum/Multimodal-Plasmacell_manuscript/blob/master/CITATION.bib) our [publication](https://doi.org/10.1016/j.mcpro.2023.100492) containing description and analysis of all presented data and results.
+
 
 ------
 
